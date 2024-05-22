@@ -463,7 +463,7 @@ document.write(`
 <ul class="simple">
 <li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
 </ul>
-<p>Consulta la notación que se ha utilizado durante todo el documento en el siguiente <a class="reference internal" href="#notacion"><span class="xref myst">enlace</span></a>.</p>
+<p>Consulta la notación que se ha utilizado durante todo el documento en el siguiente <a class="reference internal" href="#3notacion"><span class="xref myst">enlace</span></a>.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="variational-quantum-classifier-vqc">
 <h1>3. Variational Quantum Classifier (VQC)<a class="headerlink" href="#variational-quantum-classifier-vqc" title="Permalink to this heading">#</a></h1>
 <p>Existen múltiples métodos para clasificar un conjunto de datos utilizando un ordenador cuántico. Uno de ellos es el algoritmo conocido como <strong>Variational Quantum Classifier</strong> o <strong>VQC</strong>, que pertenece a la categoría de algoritmos cuánticos variacionales (VQA).</p>
@@ -522,7 +522,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:49:22]: Using tensorflow backend on /device:CPU:0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 13:09:51]: Using tensorflow backend on /device:CPU:0
 </pre></div>
 </div>
 </div>
@@ -556,7 +556,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0626d0095f46cc6272a09fb4dc956bb536b891c2ff475a214aa5a73abd74f534.png" src="../../_images/0626d0095f46cc6272a09fb4dc956bb536b891c2ff475a214aa5a73abd74f534.png" />
+<img alt="../../_images/bd350ac592412393f9d3f624cfa549c0786539973b0e4ba82e2400ea13d4d14b.png" src="../../_images/bd350ac592412393f9d3f624cfa549c0786539973b0e4ba82e2400ea13d4d14b.png" />
 </div>
 </div>
 <p>Vamos a empezar con un poco de preprocesamiento clásico. Observamos que los datos varían de -1 a 2. Teniendo en cuenta que más adelante los codificaremos en los ángulos de una rotación, vamos a reescalarlos para que estén en el rango de -1 a 1 y los vamos a centrar.</p>
@@ -587,7 +587,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/11604203ee32c80352765ced3c3573ed42530bc0b05263ae26fef2981b45f317.png" src="../../_images/11604203ee32c80352765ced3c3573ed42530bc0b05263ae26fef2981b45f317.png" />
+<img alt="../../_images/7029c1c13e63dabb4c66c6a1eb9f412d4ccee4cf43cd881119d796077dd0f3ca.png" src="../../_images/7029c1c13e63dabb4c66c6a1eb9f412d4ccee4cf43cd881119d796077dd0f3ca.png" />
 </div>
 </div>
 <p>Separamos el set de entrenamiento del de validación</p>
@@ -747,8 +747,8 @@ Parametros iniciales [1.72414847 2.24683366 1.89363699 1.711801   1.33095081 2.0
  2.44465153 2.73322377 3.07442019 2.51063067]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.2886613279735066 Acc:  0.492
-cost_all tf.Tensor(1.2886613279735066, shape=(), dtype=float64)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.2233385224330515 Acc:  0.522
+cost_all tf.Tensor(1.2233385224330515, shape=(), dtype=float64)
 </pre></div>
 </div>
 </div>
@@ -851,7 +851,7 @@ array([ 1.15410294+0.j,  2.87684302+0.j,  2.6736488 +0.j,  0.84173673+0.j,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5585749e254c606225c0a0588607e08d9cbca3d82f243adf9d85f540dd62c009.png" src="../../_images/5585749e254c606225c0a0588607e08d9cbca3d82f243adf9d85f540dd62c009.png" />
+<img alt="../../_images/38ee3a80b3c8149b7c95503a6df48c488d66aacc0e0bce164fad6e4776a3d269.png" src="../../_images/38ee3a80b3c8149b7c95503a6df48c488d66aacc0e0bce164fad6e4776a3d269.png" />
 </div>
 </div>
 <p><a id='Ejemplo'></a></p>
@@ -924,11 +924,11 @@ test_params_INI [ 5.54193389  1.25713095  3.07479606  7.03997361  5.86710646 -3.
   2.98479079 -0.47550269]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.9791728303814127 Acc:  0.314
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  2.0601758816164417 Acc:  0.31
 params &lt;tf.Variable &#39;Variable:0&#39; shape=(8,) dtype=complex128, numpy=
 array([ 5.54193389+0.j,  1.25713095+0.j,  3.07479606+0.j,  7.03997361+0.j,
         5.86710646+0.j, -3.07020901+0.j,  2.98479079+0.j, -0.47550269+0.j])&gt;
-cost_all tf.Tensor(1.9791728303814127, shape=(), dtype=float64)
+cost_all tf.Tensor(2.0601758816164417, shape=(), dtype=float64)
 </pre></div>
 </div>
 </div>
@@ -1027,10 +1027,10 @@ array([ 6.98192218+0.j, -0.5428519 +0.j,  3.79479336+0.j,  8.11996204+0.j,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e932cb00c71e7e6445d4c99ad974a6348d21d2cdaa4f1612a50d9be4084047bd.png" src="../../_images/e932cb00c71e7e6445d4c99ad974a6348d21d2cdaa4f1612a50d9be4084047bd.png" />
+<img alt="../../_images/dab02919727c3ca617d6aa16894dc938e21138e1f5173d79f524eb5156f33d25.png" src="../../_images/dab02919727c3ca617d6aa16894dc938e21138e1f5173d79f524eb5156f33d25.png" />
 </div>
 </div>
-<p><a id='notacion'></a></p>
+<p><a id='3notacion'></a></p>
 <div class="note admonition">
 <p class="admonition-title">ANEXO NOTACIÓN</p>
 <p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
