@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Introducción &#8212; PT3-Support</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jamasole/Curso-TalentQ-Book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Part_02_QML/Chapter_01_Introduction_myst';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. Feature encoding" href="Chapter_02_Feature_encoding_myst.html" />
+    <link rel="prev" title="PT3-Support" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-light" alt="PT3-Support - Home"/>
+    <script>document.write(`<img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-dark" alt="PT3-Support - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quantum Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_02_Feature_encoding_myst.html">2. Feature encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_03_VQC_myst.html">3. Variational Quantum Classifier (VQC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_04_QSVM_myst.html">4. Quantum Support Vector Machines (QSVM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/edit/master/Book/docs/Part_02_QML/Chapter_01_Introduction_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/issues/new?title=Issue%20on%20page%20%2Fdocs/Part_02_QML/Chapter_01_Introduction_myst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/Part_02_QML/Chapter_01_Introduction_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Introducción</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">1.1. Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-machine-learning">1.2. Quantum Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos">1.3. Conceptos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <blockquote>
+<div><p>May 03, 2024 | 7 min read</p>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" src="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" style="width: 2000px;" /></a>
+</figure>
+<p>Authors:</p>
+<ul class="simple">
+<li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="introduccion">
+<span id="sec-qml-introduccion"></span><h1>1. Introducción<a class="headerlink" href="#introduccion" title="Permalink to this heading">#</a></h1>
+<p>Este notebook recoge los conceptos básicos para adentrarse en el mundo del QML (Quantum Machine Learning). En primer lugar, se contextualizan los campos en los que se apoya y se explica en qué se basa el QML. Posteriormente, se recogen diferentes conceptos y definiciones que facilitarán la comprensión de los distintos cuadernos teórico-prácticos disponibles.</p>
+<p>Para los ejemplos prácticos se han utilizado los siguientes frameworks:</p>
+<ul class="simple">
+<li><p>Qibo: es un software de código abierto para trabajar con ordenadores cuánticos a nivel de circuitos, pulsos y algoritmos que cuenta con varias API de aplicaciones específicas. Su objetivo es construir una pila de software (software stack) que facilite el uso de ordenadores cuánticos permitiendo diseñar fácilmente experimentos y aplicaciones y ejecutarlos en ordenadores cuánticos reales y/o simuladores clásicos <span id="id1">[<a class="reference internal" href="#id55" title="Qibo. Qibo. URL: https://qibo.science/.">8</a>]</span>.</p></li>
+</ul>
+<section id="machine-learning">
+<span id="sec-ml"></span><h2>1.1. Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this heading">#</a></h2>
+<p>El <strong>Aprendizaje Automático</strong> (en inglés <em>Machine Learning</em>, ML) es uno de los campos más destacados de la Inteligencia Artificial en la actualidad. Se refiere al proceso de construcción de algoritmos que pueden aprender de las observaciones existentes (o conjuntos de datos o <em>datasets</em>) y aprovechar ese aprendizaje para predecir nuevas observaciones o determinar el resultado de nuevas entradas. <span id="id2">[<a class="reference internal" href="#id48" title="IBM. ¿qué es machine learning? URL: https://www.ibm.com/es-es/topics/machine-learning.">6</a>]</span></p>
+<p>Existen cuatro tipos de aprendizaje automático que se clasifican en función de la disponibilidad de las salidas de los ejemplos, es decir, dependerá de si se conoce el valor esperado para cada instancia del problema o no. La <a class="reference internal" href="#fig-clasificacionml"><span class="std std-numref">Fig. 1</span></a> recoge de forma esquemática dicha clasificación.</p>
+<p>El primer tipo corresponde al <strong>aprendizaje supervisado</strong>. En este caso se conoce la salida de todas las instancias del problema, es decir, el conjunto de datos con el que se trabaja tiene registrados los valores a predecir de todos los ejemplos disponibles. Por lo tanto, se le podrá mostrar al algoritmo toda la información necesaria para elaborar su solución. <span id="id3">[<a class="reference internal" href="#id48" title="IBM. ¿qué es machine learning? URL: https://www.ibm.com/es-es/topics/machine-learning.">6</a>]</span></p>
+<p>En el <strong>aprendizaje no supervisado</strong> sin embargo, los valores de la variable salida son desconocidos, por lo que se utilizan otro tipo de algoritmos para descubrir la estructura de los datos. Se intentan agrupar dichos ejemplos en distintos grupos con características en común. <span id="id4">[<a class="reference internal" href="#id48" title="IBM. ¿qué es machine learning? URL: https://www.ibm.com/es-es/topics/machine-learning.">6</a>]</span></p>
+<p>El <strong>aprendizaje semi supervisado</strong> es una mezcla de los dos anteriores, en este caso se conoce la salida únicamente para algunos de los ejemplos, en la mayoría de ellos no se disponen de estos valores. Este tipo de aprendizaje está presente en los casos en los que el coste de conocer el valor para la variable salida es muy grande pero el obtener los datos sin esta información conlleva un coste muy bajo. <span id="id5">[<a class="reference internal" href="#id48" title="IBM. ¿qué es machine learning? URL: https://www.ibm.com/es-es/topics/machine-learning.">6</a>]</span></p>
+<p>Por último, el <strong>aprendizaje por refuerzo</strong> se trata de un tipo distinto a los comentados anteriormente. Son algoritmos que aprenden por si mismos mediante recompensas. No se dispone del valor de salida por lo que no se encuentra dentro del aprendizaje supervisado, pero tampoco se trata de intentar obtener grupos con características comunes por lo que tampoco forma parte del no supervisado. <span id="id6">[<a class="reference internal" href="#id48" title="IBM. ¿qué es machine learning? URL: https://www.ibm.com/es-es/topics/machine-learning.">6</a>]</span></p>
+<p>También es interesante conocer que, dentro del aprendizaje supervisado, los problemas se pueden catalogar como <em>problemas de regresión</em> o <em>clasificación</em>. En los <strong>problemas de regresión</strong>, el resultado a predecir será un valor numérico y en los <strong>problemas de clasificación</strong> se pretende predecir una clase, entendiendo por “clase” a una de las categorías arbitrarias según nuestro problema. La <a class="reference internal" href="#fig-clasificacionml"><span class="std std-numref">Fig. 1</span></a> muestra las categorías de los métodos de ML.</p>
+<figure class="align-center" id="fig-clasificacionml">
+<a class="reference internal image-reference" href="../../_images/ML.jpg"><img alt="../../_images/ML.jpg" src="../../_images/ML.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">La categorías de los métodos de ML</span><a class="headerlink" href="#fig-clasificacionml" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="quantum-machine-learning">
+<span id="sec-qml"></span><h2>1.2. Quantum Machine Learning<a class="headerlink" href="#quantum-machine-learning" title="Permalink to this heading">#</a></h2>
+<p>La tecnología cuántica ha supuesto un cambio de paradigma en el campo de la computación. Surge el <strong>aprendizaje automático cuántico</strong> (en inglés, <em>Quantum Machine Learning, QML</em>), un campo en evolución. El aprendizaje automático cuántico viene dado por la combinación de técnicas y algoritmos cuánticos con estrategias habituales en aprendizaje automático como se visualizar en la <a class="reference internal" href="#fig-qmlvsml"><span class="std std-numref">Fig. 2</span></a>:</p>
+<figure class="align-center" id="fig-qmlvsml">
+<a class="reference internal image-reference" href="../../_images/mlvsqml.jpg"><img alt="../../_images/mlvsqml.jpg" src="../../_images/mlvsqml.jpg" style="width: 552px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">ML vs QML</span><a class="headerlink" href="#fig-qmlvsml" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Se puede combinar la computación cuántica con el aprendizaje automático de diversas maneras, obteniendo cuatro áreas de trabajo. Estas corresponden a las que se muestran en la <a class="reference internal" href="#fig-areatrabajoml"><span class="std std-numref">Fig. 3</span></a>:</p>
+<figure class="align-center" id="fig-areatrabajoml">
+<a class="reference internal image-reference" href="../../_images/datatype.jpg"><img alt="../../_images/datatype.jpg" src="../../_images/datatype.jpg" style="width: 423px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Áreas de trabajo QML</span><a class="headerlink" href="#fig-areatrabajoml" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>CC</strong>: Se refiere a procesar datos clásicos con ordenadores clásicos, haciendo uso de algoritmos inspirados en computación cuántica. En otras palabras, hace referencia al machine learning clásico que directamente no tiene una base de quantum, si no que toma prestadas ideas de la física cuántica. <span id="id7">[<a class="reference internal" href="#id49" title="IBM. Quantum machine learning course. URL: https://learn.qiskit.org/course/machine-learning/introduction.">5</a>]</span></p>
+<p><strong>CQ</strong>: En este caso, se procesan datos clásicos utilizando algoritmos de <em>quantum machine learning</em>. Será con la tipología que trabajaremos a partir de ahora. En este área se pretende encontrar soluciones más eficaces para problemas típicamente solucionados con ML pero sobre ordenadores cuánticos. <span id="id8">[<a class="reference internal" href="#id49" title="IBM. Quantum machine learning course. URL: https://learn.qiskit.org/course/machine-learning/introduction.">5</a>]</span></p>
+<p><strong>QC</strong>: Se trata de un área de investigación, utilizan algoritmos clásicos para tratar datos cuánticos. <span id="id9">[<a class="reference internal" href="#id49" title="IBM. Quantum machine learning course. URL: https://learn.qiskit.org/course/machine-learning/introduction.">5</a>]</span></p>
+<p><strong>QQ</strong>: Se podría decir que esta sería la aproximación más “pura”, ya que se realiza un procesamiento de los datos cuánticos y estos datos cuánticos se procesan haciendo uso del aprendizaje automático cuántico. <span id="id10">[<a class="reference internal" href="#id49" title="IBM. Quantum machine learning course. URL: https://learn.qiskit.org/course/machine-learning/introduction.">5</a>]</span></p>
+</section>
+<section id="conceptos">
+<span id="sec-conceptosintro"></span><h2>1.3. Conceptos<a class="headerlink" href="#conceptos" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><em><strong>Kernel</strong></em>: El QML puede utilizarse para realizar la evaluación del <em>kernel</em> introduciendo estimaciones de un ordenador cuántico en el método estándar. Aunque el entrenamiento y la inferencia del modelo tendrán que hacerse en el SVM (<em>Support-Vector Machine</em>) estándar, el uso de QSVM (<em>Quantum SVM</em>) podría ayudar a acelerar el proceso. A medida que se amplía el espacio de características, la estimación de las funciones <em>kernel</em> en la computación clásica resulta costosa desde el punto de vista computacional. Las propiedades cuánticas ayudan a crear un espacio de estado cuántico masivo que puede mejorar la evaluación de los <em>kernels</em> <span id="id11">[<a class="reference internal" href="#id50" title="geeksforgeeks. The ultimate guide to quantum machine learning – the next big thing. URL: https://www.geeksforgeeks.org/the-ultimate-guide-to-quantum-machine-learning-the-next-big-thing/.">4</a>]</span>.</p></li>
+<li><p><strong>PCA</strong> (<em>Principal Component Analysis</em>): Es una técnica de extracción de características donde se combinan las entradas de una manera específica y se pueden eliminar algunas de las variables “menos importantes” manteniendo la parte más significativa de todas las variables. Como valor añadido, tras aplicar técnicas de PCA se obtienen variables independientes entre sí <span id="id12">[<a class="reference internal" href="#id51" title="aprendemachinelearning. Comprende principal. URL: https://www.aprendemachinelearning.com/comprende-principal-component-analysis/.">2</a>]</span>.</p></li>
+<li><p><strong>Función de coste</strong>: Trata de definir el error entre el valor estimado y el valor real con el fin de optimizar el algoritmo. En otras palabras, la función de coste cuantifica el error que se ha cometido al predecir los valores deseados.</p></li>
+<li><p><strong>Optimización</strong>: Los problemas de optimización están presentes en muchos campos de estudio e implican encontrar las entradas que darán el mejor resultado posible para un problema dado. Por lo general, encontrar el mejor resultado posible equivale a minimizar la función de coste <span id="id13">[<a class="reference internal" href="#id52" title="Catalina Albornoz. How to start learning quantum machine learning. URL: https://pennylane.ai/blog/2021/10/how-to-start-learning-quantum-machine-learning/.">1</a>]</span>. Los algoritmos de optimización de inspiración cuántica aprovechan algunas de las ventajas de la computación cuántica en hardware clásico, lo que proporciona más velocidad que en los enfoques tradicionales. Los algoritmos de inspiración cuántica son algoritmos clásicos en los que se puede emular de forma clásica el fenómeno cuántico esencial que proporcionaría el aumento de velocidad.</p></li>
+<li><p><strong>Gradiente</strong>: En matemáticas el gradiente es una generalización de la derivada. La derivada se puede definir solo en funciones de una sola variable, en funciones de varias variables este término se denomina gradiente. Debido a esto, el gradiente es una función de valor vectorial a diferencia de una derivada que toma un valor escalar. Al igual que la derivada, el gradiente representa la pendiente de la recta tangente a la función estudiada, concretamente el gradiente apunta a aquellos puntos de la función con mayor incremento. En el caso de machine learning, resulta de interés el gradiente de la función de coste <span id="id14">[<a class="reference internal" href="#id53" title="Jose Martinez. Gradiente descendiente. URL: https://www.iartificial.net/gradiente-descendiente-para-aprendizaje-automatico/.">7</a>]</span>.</p></li>
+<li><p><strong>Medida</strong> (<em>Measurement</em>): El paso final en computación cuántica es la medida de uno o más qubits, después de todo se necesita obtener el resultado de lo que se ha estado calculando cuánticamente. Pese a que este último paso puede parecer una última capa del circuito, no se tiene en cuenta a la hora de calcular la profundidad. La definición de la medida es el problema central de la mecánica cuántica y esta estrechamente relacionada con las amplitudes del estado con el que se está trabajando, ya que el resultado obtenido depende de dichas probabilidades <span id="id15">[<a class="reference internal" href="#id54" title="qm-ware. Qmware. URL: https://www.qm-ware.com/.">9</a>]</span>.</p></li>
+<li><p><strong>Función convexa</strong>: Una función es convexa en un punto cuando la función cae por encima de la tangente en ese punto <span id="id16">[<a class="reference internal" href="#id35" title="Universitat Oberta Catalunya. Concavidad y convexidad de una función. URL: http://cimanet.uoc.edu/cursMates0/IniciacionMatematicas/s11/2_6_8.html.">3</a>]</span>. En otras palabras, consideramos que una función es convexa cuando tiene forma de valle, una función de este tipo se visualiza como en la <a class="reference internal" href="#fig-fconvexa"><span class="std std-numref">Fig. 4</span></a>.</p></li>
+</ul>
+<figure class="align-center" id="fig-fconvexa">
+<a class="reference internal image-reference" href="../../_images/Convexa_funcion.png"><img alt="../../_images/Convexa_funcion.png" src="../../_images/Convexa_funcion.png" style="width: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Visualización función convexa</span><a class="headerlink" href="#fig-fconvexa" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Función cóncava</strong>: Una función es cóncava en un punto cuando la función cae por debajo de la tangente en ese punto <span id="id17">[<a class="reference internal" href="#id35" title="Universitat Oberta Catalunya. Concavidad y convexidad de una función. URL: http://cimanet.uoc.edu/cursMates0/IniciacionMatematicas/s11/2_6_8.html.">3</a>]</span>. Dicho de otra manera, este tipo de funciones se asemejan a la forma de una montaña, tal y como se muestra en la <a class="reference internal" href="#fig-fconcava"><span class="std std-numref">Fig. 5</span></a>.</p></li>
+</ul>
+<figure class="align-center" id="fig-fconcava">
+<a class="reference internal image-reference" href="../../_images/Concava_funcion.png"><img alt="../../_images/Concava_funcion.png" src="../../_images/Concava_funcion.png" style="width: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Visualización función cóncava</span><a class="headerlink" href="#fig-fconcava" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<hr class="docutils" />
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id18">
+<dl class="citation">
+<dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id13">1</a></span></dt>
+<dd><p>Catalina Albornoz. How to start learning quantum machine learning. URL: <a class="reference external" href="https://pennylane.ai/blog/2021/10/how-to-start-learning-quantum-machine-learning/">https://pennylane.ai/blog/2021/10/how-to-start-learning-quantum-machine-learning/</a>.</p>
+</dd>
+<dt class="label" id="id51"><span class="brackets"><a class="fn-backref" href="#id12">2</a></span></dt>
+<dd><p>aprendemachinelearning. Comprende principal. URL: <a class="reference external" href="https://www.aprendemachinelearning.com/comprende-principal-component-analysis/">https://www.aprendemachinelearning.com/comprende-principal-component-analysis/</a>.</p>
+</dd>
+<dt class="label" id="id35"><span class="brackets">3</span><span class="fn-backref">(<a href="#id16">1</a>,<a href="#id17">2</a>)</span></dt>
+<dd><p>Universitat Oberta Catalunya. Concavidad y convexidad de una función. URL: <a class="reference external" href="http://cimanet.uoc.edu/cursMates0/IniciacionMatematicas/s11/2_6_8.html">http://cimanet.uoc.edu/cursMates0/IniciacionMatematicas/s11/2_6_8.html</a>.</p>
+</dd>
+<dt class="label" id="id50"><span class="brackets"><a class="fn-backref" href="#id11">4</a></span></dt>
+<dd><p>geeksforgeeks. The ultimate guide to quantum machine learning – the next big thing. URL: <a class="reference external" href="https://www.geeksforgeeks.org/the-ultimate-guide-to-quantum-machine-learning-the-next-big-thing/">https://www.geeksforgeeks.org/the-ultimate-guide-to-quantum-machine-learning-the-next-big-thing/</a>.</p>
+</dd>
+<dt class="label" id="id49"><span class="brackets">5</span><span class="fn-backref">(<a href="#id7">1</a>,<a href="#id8">2</a>,<a href="#id9">3</a>,<a href="#id10">4</a>)</span></dt>
+<dd><p>IBM. Quantum machine learning course. URL: <a class="reference external" href="https://learn.qiskit.org/course/machine-learning/introduction">https://learn.qiskit.org/course/machine-learning/introduction</a>.</p>
+</dd>
+<dt class="label" id="id48"><span class="brackets">6</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>,<a href="#id4">3</a>,<a href="#id5">4</a>,<a href="#id6">5</a>)</span></dt>
+<dd><p>IBM. ¿qué es machine learning? URL: <a class="reference external" href="https://www.ibm.com/es-es/topics/machine-learning">https://www.ibm.com/es-es/topics/machine-learning</a>.</p>
+</dd>
+<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id14">7</a></span></dt>
+<dd><p>Jose Martinez. Gradiente descendiente. URL: <a class="reference external" href="https://www.iartificial.net/gradiente-descendiente-para-aprendizaje-automatico/">https://www.iartificial.net/gradiente-descendiente-para-aprendizaje-automatico/</a>.</p>
+</dd>
+<dt class="label" id="id55"><span class="brackets"><a class="fn-backref" href="#id1">8</a></span></dt>
+<dd><p>Qibo. Qibo. URL: <a class="reference external" href="https://qibo.science/">https://qibo.science/</a>.</p>
+</dd>
+<dt class="label" id="id54"><span class="brackets"><a class="fn-backref" href="#id15">9</a></span></dt>
+<dd><p>qm-ware. Qmware. URL: <a class="reference external" href="https://www.qm-ware.com/">https://www.qm-ware.com/</a>.</p>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<center>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img aling="left" alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+</center>
+<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.</p>
+<p>This work has been financially supported by the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda.</p>
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" class="align-left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" style="width: 1000px;" /></a>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/Part_02_QML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PT3-Support</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter_02_Feature_encoding_myst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2. Feature encoding</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">1.1. Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-machine-learning">1.2. Quantum Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos">1.3. Conceptos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QuantumSpain & TalentQ
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Feature encoding &#8212; PT3-Support</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jamasole/Curso-TalentQ-Book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Part_02_QML/Chapter_02_Feature_encoding_myst';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Variational Quantum Classifier (VQC)" href="Chapter_03_VQC_myst.html" />
+    <link rel="prev" title="1. Introducción" href="Chapter_01_Introduction_myst.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-light" alt="PT3-Support - Home"/>
+    <script>document.write(`<img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-dark" alt="PT3-Support - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quantum Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter_01_Introduction_myst.html">1. Introducción</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Feature encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_03_VQC_myst.html">3. Variational Quantum Classifier (VQC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_04_QSVM_myst.html">4. Quantum Support Vector Machines (QSVM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/edit/master/Book/docs/Part_02_QML/Chapter_02_Feature_encoding_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/issues/new?title=Issue%20on%20page%20%2Fdocs/Part_02_QML/Chapter_02_Feature_encoding_myst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/Part_02_QML/Chapter_02_Feature_encoding_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Feature encoding</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-encoding">2.1. Basis encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-encoding">2.2. Amplitude encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-encoding">2.3. Angle encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dense-angle-encoding">2.2.4. Dense angle encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-escoger-feature-encoding">2.3. Cómo escoger Feature Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <blockquote>
+<div><p>May 03, 2024 | 6 min read</p>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" src="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" style="width: 2000px;" /></a>
+</figure>
+<p>Authors:</p>
+<ul class="simple">
+<li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\( \newcommand{\bra}[1]{\langle #1|} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\ket}[1]{|#1\rangle} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\braket}[2]{\langle #1|#2\rangle} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\ketbra}[2]{| #1\rangle \langle #2|} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\i}{{\color{blue} i}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\Hil}{{\mathbb H}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\boldn}{{\bf n}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\tr}{{\rm tr}}\)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\bn}{{\bf n}} \)</span></p>
+<p>Consulta la notación que se ha utilizado durante todo el documento en el siguiente <a class="reference internal" href="#notacion"><span class="xref myst">enlace</span></a>.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="feature-encoding">
+<span id="sec-qml-featureencoding"></span><h1>2. Feature encoding<a class="headerlink" href="#feature-encoding" title="Permalink to this heading">#</a></h1>
+<p>Esta sección se centra en el proceso de <strong>codificación de caracteristicas</strong> o <strong>feature encoding</strong>, se encarga de codificar datos clásicos en estados cuánticos. Es un parte muy delicada en procesamiento de la información cuántica debido a que te dará el mapa que proyectará tus datos clásicos en el espacio de hilbert.</p>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p><i>Dependiendo de cómo esté proyectado este conjunto de datos en el espacio de Hilbert, el tratamiento que se le tendrá que hacer para extraer información será muy simple o, si no se hace adecuadamente, imposible.</i></p>
+</div>
+<p>Se empieza con un conjunto de datos <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> y se quiere codificar en un estado <span class="math notranslate nohighlight">\(\ket{\psi_x}\)</span> con el que trabajar, para ello se construye un circuito parametrizado que generará una unitaria <span class="math notranslate nohighlight">\(\mathcal{U}(\mathbf{x})\)</span> tal que <span class="math notranslate nohighlight">\(\ket{\psi_x}=\mathcal{U}(\mathbf{x})\ket{0}\)</span>. Dependiendo del tipo de feature encoding que se utilice, la unitaria <span class="math notranslate nohighlight">\(\mathcal{U}(x)\)</span> tendrá diferentes características.</p>
+<p>Se define un conjunto de datos (dataset) de entrada <span class="math notranslate nohighlight">\(D\)</span> de dimensión <span class="math notranslate nohighlight">\(M\)</span> x <span class="math notranslate nohighlight">\(N\)</span>, es decir, se cuenta con un dataset con M instancias y N variables. Este dataset se puede expresar como <span class="math notranslate nohighlight">\(D = {\mathbf{x}_{(1)}, ..., \mathbf{x}_{(m)}, ..., \mathbf{x}_{(M)}}\)</span> donde cada <span class="math notranslate nohighlight">\(\mathbf{x}_{(m)}\)</span> es un vector de dimensión N.</p>
+<p>Hay multiples técnicas de <strong>feature encoding</strong>, a continuación se explicarán las más básicas y se dará un ejemplo de cómo implementar cada una. Para más detalles consultar<span id="id1">[<a class="reference internal" href="#id76" title="Seth Lloyd, Maria Schuld, Aroosa Ijaz, Josh Izaac, and Nathan Killoran. Quantum embeddings for machine learning. 2020. arXiv:2001.03622.">1</a>]</span>,<span id="id2">[<a class="reference internal" href="#id77" title="Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. Physical Review Letters, February 2019. URL: http://dx.doi.org/10.1103/PhysRevLett.122.040504, doi:10.1103/physrevlett.122.040504.">4</a>]</span>.</p>
+<p><a id='BasisEncoding'></a></p>
+<section id="basis-encoding">
+<h2>2.1. Basis encoding<a class="headerlink" href="#basis-encoding" title="Permalink to this heading">#</a></h2>
+<p>La técnica <em>Basis encoding</em>, también conocida como Basis Embedding, asocia cada elemento del dataset a un estado de la base computacional de un sistema de qubits. Es por eso que los datos clásicos deben estar representados por una cadena de bits de longitud equivalente al número de qubits del circuito. Esto da una correspondencia uno a uno entre elementos del dataset y vectores de la base computacional del espacio de Hilbert.</p>
+<p>Se considera el conjunto de datos <span class="math notranslate nohighlight">\(D\)</span>, definido anteriormente. Asumimos por simplicidad que podemos codificar las <span class="math notranslate nohighlight">\(N\)</span> características con un número binario de longitud <span class="math notranslate nohighlight">\(N\)</span>, tal que <span class="math notranslate nohighlight">\(\mathbf{x}_m = (b_1,...,b_N)\)</span> con <span class="math notranslate nohighlight">\(b_i\in { 0,1}\)</span> para <span class="math notranslate nohighlight">\(i=1,...,N\)</span>. De esta manera, cada elemento del conjunto de datos <span class="math notranslate nohighlight">\(\mathbf{x}_{m}\)</span> se puede representar como <span class="math notranslate nohighlight">\(\ket{\mathbf{x}_{m}}\)</span>. Extendiendo la expresión anterior a todo el dataset, obtenemos la representación del conjunto de datos al completo tal que:</p>
+<div class="math notranslate nohighlight">
+\[\ket{D} = \frac{1}{\sqrt M} \sum^M_{m=1} \ket{\mathbf{x}_{m}}\]</div>
+<p>Por ejemplo, si consideramos que el <em>dataset</em> <span class="math notranslate nohighlight">\( D=\{1,3,5,7\} \)</span> los datos en binario corresponden a <span class="math notranslate nohighlight">\( D=\{001,011,101,111\} \)</span>. En este caso, el estado correspondiente sería:</p>
+<div class="math notranslate nohighlight">
+\[\ket{D} = \frac{1}{\sqrt{4}}(\ket{001}+\ket{011}+\ket{101}+\ket{111})\]</div>
+<p>Que como vector en la base computacional corresponde a <span class="math notranslate nohighlight">\(\vec{x}=\frac{1}{2}(0,1,0,1,0,1,0,1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qibo</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">qibo</span> <span class="kn">import</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">gates</span><span class="p">,</span> <span class="n">hamiltonians</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">qibo.symbols</span> <span class="kn">import</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">I</span>
+<span class="kn">from</span> <span class="nn">qibo.models</span> <span class="kn">import</span> <span class="n">Circuit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Número de qubits de nuestro ejemplo</span>
+<span class="n">num_q</span><span class="o">=</span><span class="mi">3</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p><i>El circuito que codifica el dataset entero no es trivial y se debe hacer a mano. Aun así para muchas aplicaciones no es necesario codificar el dataset entero y se puede pasar los elemenotos del mismo de uno a uno. La función <b>Basis_encoding</b> codifica un elemento del dataset en el circuito.</i></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Funcion que codifica 1 vector binario x ens el estado |x&gt;</span>
+
+<span class="k">def</span> <span class="nf">Basis_encoding</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nqubits</span><span class="o">=</span> <span class="mi">2</span><span class="p">):</span> 
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">c_b</span><span class="o">=</span><span class="n">Circuit</span><span class="p">(</span><span class="n">num_q</span><span class="p">)</span>
+<span class="n">c_b</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">c_b</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">c_b</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x               : &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;amplitude vector: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c_b</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c_b</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x               :  [0.  0.5 0.  0.5 0.  0.5 0.  0.5]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:49:18]: Using tensorflow backend on /device:CPU:0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amplitude vector:  [0. +0.j 0.5+0.j 0. +0.j 0.5+0.j 0. +0.j 0.5+0.j 0. +0.j 0.5+0.j]
+q0: ─H─
+q1: ─H─
+q2: ─X─
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='AmplitudeEncoding'></a></p>
+</section>
+<section id="amplitude-encoding">
+<h2>2.2. Amplitude encoding<a class="headerlink" href="#amplitude-encoding" title="Permalink to this heading">#</a></h2>
+<p>La técnica <em>Amplitude encoding</em> o <em>amplitude embedding</em>, codifica los datos clásicos como las amplitudes del vector de un estado cuántico. En este caso, un elemento <span class="math notranslate nohighlight">\(\mathbf{x_m}=(b_0,...b_N)\)</span> del conjunto de datos <span class="math notranslate nohighlight">\(D\)</span> con <span class="math notranslate nohighlight">\(N\)</span> características se codifica en un sistema de <span class="math notranslate nohighlight">\(2^n=N\)</span> qubits tal que:</p>
+<div class="math notranslate nohighlight">
+\[ \ket{\psi_x} = \sum^N_{i=1} b_i\ket{i}\]</div>
+<p>Donde <span class="math notranslate nohighlight">\(b_i\)</span> es el i-ésimo elemento del vector <span class="math notranslate nohighlight">\(\mathbf{x_m}\)</span> y <span class="math notranslate nohighlight">\(\ket{i}\)</span> es el i-ésimo estado de la base computacional. A diferencia de la técnica <em>basis encoding</em>, <span class="math notranslate nohighlight">\(x_i\)</span> puede tomar valores de distintos tipos, como <em>integer</em> (valores enteros) o <em>float</em> (valores de coma flotante).</p>
+<p>Como ejemplo, si tratamos de codificarel vector <span class="math notranslate nohighlight">\(\mathbf{x}=(1,3,5,7)\)</span>
+utilizando esta técnica obtendremos:</p>
+<div class="math notranslate nohighlight">
+\[\ket{\psi_x} = \frac{1}{2\sqrt{21}} [1\ket{00}+3\ket{01}+5\ket{10}+7\ket{11}]\]</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p><i>Hay que tener en cuenta que todos los vectores cuánticos deben estar siempre normalizados, <span class="math notranslate nohighlight">\(\bra{\psi_x}\ket{\psi_x} = 1\)</span></i></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_q</span><span class="o">=</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Normalize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">N</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">N</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+
+<span class="c1"># Normalizamos x</span>
+<span class="n">x_norm</span><span class="o">=</span><span class="n">Normalize</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># No hay una funcion para ejecutar el circuito que codifica el estado x en la amplitud pero podemos inizializar con un estado arbitrario el circuito en qibo.</span>
+<span class="n">c_a</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">num_q</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x               : &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;amplitude vector: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c_a</span><span class="p">(</span><span class="n">x_norm</span><span class="p">,</span><span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">state</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c_a</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x               :  [1 3 5 7]
+amplitude vector:  [0.10910895+0.j 0.32732684+0.j 0.54554473+0.j 0.76376262+0.j]
+q0: ─
+q1: ─
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para codificar un vector arbitrario en las amplitudes de un estado cuántico con el mínimo número de puertas cuánticas hay que utilizar los resultados de <span id="id3">[<a class="reference internal" href="#id78" title="Mikko Mottonen, Juha J. Vartiainen, Ville Bergholm, and Martti M. Salomaa. Transformation of quantum states using uniformly controlled rotations. 2004. arXiv:quant-ph/0407010.">2</a>]</span>. Una implementación de este método en qibo todavía no está desarrollada. Por esa razon de momento se pasa el vector cuántico explicitamente.</p>
+</section>
+<section id="angle-encoding">
+<h2>2.3. Angle encoding<a class="headerlink" href="#angle-encoding" title="Permalink to this heading">#</a></h2>
+<p><em>Angle encoding</em> es la tecnica de codificación más fácil de implementar debido a que utiliza las puertas parametrizadas más basicas para ello. Las N características de los elementos del <em>dataset</em> se codifican como ángulos de rotación de N cúbits. Esta metodología codifica N características en un ángulos de rotación de N qubits. Dichas rotaciones pueden llevarse a cabo en cualquier eje, tanto en el <span class="math notranslate nohighlight">\(X\)</span>, como en el <span class="math notranslate nohighlight">\(Y\)</span> o en el <span class="math notranslate nohighlight">\(Z\)</span>. Mas explicitamente si queremos codificar el vector del conjuto de datos <span class="math notranslate nohighlight">\(\mathbf{x_m}=(x_1,...,x_N)\)</span> con rotaciones en el eje <span class="math notranslate nohighlight">\(X\)</span> el estado cuántico resultante sería:</p>
+<div class="math notranslate nohighlight">
+\[
+\ket {\mathbf{x}} = \bigotimes^N_{i=1} \cos(x_i)\ket 0 + \sin(x_i)\ket 1
+\]</div>
+<p>Por ejemplo, si se trata de codificar el vector <span class="math notranslate nohighlight">\(\mathbf{x}=(1,3,5,7)\)</span> con este tipo de <em>encoding</em>, se necesitarán cuatro cúbits y quedará como sigue:</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\mathbf{x}} = (\cos(1)\ket{0} + \sin(1)\ket{1} ) \otimes (\cos(3)\ket{0} + \sin(3)\ket{1}) \otimes (\cos(5)\ket{0} + \sin(5)\ket{1}) \otimes (\cos(7)\ket{0} + \sin(7)\ket{1} )
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_q</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Angle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RX</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">theta</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+
+<span class="n">c_an</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">num_q</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x               : &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;amplitude vector: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c_an</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c_an</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x               :  [1 3 5 7]
+amplitude vector:  [ 0.04657297+0.j          0.        -0.01744557j  0.        +0.03479105j
+  0.01303223+0.j          0.        -0.656745j   -0.24600725+0.j
+  0.49060316+0.j          0.        -0.1837729j   0.        -0.02544293j
+ -0.00953056+0.j          0.01900644+0.j          0.        -0.00711954j
+ -0.35878143+0.j          0.        +0.13439437j  0.        -0.26801773j
+ -0.10039559+0.j        ]
+q0: ─RX─
+q1: ─RX─
+q2: ─RX─
+q3: ─RX─
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='DenseAngleEncoding'></a></p>
+</section>
+<section id="dense-angle-encoding">
+<h2>2.2.4. Dense angle encoding<a class="headerlink" href="#dense-angle-encoding" title="Permalink to this heading">#</a></h2>
+<p>Esta técnica, tal como su nombre indica, es una versión más sofisticada de la codificación anterior. Es capaz de codificar dos características por cada <em>qubit</em>, haciendo uso de fases relativas. En este caso, la instancia <span class="math notranslate nohighlight">\(\mathbf{x}=(x_1,...,x_N)\)</span> se codifica como sigue:</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{x} = \bigotimes^{N/2}_{i=1} \cos(x_{2i-1})\ket{0} + e^{ix_{2i}}\sin(x_{2i-1})\ket{1}
+\]</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>Angle encoding necesita <span class="math notranslate nohighlight">\(num \, qubits = \text{dim}(\mathbf{x})\)</span>, mientras que dense angle requiere <span class="math notranslate nohighlight">\(num \, qubits = \text{dim}(\mathbf{x})/2\)</span>. Aun así, hay aplicaciones donde la simplicidad de angle encoding es preferible.</p>
+</div>
+<p>Por ejemplo, si se trata de codificar el vector <span class="math notranslate nohighlight">\(\mathbf{x}=(1,3,5,7)\)</span> con este tipo de <em>encoding</em>, se necesitarán dos cúbits y quedará como sigue:</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\mathbf{x}} = (\cos(1)\ket{0} + e^{i3}\sin(1)\ket{1} ) \otimes (\cos(5)\ket{0} + e^{i7}\sin(5)\ket{1})
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_q</span><span class="o">=</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">denseAngle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RX</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">theta</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">theta</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">c_dan</span><span class="o">=</span><span class="n">denseAngle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">num_q</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x               : &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;amplitude vector: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c_dan</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c_dan</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x               :  [0 1 2 3]
+amplitude vector:  [0.06207773-0.87538421j 0.22984885-0.42073549j 0.        +0.j
+ 0.        +0.j        ]
+q0: ─RX─RZ─
+q1: ─RX─RZ─
+</pre></div>
+</div>
+</div>
+</div>
+<p>En este apartado se muestran algunas de las técnicas de codificación, no obstante existen otras como <em>Displacement Embedding</em>, <em>IQP Embedding</em>, <em>QAOA Embedding</em>…</p>
+<p><a id='EleccionFeatureEncoding'></a></p>
+</section>
+<section id="como-escoger-feature-encoding">
+<h2>2.3. Cómo escoger Feature Encoding<a class="headerlink" href="#como-escoger-feature-encoding" title="Permalink to this heading">#</a></h2>
+<p>Cuando se trata con circuitos variacionales, la decisión de qué <em>feature encoding</em> utilizar es crucial. Los diferentes <em>feature encoding</em> presentan diferentes ventajas e inconvenientes dependiendo del problema que queramos resolver. Las técnicas mencionadas en este notebook se pueden separar en dos tipos:</p>
+<ul class="simple">
+<li><p><em>Basis encoding</em> donde se trabaja con los elementos de la base computacional como <em>inputs</em> (entradas).</p></li>
+<li><p>El resto de codificadores que trabajan con las amplitudes del vector cuántico.</p></li>
+</ul>
+<p>La técnica de <em>basis encoding</em> presenta la capacidad de calcular operaciones no lineales de forma natural, a cambio es el codificador que presenta mayor número de problemas:</p>
+<ul class="simple">
+<li><p>Es el más susceptible a errores.</p></li>
+<li><p>Escala muy mal con el número de cúbits, ya que de esto depende la precisión de los <em>feature</em> que se quiere codificar.</p></li>
+<li><p>Es el método que presenta mayor dificultad a la hora de entrenar la red neuronal y tiene tendencia a presentar barren plateaus (gradientes que tienden a cero).</p></li>
+</ul>
+<p>El resto de métodos basados en codificar en las amplitudes del vector cuántico no presentan los inconvenientes enumerados anteriormente y son los métodos preferidos para desarrollar algoritmos en la era del NISQ (<em>Noisy Intermediate-Scale Quantum</em>). Aún así, presentan el inconveniente de que hay que escoger sabiamente cómo introducir la no linealidad necesaria para cada problema. La forma más genérica es utilizar <em>Amplitude encoding</em> y aplicar una función <span class="math notranslate nohighlight">\(f(x)\)</span> a tus datos para obtener correlaciones entre ellos y así poder resolver problemas no lineales. Este método, que es a primera vista sencillo, presenta el problema de que la amplitud del circuito puede ser muy grande dependiendo de <span class="math notranslate nohighlight">\(f(x)\)</span> y además, escoger <span class="math notranslate nohighlight">\(f(x)\)</span> puede ser un proceso muy arbitrario. Por otra parte, otros métodos de codificación más sencillos pueden proporcionar directamente los elementos de no linealidad necesarios para resolver el problema.</p>
+<p>Para finalizar, existen otras técnicas más sofisticadas para introducir datos clásicos en un circuito variacional, una de ellas es conocida como <em>data re-uploading</em> <span id="id4">[<a class="reference internal" href="Chapter_03_VQC_myst.html#id78" title="Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. Quantum, 4:226, February 2020. URL: http://dx.doi.org/10.22331/q-2020-02-06-226, doi:10.22331/q-2020-02-06-226.">3</a>]</span> el cual se cubrira en el siguiente notebook.</p>
+<p><a id='notacion'></a></p>
+<div class="note admonition">
+<p class="admonition-title">ANEXO NOTACIÓN</p>
+<p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
+<p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id5">
+<dl class="citation">
+<dt class="label" id="id76"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Seth Lloyd, Maria Schuld, Aroosa Ijaz, Josh Izaac, and Nathan Killoran. Quantum embeddings for machine learning. 2020. <a class="reference external" href="https://arxiv.org/abs/2001.03622">arXiv:2001.03622</a>.</p>
+</dd>
+<dt class="label" id="id78"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>Mikko Mottonen, Juha J. Vartiainen, Ville Bergholm, and Martti M. Salomaa. Transformation of quantum states using uniformly controlled rotations. 2004. <a class="reference external" href="https://arxiv.org/abs/quant-ph/0407010">arXiv:quant-ph/0407010</a>.</p>
+</dd>
+<dt class="label" id="id79"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. <em>Quantum</em>, 4:226, February 2020. URL: <a class="reference external" href="http://dx.doi.org/10.22331/q-2020-02-06-226">http://dx.doi.org/10.22331/q-2020-02-06-226</a>, <a class="reference external" href="https://doi.org/10.22331/q-2020-02-06-226">doi:10.22331/q-2020-02-06-226</a>.</p>
+</dd>
+<dt class="label" id="id77"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
+<dd><p>Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. <em>Physical Review Letters</em>, February 2019. URL: <a class="reference external" href="http://dx.doi.org/10.1103/PhysRevLett.122.040504">http://dx.doi.org/10.1103/PhysRevLett.122.040504</a>, <a class="reference external" href="https://doi.org/10.1103/physrevlett.122.040504">doi:10.1103/physrevlett.122.040504</a>.</p>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<center>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img aling="left" alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+</center>
+<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.</p>
+<p>This work has been financially supported by the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda.</p>
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" class="align-left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" style="width: 1000px;" /></a>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/Part_02_QML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter_01_Introduction_myst.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Introducción</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter_03_VQC_myst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Variational Quantum Classifier (VQC)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-encoding">2.1. Basis encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amplitude-encoding">2.2. Amplitude encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-encoding">2.3. Angle encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dense-angle-encoding">2.2.4. Dense angle encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-escoger-feature-encoding">2.3. Cómo escoger Feature Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QuantumSpain & TalentQ
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

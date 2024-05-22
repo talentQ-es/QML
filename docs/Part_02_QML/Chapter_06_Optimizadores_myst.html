@@ -1,0 +1,1751 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6. Optimizadores &#8212; PT3-Support</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jamasole/Curso-TalentQ-Book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Part_02_QML/Chapter_06_Optimizadores_myst';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="5. Quantum Kernels" href="Chapter_05_Kernel_myst.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-light" alt="PT3-Support - Home"/>
+    <script>document.write(`<img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-dark" alt="PT3-Support - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quantum Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter_01_Introduction_myst.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_02_Feature_encoding_myst.html">2. Feature encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_03_VQC_myst.html">3. Variational Quantum Classifier (VQC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_04_QSVM_myst.html">4. Quantum Support Vector Machines (QSVM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Optimizadores</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/edit/master/Book/docs/Part_02_QML/Chapter_06_Optimizadores_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/issues/new?title=Issue%20on%20page%20%2Fdocs/Part_02_QML/Chapter_06_Optimizadores_myst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/Part_02_QML/Chapter_06_Optimizadores_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6. Optimizadores</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-por-gradiente">6.1. Descenso por gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-del-descenso-por-gradiente">6.1.1. Problemas del descenso por gradiente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">6.1.2 Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">6.2. Momentum</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">6.2.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-seleccionar-beta">6.2.2. Como seleccionar <span class="math notranslate nohighlight">\(\beta\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-momentumimplementacion">6.2.3. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nesterov-momentum-optimizer-descenso-por-gradiente-con-nertorv-momentum">6.3. Nesterov Momentum Optimizer (descenso por gradiente con Nertorv Momentum)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-nesterovalgortimo">6.3.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-nesterovimplementacion">6.3.2. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adam">6.4 Adam</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adamalgoritmo">6.4.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adamimplementacion">6.4.2. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adadelta">6.5 Adadelta</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adadeltaalgoritmo">6.5.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adadeltaimplementacion">6.5.2. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-powell">6.6.  Método de optimización Powell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-bfgs">6.7. Método de optimización BFGS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <blockquote>
+<div><p>May 03, 2024 | 16 min read</p>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" src="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" style="width: 2000px;" /></a>
+</figure>
+<p>Authors:</p>
+<ul class="simple">
+<li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="optimizadores">
+<h1>6. Optimizadores<a class="headerlink" href="#optimizadores" title="Permalink to this heading">#</a></h1>
+<p>Tal y como se menciona en el notebook de <a class="reference internal" href="Chapter_01_Introduction_myst.html#sec-qml-introduccion"><span class="std std-ref">1. Introducción</span></a>, el aprendizaje automático tinene como objetivo aprender de las observaciones existentes y hacer uso de ese aprendizaje para predecir nuevas observaciones o determinar el resultado de nuevas entradas. Para ello, es necesario un proceso iterativo en el que se busca minimizar el error cometido, este proceso se conoce como el entrenamiento del modelo <span id="id1">[<a class="reference internal" href="#id42" title="Juankboards en Planeta Chatbot. Conceptos fundamentales en machine learning: función de pérdida y optimización. URL: https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/.">3</a>]</span>.</p>
+<p>En objetivo del entrenamiento es lograr el menor error posible, para ello se evalua la función de coste conociendo así la calidad de las predicciones del modelo, en otras palabras conoceremos como de buena es una solución. El proceso irá avanzando, mejorando la precisión en la predicción, hasta cumplir con el criterio de parada fijado. La tarea de minimizar las funciones de coste no es sencilla y existen diversas técnicas para abordarla, algunas de ellas se muestran a continuación.</p>
+<section id="descenso-por-gradiente">
+<span id="sec-descensogradiente"></span><h2>6.1. Descenso por gradiente<a class="headerlink" href="#descenso-por-gradiente" title="Permalink to this heading">#</a></h2>
+<p>El descenso por gradiente (<em>gradient descent</em>) es un algoritmo de optimización utilizado para realizar el entrenamiento de modelos de <em>Machine Learning</em> y <em>Deep learning</em> que se basa en el concepto del gradiente para llevar a cabo la minimización del error cometido <span id="id2">[<a class="reference internal" href="#id43" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">4</a>]</span>. Cabe destacar que para poder encontrar el mínimo de la función este método asume que se puede obtener el gradiente de la función a estudiar y que esta es contínua y diferenciable (no necesariamente en toda la función).</p>
+<p>Para poder implementar este algoritmo de optimización se debe definir la dirección y la <strong>tasa de aprendizaje</strong> (también conocido como el tamaño del paso). El primero de ellos nos indica en qué dirección seguir explorando el conjunto de soluciones mientras que el segundo especifica cuanto avanzar en la dirección seleccionada <span id="id3">[<a class="reference internal" href="#id44" title="V. Robles B. Descenso por gradiente: una breve introducción - parte 1. URL: https://github.com/vlarobbyk/descenso-por-gradiente/blob/master/GradientDescent-1.ipynb.">1</a>]</span>.</p>
+<p>El algoritmo parte desde un punto arbitrario <span class="math notranslate nohighlight">\(x^{(0)}\)</span> en el que se debe conocer el valor inicial de la función objetivo a minimizar. En cada paso <span class="math notranslate nohighlight">\(k \geq 0\)</span> se avanza de forma iterativa en la dirección opuesta al gradiente, ya que se trabaja con problemas a minimizar. Cabe destacar que esto no supone un límite a la hora de definir la cantidad de problemas que se pueden resolver con esta técnica, ya que todos los problemas a maximizar se pueden transformar en problemas a minimizar mediante un cambio de signo. La busqueda de la solución utilizando el descenso por gradiente se puede resumir mediante la siguiente expresión matemática.</p>
+<div class="math notranslate nohighlight">
+\[ x^{(k+1)} = x^{(k)} - t_k \nabla f(x^{(k)})\]</div>
+<p>Donde <span class="math notranslate nohighlight">\(x^{(k+1)}\)</span> corresponde al nuevo punto, <span class="math notranslate nohighlight">\(x^{(k)}\)</span> representa el punto actual en el que se encuentra el algoritmo, <span class="math notranslate nohighlight">\(t_k\)</span> hace referencia al tamaño del paso (también se utiliza <span class="math notranslate nohighlight">\(\alpha\)</span> para representar este parámetos) y <span class="math notranslate nohighlight">\(\nabla f(x^{(k)})\)</span> corresponde al gradiente en el punto actual.</p>
+<p>Tal y como se aprecia en la expresión anterior, para encontrar el nuevo punto el algoritmo se avanza en el sentido opuesto al gradiente, esto se indica mediante el signo negativo.</p>
+<p>A continuación, se adjunta el pseudo-código del descenso por gradiente.</p>
+<figure class="align-center" id="fig-pseudo-gd">
+<a class="reference internal image-reference" href="../../_images/pseudo_GD.PNG"><img alt="../../_images/pseudo_GD.PNG" src="../../_images/pseudo_GD.PNG" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Pseudo-código del descenso por gradiente.</span><a class="headerlink" href="#fig-pseudo-gd" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La <b>tasa de aprendizaje</b> también conocida como tamaño del paso, suele tomar un valor pequeño. Existen algunas variantes del algoritmo en las que se evalúa y se actualiza en función del comportamiento de la función de coste. Mediante estas estrategias se busca explorar el espacio de soluciones en las primeras iteraciones y explotar las buenas soluciones conforme avanzan las iteraciones [3].</p>
+<p>Una tasa de aprendizaje alta conlleva pasos más grandes, por lo que puede que el algoritmo encuentre la solución antes, pero se corre el riesgo de sobrepasar el minimo y que el algoritmo no converja a una solución. El descenso del gradiente con una tasa baja, sin embargo, avanza muy despacio y necesita muchas iteraciones para encontrar una buena solución, resultando así un proceso muy costoso.</p>
+</div>
+<section id="problemas-del-descenso-por-gradiente">
+<span id="sec-dgproblemas"></span><h3>6.1.1. Problemas del descenso por gradiente<a class="headerlink" href="#problemas-del-descenso-por-gradiente" title="Permalink to this heading">#</a></h3>
+<p>El algoritmo de descenso por gradiente se basa en que la <strong>función de coste es convexa</strong>, cuando esta condición se cumple el algoritmo de descenso por gradiente encuentra con facilidad el mínimo global. En problemas no convexos sin embargo, este algoritmo puede encontrarse con dificultades para llegar hasta el minimo global y quedarse atrapado en minimos locales.</p>
+<p>Es importante recordar que cuando la pendiente de la función de coste (el gradiente de la función) es cercana a cero el modelo deja de aprender, dejando al algoritmo atrapado en dichos puntos. Cabe destacar que esta situación se puede producir también en puntos silla (también llamados puntos de inflexión) y mínimos locales, por lo que en estos casos hacer uso del descenso por gradiente no asegura el obtener la solución óptima al problema.</p>
+<figure class="align-center" id="fig-pinflex">
+<a class="reference internal image-reference" href="../../_images/punto_inflexion.png"><img alt="../../_images/punto_inflexion.png" src="../../_images/punto_inflexion.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Ejemplo de máximo, mínimo y punto silla de una función.</span><a class="headerlink" href="#fig-pinflex" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Se detectan otras dos dificultades al utilizar el descenso por gradiente para ajustar los parámetros de las redes neuronales.</p>
+<ul class="simple">
+<li><p><strong>Desvanecimiento del gradiente</strong> (gradientes fuga), esto ocurre cuando el gradiente es demasiado pequeño en la retropropagación en las redes neuronales. El gradiente se reduce lo que provoca que las capas intermedias de la red aprendan muy lentamente, cuando esto sucede los parámetros se actualizan hasta que toman el valor nulo. Cuando esto ocurre el algoritmo que se esta entrenando deja de aprender. <span id="id4">[<a class="reference internal" href="#id43" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">4</a>]</span></p></li>
+<li><p>El problema de <strong>gradientes explosivos</strong> es justamente el efecto opuesto al anterior, es decir, cuando el gradiente es demasiado grande. En estos casos se crea un modelo inestable, los pesos de la red neuronal crecen demasiado hasta que pasan a tomar el valor NaN. <span id="id5">[<a class="reference internal" href="#id43" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">4</a>]</span></p></li>
+</ul>
+</section>
+<section id="implementacion">
+<span id="sec-dgimplementacion"></span><h3>6.1.2 Implementación<a class="headerlink" href="#implementacion" title="Permalink to this heading">#</a></h3>
+<p>A continuación se implementa un ejemplo con el dataset two moons para visualizar el funcionamiento de este algoritmo de optimización. Este conjunto de datos cuenta con dos carácteristicas y las instancias se dividen en dos clases, por lo tanto el objetivo es clasificar dichas clases cometiendo el menor error posible. No obstante, cabe destacar que la frontera de decisión no es lineal, lo que supone una dificultad añadida en el aprendizaje.</p>
+<p>Más adelante se muestra gráficamente el dataset de manera que se clarifica el problema a abordar.</p>
+<p>Para poder trabajar con el ejemplo planteado, primero se ha generado un entorno que contiene el software <em>Qibo</em> en la versión 0.1.12 y <em>tensorflow</em> en la versión 2.10.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar las librerías necesarias</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qibo</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">qibo</span> <span class="kn">import</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">gates</span><span class="p">,</span> <span class="n">hamiltonians</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">qibo.symbols</span> <span class="kn">import</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">I</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+<span class="kn">from</span> <span class="nn">qibo.models</span> <span class="kn">import</span> <span class="n">Circuit</span>
+
+<span class="c1"># Se desactiva los mensajes de tensorflow</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="c1"># Fijar el backend en el que se ejecutará el programa</span>
+<span class="n">qibo</span><span class="o">.</span><span class="n">set_backend</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:50:19]: Using tensorflow backend on /device:CPU:0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definir variables necesarias para la ejecución del algoritmo:</span>
+
+<span class="n">nclasses</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">measured_qubits</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">nclasses</span><span class="p">)))</span>
+<span class="n">nqubits</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">nlayers</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la función <strong>procesdata</strong> se estandarizan los datos de entrada mediante la normalización min-max y se genera un nuevo conjunto de datos que almacenan dichos valores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">procesdata</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">Min</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Max</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">data</span><span class="o">-</span><span class="n">Max</span><span class="o">-</span><span class="n">Min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Max</span><span class="o">-</span><span class="n">Min</span><span class="p">)</span>
+    <span class="n">one</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">data_p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">data</span><span class="p">,</span><span class="n">data</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">data_p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la siguiente celda se carga el conjunto de datos que se utilizará en este notebook para testear el funcionamiento de distintas técnicas de optimización. Tras ejecutar dicha celda obtendremos la <strong>representación gráfica del dataset</strong> two moons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_inputs</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">make_moons</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">y01</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># in { 0,  1}</span>
+<span class="n">y_one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">):</span>
+    <span class="n">y_one_hot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">y01</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">X_pad</span><span class="o">=</span><span class="n">procesdata</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d852bfeab91ed3221f5c7a6602af8d1d33507a89c4742aa038670bed0d09dc14.png" src="../../_images/d852bfeab91ed3221f5c7a6602af8d1d33507a89c4742aa038670bed0d09dc14.png" />
+</div>
+</div>
+<p>Tal y como ya se ha comentado en notebooks anteriores, para poder entrenar el modelo dividiremos el dataset inicial en el conjunto de entremaniento (<em>train</em>) y en el que nos servirá para conocer el comportamiento del circuito con datos desconocidos (<em>val</em>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="n">num_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">num_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.80</span> <span class="o">*</span> <span class="n">num_data</span><span class="p">)</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_data</span><span class="p">))</span>
+
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]]</span>
+<span class="n">Y_val</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]]</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_pad</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]]</span>
+<span class="n">X_val</span> <span class="o">=</span> <span class="n">X_pad</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>El circuito que se va a utilizar en este notebook está detallado en la siguiente función. Se pueden distinguir dos fases:</p>
+<p><strong>1. Encoding:</strong>
+El encoding está definido por una rotación en el eje Y y otra rotación en el eje Z. Como se puede apreciar en el código, para poder codificar los datos con los que estamos trabajando se deben introducir como ángulos de rotación en las puertas iniciales. Este método de codificación se explica más detalladamente en el notebook <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a>.</p>
+<p><strong>2. Circuito variacional:</strong>
+Como se aprecia en la funicón <em>create_circuit</em> el circuito variacional cuenta con tres capas, cada una de ellas se compone con dos rotaciones en el eje Y y una CNOT necesario para entrelazar los dos qubits, y una última rotación en el eje Y antes de realizar la medida.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_circuit</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">nqubits</span><span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+    
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+    
+    <span class="c1"># ENCODING:</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">6</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span>
+    
+    <span class="c1"># CIRCUITO VARIACIONAL:</span>
+    
+    <span class="c1"># LAYER 1</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+     
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">CZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">6</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span>
+    
+    <span class="c1"># LAYER 2</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">8</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">9</span><span class="p">]))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">CZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">10</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">11</span><span class="p">]))</span>
+    
+    <span class="c1"># LAYER 3</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">12</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">13</span><span class="p">]))</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">CZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">14</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">15</span><span class="p">]))</span>
+    
+    <span class="c1"># ÚLTIMA ROTACIÓN EN Y:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">16</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">17</span><span class="p">]))</span>
+    
+    <span class="c1"># MEDIMOS EL QUBIT 0:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La siguente función calcula el rendimiento del modelo, para ello se utilizan dos métricas:</p>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><b>Definición</b>: </i>Error cuadrático medio</i></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Mide el promedio del error al cuadrado, donde el error se considera la diferencia entre la predicción que realiza el modelo y la etiqueta almacenada en el dataset. La formula con la que se calcula este valor es la siguiente:</p>
+<div class="math notranslate nohighlight">
+\[
+MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
+\]</div>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><b>Definición</b>: </i>Accuracy</i></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Se trata de una métrica que muestra fracción de ejemplos que se han clasificado correctamente, es decir, que el modelo ha predicho la clase a la que pertenece.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Accuracy} = \frac{\text{Number of correct pedictions}}{\text{Total number of predictions}}
+\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqloss_acc</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="n">sqloss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Recorremos todas las instancias comparando el label conocido con la predicción que ha realizado el modelo.</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+        
+        <span class="c1"># Modificamos el valor de loss</span>
+        <span class="n">sqloss</span> <span class="o">=</span> <span class="n">sqloss</span> <span class="o">+</span> <span class="p">(</span><span class="n">label</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        
+        <span class="c1">#Vemos si el label y la predicción coincide para calcular el accuracy</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">prediction</span><span class="p">):</span>
+            <span class="n">acc</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># dividir entre la cantidad de datos de entrada para obtener un valor entre 0 y 1.</span>
+    <span class="n">sqloss</span> <span class="o">=</span> <span class="n">sqloss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loss: &#39;</span><span class="p">,</span> <span class="n">sqloss</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="s1">&#39;Acc: &#39;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sqloss</span><span class="p">,</span> <span class="n">acc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  En esta función se llama a la función de crear el circuito con los parámetros necesarios.</span>
+<span class="k">def</span> <span class="nf">Classifier_circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">nqubits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">circ</span> <span class="o">=</span> <span class="n">create_circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">circ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La función <strong>hamiltonian</strong> varía en función del número de qubits con los que se este trabajando, en este caso nos interesa realizar una medición Z en el qubit 0 por lo que realizamos el producto Z en el qubit 0 y la identidad para el resto de qubits. Haremos uso de está función para calcular el valor esperado del circuito y nos facilitará el cálculo del gradiente que necesitaremos más adelante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definir el observable:</span>
+<span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">():</span>
+    <span class="n">Obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">([</span> <span class="n">Z</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonians</span><span class="o">.</span><span class="n">SymbolicHamiltonian</span><span class="p">(</span><span class="n">Obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La función <strong>Predictions</strong> es la encargada de ejecutar el circuito y obtener el valor esperado. Tiene como parámetros de entrada el número de qubits, el número de shots, los pesos (son los parámetros que deseamos optimizar y corresponden a las rotaciones de las puertas del circuito) y una instancia x del dataset (unicamente las variables de entrada, excluimos el valor de la etiqueta).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Predictions</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Classifier_circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="p">()</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">expectation</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">expected_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la función de coste realizamos las predicciones para los datos de entrada y calculamos el rendimiento del modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Cost_function</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sqloss_acc</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la siguiente celda se lleva a cabo todo el proceso:</p>
+<ol class="arabic simple">
+<li><p>Definir el número de qubits necesarios, número de iteraciones a realizar y el <em>batch size</em>.</p></li>
+<li><p>Inicializar los ángulos de rotación (parámetros a optimizar).</p></li>
+<li><p>Iterar para optimizar los parámetros correspondientes a las rotaciones de las puertas. Para ello se calcula el gradiente y se calculan los nuevos valores de los angulos de rotación.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="c1"># Definición de algunos parámetros</span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Número máximo de iteraciones que hará el algoritmo.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
+ 
+   
+   <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+
+    <span class="n">tf_grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">])</span>
+    
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;SGD&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_SGD</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.94029041</span><span class="p">,</span>  <span class="mf">1.76279408</span><span class="p">,</span>  <span class="mf">0.07174585</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08851703</span><span class="p">,</span>  <span class="mf">0.59543365</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">0.61919009</span><span class="p">,</span>  <span class="mf">0.16678696</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.11759714</span><span class="p">,</span>  <span class="mf">0.40629924</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.21482006</span><span class="p">,</span>
+        <span class="mf">0.15629836</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.10974645</span><span class="p">,</span>  <span class="mf">0.16246831</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.12307243</span><span class="p">,</span>  <span class="mf">0.23741627</span><span class="p">,</span>
+        <span class="mf">0.00333674</span><span class="p">,</span>  <span class="mf">0.24791843</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00205158</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una vez entrenado el modelo, se utilizan los parámetros ajustados para conocer las predicciones y conocer el error y tasa de acierto que se ha logrado. A continuación se calcula el error al realizar las predicciones del conjunto val y por otro lado el comentido con todas las instancias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular coste con todos los datos</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_SGD</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_SGD</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.43241086306503357 Acc:  0.85
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3534984650110077 Acc:  0.896
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la siguiente imagen se puede comparar la clasificación obtenida mediante el modelo entrenado y las etiquetas reales que presentaban los datos en el dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_SGD</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" src="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" />
+</div>
+</div>
+<p>Tal y como se aprecia en la imagen anterior, el modelo no llega a aprender correctamente. El clasificador que obtenemos no consigue generar la frontera de decisión no lineal que se comentaba anteriormente. Todos los errores se comenten en la zona central (la que genera la dificultad), es por eso que el valor del error no es demasiado alto ni el del accuracy excesivamente bajo.</p>
+</section>
+</section>
+<section id="momentum">
+<span id="sec-momentum"></span><h2>6.2. Momentum<a class="headerlink" href="#momentum" title="Permalink to this heading">#</a></h2>
+<p>Como se ha comentado en apartados anteriores, el algoritmo de descenso por gradiente puede encontrarse con ciertas dificultades que empeoren considerablemente su funcionamiento. Esto principalmente se debe a que el resultado obtenido tiene una gran dependencia de la tasa de aprendizaje y del gradiente del paso actual, por lo que al no tener en cuenta la trayectoria de soluciones exploradas se puede quedar atrapado en puntos que aparentan ser una buena solución (por ejemplo mínimos locales y puntos silla). Para intentar solventar este tipo de dificultades se implementa el concepto de Momentum.</p>
+<section id="algoritmo">
+<span id="sec-momentumalgoritmo"></span><h3>6.2.1. Algoritmo<a class="headerlink" href="#algoritmo" title="Permalink to this heading">#</a></h3>
+<p>Este algoritmo es una extensión de la técnica anterior, por lo que la estrategía a seguir es muy similar, la variación que sufre esta técnica es que en la exploración de soluciones se tiene en cuenta las soluciones ya exploradas. Para integrar la inercia se puede hacer uso del concepto estadístico de media móvil sobre los gradientes pasados. En las regiones donde la pendiente es alta, las actualizaciones serán significativas, de manera que en cierto modo, se gana impulso al tomar una media móvil sobre estos gradientes.</p>
+<p>Utilizando esta técnica se consigue introducir la inercia. Sin embargo, utilizando este concepto estadístico todos los gradientes tienen la misma ponderación, en otras palabras, se les otorga la misma importancia a todos los gradientes independientemente de la lejanía del momento actual. Es por esto que se utiliza un promedio ponderado, de manera que los gradientes más recientes tengan mayor influencia.</p>
+<p>El algoritmo no sufre variaciones drásticas, unicamente se debe tener en cuenta la variación a la hora de calcular el gradiente. En el descenso por gradiente con momentum el valor del siguiente punto se calcula mediante la siguiente expresión:</p>
+<div class="math notranslate nohighlight">
+\[ x^{(k+1)} = x^{(k)} - a^{(k+1)}\]</div>
+<p>donde el término <span class="math notranslate nohighlight">\(a^{(k+1)}\)</span> se actualiza mediante la siguiente expresión <span class="math notranslate nohighlight">\( a^{(k+1)} = \beta a^{(k)} + t_k \nabla f(x^{(k)})\)</span> donde <span class="math notranslate nohighlight">\(t_k\)</span> corresponde al tamaño de paso y <span class="math notranslate nohighlight">\(\beta\)</span> corresponde al momentum, este parámetro debe cumplir que <span class="math notranslate nohighlight">\( \beta \in [0,1]\)</span> <span id="id6">[<a class="reference internal" href="#id46" title="Pennylane. Momentum optimizer. URL: https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html.">7</a>]</span>.</p>
+</section>
+<section id="como-seleccionar-beta">
+<span id="sec-momentumbeta"></span><h3>6.2.2. Como seleccionar <span class="math notranslate nohighlight">\(\beta\)</span><a class="headerlink" href="#como-seleccionar-beta" title="Permalink to this heading">#</a></h3>
+<p>Al introducir el momentum se debe ajustar un nuevo parámetro, este corresponde al peso que le otorgamos a los gradientes anteriores y se denomina <span class="math notranslate nohighlight">\(\beta\)</span>. Si el valor de <span class="math notranslate nohighlight">\(\beta\)</span> es pequeño el gradiante se reduce rápidamente pudiendo crear problemas de gradiente desvaneciente. Si se le asigna un valor demasiado grande, sin embargo, este no se reducirán tan rápido por lo que influirán más gradientes en la actualización, este segundo caso es el ideal. Cabe destacar que el valor más común para este parámetos es <span class="math notranslate nohighlight">\(0.9\)</span>. <span id="id7">[<a class="reference internal" href="#id47" title="Coursera. Gradient descent with momentum. URL: https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f.">2</a>]</span></p>
+</section>
+<section id="sec-momentumimplementacion">
+<span id="id8"></span><h3>6.2.3. Implementación<a class="headerlink" href="#sec-momentumimplementacion" title="Permalink to this heading">#</a></h3>
+<p>Para apreciar las diferencias entre los métodos, desarrollaremos el mismo ejemplo con este segundo optimizador.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="c1"># Definición de algunos parámetos</span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Número máximo de iteraciones que hará el algoritmo.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
+    
+
+    <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span> 
+
+    <span class="n">tf_grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">])</span>
+    
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;SGD&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span> <span class="o">=</span> <span class="n">momentum</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_SGD_momentum</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.94029041</span><span class="p">,</span>  <span class="mf">1.76279408</span><span class="p">,</span>  <span class="mf">0.07174585</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08851703</span><span class="p">,</span>  <span class="mf">0.59543365</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">0.61919009</span><span class="p">,</span>  <span class="mf">0.16678696</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.11759714</span><span class="p">,</span>  <span class="mf">0.40629924</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.21482006</span><span class="p">,</span>
+        <span class="mf">0.15629836</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.10974645</span><span class="p">,</span>  <span class="mf">0.16246831</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.12307243</span><span class="p">,</span>  <span class="mf">0.23741627</span><span class="p">,</span>
+        <span class="mf">0.00333674</span><span class="p">,</span>  <span class="mf">0.24791843</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00205158</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al igual que en el caso anterior, se calcula el error y el accuracy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular coste con todos los datos y mirar precisión para criterio de parada.</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_SGD_momentum</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_SGD_momentum</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.43241086306503357 Acc:  0.85
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3534984650110077 Acc:  0.896
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_SGD_momentum</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" src="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" />
+</div>
+</div>
+<p>El resultado obtenido en este caso es similar al anterior.</p>
+</section>
+</section>
+<section id="nesterov-momentum-optimizer-descenso-por-gradiente-con-nertorv-momentum">
+<span id="sec-nesterov"></span><h2>6.3. Nesterov Momentum Optimizer (descenso por gradiente con Nertorv Momentum)<a class="headerlink" href="#nesterov-momentum-optimizer-descenso-por-gradiente-con-nertorv-momentum" title="Permalink to this heading">#</a></h2>
+<p>Al igual que los dos métodos anteriores, este algoritmo de optimización también se basa en el gradiente. No obstante, cuenta con una mayor tasa de convergencia en ciertas situaciones. <span id="id9">[<a class="reference internal" href="#id48" title="Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In International conference on machine learning, 1139–1147. PMLR, 2013.">9</a>]</span></p>
+<section id="sec-nesterovalgortimo">
+<span id="id10"></span><h3>6.3.1. Algoritmo<a class="headerlink" href="#sec-nesterovalgortimo" title="Permalink to this heading">#</a></h3>
+<p>El optimizador Nesterov Momentum es similar al descenso por gradiente con momentum, pero este desplaza el punto actual mediante el término de momentum al calcular el gradiente. De manera que la única modificación respecto a la técnica anterior es la expresión para actualizar <span class="math notranslate nohighlight">\(a^{(k+1)}\)</span> que se sustituye por <span class="math notranslate nohighlight">\(a^{(k+1)} = \beta a^{(k)} + t_k \nabla f(x^{(k)} - \beta a^{(k)})\)</span>.<span id="id11">[<a class="reference internal" href="#id49" title="Pennylane. Nesterov momentum optimizer. URL: https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html.">8</a>]</span></p>
+</section>
+<section id="sec-nesterovimplementacion">
+<span id="id12"></span><h3>6.3.2. Implementación<a class="headerlink" href="#sec-nesterovimplementacion" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1"># Definición de algunos parámetros</span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Número máximo de iteraciones que hará el algoritmo.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
+      
+    <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+
+    <span class="n">tf_grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">])</span>
+    
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;SGD&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span> <span class="o">=</span> <span class="n">momentum</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_nesterov</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.16792912</span><span class="p">,</span>  <span class="mf">1.6060722</span> <span class="p">,</span>  <span class="mf">0.0843576</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.02140028</span><span class="p">,</span>  <span class="mf">1.58956029</span><span class="p">,</span>
+        <span class="mf">0.01566641</span><span class="p">,</span>  <span class="mf">1.48904306</span><span class="p">,</span>  <span class="mf">0.69655598</span><span class="p">,</span>  <span class="mf">0.82610582</span><span class="p">,</span>  <span class="mf">0.50128958</span><span class="p">,</span>
+        <span class="mf">0.62812613</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04462584</span><span class="p">,</span>  <span class="mf">0.63429607</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05795183</span><span class="p">,</span>  <span class="mf">0.83151127</span><span class="p">,</span>
+        <span class="mf">0.00333674</span><span class="p">,</span>  <span class="mf">0.84201342</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00205158</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular coste con todos los datos y mirar precisión para criterio de parada.</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_nesterov</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_nesterov</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.45130980034682855 Acc:  0.82
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3732143075303984 Acc:  0.874
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_nesterov</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label       </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/14613524e5f5c04df6db1296e568507ef2b7645f1bc24231b415b56a1d57c87c.png" src="../../_images/14613524e5f5c04df6db1296e568507ef2b7645f1bc24231b415b56a1d57c87c.png" />
+</div>
+</div>
+<p>En este caso la clasificación cambia, se pueden apreciar errores de clasificación en los extremos y se mantienen los errores de clasificación en el centro.</p>
+</section>
+</section>
+<section id="adam">
+<span id="sec-adam"></span><h2>6.4 Adam<a class="headerlink" href="#adam" title="Permalink to this heading">#</a></h2>
+<p>Se trata de un método de optimización estocástica eficiente que unicamente requiere gradientes de primer orden con poco requerimiento de memoria. Este método calcula tasas de aprendizaje adaptativas individuales para diferentes parámetros a partir de las estimaciones del primer y segundo momento de los gradientes. Es por eso que el nombre de esta técnica, Adam, proviene de <em>adaptative moment estimation</em>. <span id="id13">[<a class="reference internal" href="#id50" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">6</a>]</span></p>
+<section id="sec-adamalgoritmo">
+<span id="id14"></span><h3>6.4.1. Algoritmo<a class="headerlink" href="#sec-adamalgoritmo" title="Permalink to this heading">#</a></h3>
+<p>A continuación se muestra el pseudo-código de este algoritmo.</p>
+<figure class="align-center" id="fig-algadam">
+<a class="reference internal image-reference" href="../../_images/AlgAdam.PNG"><img alt="../../_images/AlgAdam.PNG" src="../../_images/AlgAdam.PNG" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Pseudo-código algoritmo Adam <span>[<a class="reference internal" href="#id50" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">6</a>]</span>.</span><a class="headerlink" href="#fig-algadam" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Tal y como se muestra en la figura 5, el algoritmo actualiza las medias móviles exponenciales del gradiente (<span class="math notranslate nohighlight">\(m_t\)</span>) y del gradiente al cuadrado (<span class="math notranslate nohighlight">\(v_t\)</span>) donde los hiperparámetros <span class="math notranslate nohighlight">\(\beta_1, \beta_2 \in [0,1)\)</span> corresponden al parámetro de suavizado de las medias móviles. Como se aprecia en el pseudo-código anterior, los parámetros de suavizado se inicializan al 0, dejando que en las primeras iteraciones el valor sea cercano al valor nulo, especialmente cuando los valores de <span class="math notranslate nohighlight">\(\beta\)</span> son cercanos a 1 <span id="id15">[<a class="reference internal" href="#id50" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">6</a>]</span>.</p>
+</section>
+<section id="sec-adamimplementacion">
+<span id="id16"></span><h3>6.4.2. Implementación<a class="headerlink" href="#sec-adamimplementacion" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1"># Definición de algunos parámetros</span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Número máximo de iteraciones que hará el algoritmo.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
+    
+    <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+
+    <span class="n">tf_grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">])</span>
+    
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;Adam&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta_1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta_2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-08</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_adam</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.48232873e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.51308046e+00</span><span class="p">,</span>  <span class="mf">5.62069491e-01</span><span class="p">,</span>  <span class="mf">2.72334117e-01</span><span class="p">,</span>
+        <span class="mf">1.86775543e-02</span><span class="p">,</span>  <span class="mf">4.87684609e-01</span><span class="p">,</span>  <span class="mf">5.09494809e-01</span><span class="p">,</span>  <span class="mf">4.27517459e-01</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">1.02794316e-03</span><span class="p">,</span>  <span class="mf">4.33140725e-01</span><span class="p">,</span>  <span class="mf">5.01443413e-01</span><span class="p">,</span>  <span class="mf">4.41843375e-02</span><span class="p">,</span>
+        <span class="mf">5.07613354e-01</span><span class="p">,</span>  <span class="mf">3.08583526e-02</span><span class="p">,</span>  <span class="mf">4.43715065e-03</span><span class="p">,</span>  <span class="mf">3.33674327e-03</span><span class="p">,</span>
+        <span class="mf">1.49393091e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.05158266e-03</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular coste con todos los datos y mirar precisión para criterio de parada.</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_adam</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_adam</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6442657540037081 Acc:  0.77
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6209059083737476 Acc:  0.796
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_adam</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label       </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e626b22eccaf52a82f9f1259458ba234e8c73af39a43fcf301636b0e0c7e093a.png" src="../../_images/e626b22eccaf52a82f9f1259458ba234e8c73af39a43fcf301636b0e0c7e093a.png" />
+</div>
+</div>
+<p>Tal y como se aprecia en el gráfico anterior, este optimizador no es capaz de conseguir los parámetros adecuados para una correcta clasificación. Se puede observar que todas las instancias se etiquetan con la misma clase.</p>
+</section>
+</section>
+<section id="adadelta">
+<span id="sec-adadelta"></span><h2>6.5 Adadelta<a class="headerlink" href="#adadelta" title="Permalink to this heading">#</a></h2>
+<p>Adadelta es una técnica de optimización estocástica basada en el descenso por gradiente que permite aplicar el método de la tasa de aprendizaje por dimensión. Se trata de una expansión del método Adagrad que busca reducir la agresividad y el descenso monótono de la tasa de aprendizaje. Para ello en vez de hacer uso de todos los gradientes pasados, únicamente utilizan los contenidos en una ventana de tamaño fijo <span class="math notranslate nohighlight">\(w\)</span> <span id="id17">[<a class="reference internal" href="#id51" title="Keras. Adadelta. URL: https://keras.io/api/optimizers/adadelta/.">5</a>]</span>.</p>
+<section id="sec-adadeltaalgoritmo">
+<span id="id18"></span><h3>6.5.1. Algoritmo<a class="headerlink" href="#sec-adadeltaalgoritmo" title="Permalink to this heading">#</a></h3>
+<p>La suma de los gradientes se define de manera recursiva, de manera que <span class="math notranslate nohighlight">\(E[g^2]_t\)</span> en el tiempo t depende de la media anterior y el gradiente actual, tal y como se indíca en la siguiente formula <span id="id19">[<a class="reference internal" href="#id52" title="Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.">11</a>]</span>:
+$<span class="math notranslate nohighlight">\(E[g^2]_t = \gamma E[g^2]_{t-1} + (1-\gamma)g_t^2\)</span>$</p>
+<p>Normalmente el parámetro <span class="math notranslate nohighlight">\(\gamma\)</span> se fija a 0.9. Utilizando este método de optimización los parámetros se acutalizan mediante las siguientes expresiones <span id="id20">[<a class="reference internal" href="#id52" title="Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.">11</a>]</span>:
+$<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqrt{E[g^2]_t+\epsilon}}g_t\)</span>$</p>
+<p>La principal ventaja del algoritmo Adadelta es que no es necesario definir el valor de la tasa de aprendizaje por defecto <span id="id21">[<a class="reference internal" href="#id51" title="Keras. Adadelta. URL: https://keras.io/api/optimizers/adadelta/.">5</a>]</span>.</p>
+</section>
+<section id="sec-adadeltaimplementacion">
+<span id="id22"></span><h3>6.5.2. Implementación<a class="headerlink" href="#sec-adadeltaimplementacion" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1"># Definición de algunos parámetros</span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Número máximo de iteraciones que hará el algoritmo.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>  
+   
+    <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+
+<span class="c1">#         print(&#39;LOSS en batch: &#39;, value_cost.numpy(), &#39;ACC en batch: &#39;, acc_cost)</span>
+    <span class="n">tf_grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">])</span>
+<span class="c1">#     print (&quot;tf_grad&quot;, tf_grads) </span>
+    
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;Adadelta&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_adadelta</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.003568</span>  <span class="p">,</span>  <span class="mf">0.00432562</span><span class="p">,</span>  <span class="mf">0.01021908</span><span class="p">,</span>  <span class="mf">0.02240893</span><span class="p">,</span>  <span class="mf">0.0398887</span> <span class="p">,</span>
+       <span class="o">-</span><span class="mf">0.00748113</span><span class="p">,</span>  <span class="mf">0.03071376</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00137568</span><span class="p">,</span>  <span class="mf">0.02018069</span><span class="p">,</span>  <span class="mf">0.00424388</span><span class="p">,</span>
+        <span class="mf">0.02265331</span><span class="p">,</span>  <span class="mf">0.01388976</span><span class="p">,</span>  <span class="mf">0.02882325</span><span class="p">,</span>  <span class="mf">0.00056377</span><span class="p">,</span>  <span class="mf">0.02565151</span><span class="p">,</span>
+        <span class="mf">0.00333674</span><span class="p">,</span>  <span class="mf">0.03615367</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00205158</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular coste con todos los datos y mirar precisión para criterio de parada.</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_adadelta</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params_adadelta</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.8635020982383261 Acc:  0.52
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.9411585777667268 Acc:  0.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_adadelta</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label       </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a57eed172b6e9c57a9ca64cea6c9c14f062141bb02b4df01acde94b7301b314a.png" src="../../_images/a57eed172b6e9c57a9ca64cea6c9c14f062141bb02b4df01acde94b7301b314a.png" />
+</div>
+</div>
+<p>Ocurre lo mismo que en el caso anterior, el clasificador no hace distinción entre dos clases y no se genera ninguna frontera de decisión.</p>
+</section>
+</section>
+<section id="metodo-de-optimizacion-powell">
+<span id="sec-powell"></span><h2>6.6.  Método de optimización Powell<a class="headerlink" href="#metodo-de-optimizacion-powell" title="Permalink to this heading">#</a></h2>
+<p>El algoritmo <em>Powell’s conjugate direction method</em>, también conocido como método de Powell trata de encontrar un mínimo local de una función. Haciendo uso de esta técnica no es necesario que la función de coste sea diferenciable ya que no se hace uso de derivadas durante el proceso de optimización.</p>
+<p>Para poder utilizar este método debe ser una función de valores reales y con un número fijo de inputs. El algoritmo necesita un punto inicial y un set de vectores para iniciar el proceso. Este método minimiza la función mediante una busqueda bidireccional para cada uno de los vectores.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1"># Definición de algunos parámetros</span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">Cost_function</span><span class="p">,</span> <span class="n">test_params</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span><span class="n">nqubits</span><span class="p">),</span> <span class="n">method</span> <span class="o">=</span><span class="s1">&#39;Powell&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;disp&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;maxfev&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_powell</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.78141512e+00</span><span class="p">,</span>  <span class="mf">2.94328489e+00</span><span class="p">,</span>  <span class="mf">8.82134090e-04</span><span class="p">,</span>  <span class="mf">4.07261522e-03</span><span class="p">,</span>
+  <span class="mf">7.84590743e-01</span><span class="p">,</span>  <span class="mf">1.64362966e+00</span><span class="p">,</span>  <span class="mf">9.50088418e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.51357208e-03</span><span class="p">,</span>
+ <span class="o">-</span><span class="mf">1.03218852e-03</span><span class="p">,</span>  <span class="mf">4.10598502e-03</span><span class="p">,</span>  <span class="mf">1.44043571e-03</span><span class="p">,</span>  <span class="mf">1.45427351e-02</span><span class="p">,</span>
+  <span class="mf">7.61037725e-03</span><span class="p">,</span>  <span class="mf">1.21675016e-03</span><span class="p">,</span>  <span class="mf">4.43863233e-03</span><span class="p">,</span>  <span class="mf">3.33674327e-03</span><span class="p">,</span>
+  <span class="mf">1.49407907e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.05158264e-03</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_powell</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label       </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c5b0fbd9ffd604be88791b9aa96d3c446fbe58fc555232bee2116783f6b4c158.png" src="../../_images/c5b0fbd9ffd604be88791b9aa96d3c446fbe58fc555232bee2116783f6b4c158.png" />
+</div>
+</div>
+<p>Con el clasificador ajustado mediante el optimizador Powell observamos una frontera de decisión que corresponde a una línea horizontal, por lo que tampoco se logra la clasificación esperada.</p>
+</section>
+<section id="metodo-de-optimizacion-bfgs">
+<span id="sec-bfgs"></span><h2>6.7. Método de optimización BFGS<a class="headerlink" href="#metodo-de-optimizacion-bfgs" title="Permalink to this heading">#</a></h2>
+<p>El algoritmo Broyden-Fletcher-Goldfarb-Shanno también conocido como BFGS, es un método iterativo utilizado para resolver problemas no lineales sin restricciones. Al igual que el método Davidon-Fletcher-Powell, determina la dirección de descenso precondicionando el gradiente con la información de la curvatura de la función. BFGS realiza este proceso gradualmente mejorando la matriz hessiana de la función de coste. Dicha matriz se obtiene mediante evaluaciones del gradiente (o evaluaciones del gradiente aproximado) y se generaliza mediante el <em>método de la secante</em> <span id="id23">[<a class="reference internal" href="#id53" title="Wikipedia. Broyden–fletcher–goldfarb–shanno algorithm. URL: https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm.">10</a>]</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Nota (Método de la secante)</p>
+<p>Se trata de un método utilizado para aproximar la derivada de una función, en algunos casos el cálculo de la derivada es muy costoso por lo que este tipo de métodos resultan de gran utilidad. La expresión utilizada para obtener el valor de la pendiente es la siguiente [14]:</p>
+<div class="math notranslate nohighlight">
+\[
+f^\prime(x_0) = \frac{f(x_1)-f(x_0)}{x_1-x_0}
+\]</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1"># Definición de algunos parámetros </span>
+<span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Inicializar los ángulos de rotación</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">Cost_function</span><span class="p">,</span> <span class="n">test_params</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span><span class="n">nqubits</span><span class="p">),</span> <span class="n">method</span> <span class="o">=</span><span class="s1">&#39;BFGS&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;disp&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo necesario para ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>La celda anterior no se ejecuta al generar la página web debido a que el tiempo requerido es muy elevado. Los parámetros obtenidos trás el proceso de optimización se indican en la siguiente celda para poder obtener los siguientes gráficos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cambiar valores de los parametros</span>
+
+<span class="n">params_BFGS</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.13857089e+00</span><span class="p">,</span>  <span class="mf">2.37978594e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.19608946e-05</span><span class="p">,</span>  <span class="mf">7.41954923e-05</span><span class="p">,</span>
+  <span class="mf">5.95981338e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.80111697e-01</span><span class="p">,</span>  <span class="mf">2.72385273e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.69266125e-02</span><span class="p">,</span>
+  <span class="mf">6.48136305e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.34811159e-02</span><span class="p">,</span>  <span class="mf">1.46589166e-01</span><span class="p">,</span>  <span class="mf">8.38802914e-02</span><span class="p">,</span>
+  <span class="mf">1.52760468e-01</span><span class="p">,</span>  <span class="mf">7.05566292e-02</span><span class="p">,</span>  <span class="mf">1.92534534e-01</span><span class="p">,</span>  <span class="mf">3.33697291e-03</span><span class="p">,</span>
+  <span class="mf">2.03037478e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.05223045e-03</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_BFGS</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Visualizar las predicciones realizadas por el modelo</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+        
+<span class="c1"># Visualizar los valores reales del label       </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valores Reales&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1867bb475029b91a564c53b4a5f3551489ca20281e76a85be18f82f2fb60c845.png" src="../../_images/1867bb475029b91a564c53b4a5f3551489ca20281e76a85be18f82f2fb60c845.png" />
+</div>
+</div>
+<p>En este caso se obtiene un resultado similar al obtenido con el optimizador de descenso por gradiente.</p>
+</section>
+<hr class="docutils" />
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id24">
+<dl class="citation">
+<dt class="label" id="id44"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
+<dd><p>V. Robles B. Descenso por gradiente: una breve introducción - parte 1. URL: <a class="github reference external" href="https://github.com/vlarobbyk/descenso-por-gradiente/blob/master/GradientDescent-1.ipynb">vlarobbyk/descenso-por-gradiente</a>.</p>
+</dd>
+<dt class="label" id="id47"><span class="brackets"><a class="fn-backref" href="#id7">2</a></span></dt>
+<dd><p>Coursera. Gradient descent with momentum. URL: <a class="reference external" href="https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f">https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f</a>.</p>
+</dd>
+<dt class="label" id="id42"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p>Juankboards en Planeta Chatbot. Conceptos fundamentales en machine learning: función de pérdida y optimización. URL: <a class="reference external" href="https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/">https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/</a>.</p>
+</dd>
+<dt class="label" id="id43"><span class="brackets">4</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>)</span></dt>
+<dd><p>IBM. ¿qué es el descenso de gradiente? URL: <a class="reference external" href="https://www.ibm.com/mx-es/topics/gradient-descent">https://www.ibm.com/mx-es/topics/gradient-descent</a>.</p>
+</dd>
+<dt class="label" id="id51"><span class="brackets">5</span><span class="fn-backref">(<a href="#id17">1</a>,<a href="#id21">2</a>)</span></dt>
+<dd><p>Keras. Adadelta. URL: <a class="reference external" href="https://keras.io/api/optimizers/adadelta/">https://keras.io/api/optimizers/adadelta/</a>.</p>
+</dd>
+<dt class="label" id="id50"><span class="brackets">6</span><span class="fn-backref">(<a href="#id13">1</a>,<a href="#id15">2</a>)</span></dt>
+<dd><p>Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. <em>arXiv preprint arXiv:1412.6980</em>, 2014.</p>
+</dd>
+<dt class="label" id="id46"><span class="brackets"><a class="fn-backref" href="#id6">7</a></span></dt>
+<dd><p>Pennylane. Momentum optimizer. URL: <a class="reference external" href="https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html">https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html</a>.</p>
+</dd>
+<dt class="label" id="id49"><span class="brackets"><a class="fn-backref" href="#id11">8</a></span></dt>
+<dd><p>Pennylane. Nesterov momentum optimizer. URL: <a class="reference external" href="https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html">https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html</a>.</p>
+</dd>
+<dt class="label" id="id48"><span class="brackets"><a class="fn-backref" href="#id9">9</a></span></dt>
+<dd><p>Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In <em>International conference on machine learning</em>, 1139–1147. PMLR, 2013.</p>
+</dd>
+<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id23">10</a></span></dt>
+<dd><p>Wikipedia. Broyden–fletcher–goldfarb–shanno algorithm. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm</a>.</p>
+</dd>
+<dt class="label" id="id52"><span class="brackets">11</span><span class="fn-backref">(<a href="#id19">1</a>,<a href="#id20">2</a>)</span></dt>
+<dd><p>Matthew D Zeiler. Adadelta: an adaptive learning rate method. <em>arXiv preprint arXiv:1212.5701</em>, 2012.</p>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<center>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img aling="left" alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+</center>
+<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.</p>
+<p>This work has been financially supported by the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda.</p>
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" class="align-left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" style="width: 1000px;" /></a>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/Part_02_QML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter_05_Kernel_myst.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5. Quantum Kernels</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-por-gradiente">6.1. Descenso por gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-del-descenso-por-gradiente">6.1.1. Problemas del descenso por gradiente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">6.1.2 Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">6.2. Momentum</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">6.2.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-seleccionar-beta">6.2.2. Como seleccionar <span class="math notranslate nohighlight">\(\beta\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-momentumimplementacion">6.2.3. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nesterov-momentum-optimizer-descenso-por-gradiente-con-nertorv-momentum">6.3. Nesterov Momentum Optimizer (descenso por gradiente con Nertorv Momentum)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-nesterovalgortimo">6.3.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-nesterovimplementacion">6.3.2. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adam">6.4 Adam</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adamalgoritmo">6.4.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adamimplementacion">6.4.2. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adadelta">6.5 Adadelta</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adadeltaalgoritmo">6.5.1. Algoritmo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-adadeltaimplementacion">6.5.2. Implementación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-powell">6.6.  Método de optimización Powell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-bfgs">6.7. Método de optimización BFGS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QuantumSpain & TalentQ
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,880 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Quantum Support Vector Machines (QSVM) &#8212; PT3-Support</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jamasole/Curso-TalentQ-Book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Part_02_QML/Chapter_04_QSVM_myst';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Quantum Kernels" href="Chapter_05_Kernel_myst.html" />
+    <link rel="prev" title="3. Variational Quantum Classifier (VQC)" href="Chapter_03_VQC_myst.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-light" alt="PT3-Support - Home"/>
+    <script>document.write(`<img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-dark" alt="PT3-Support - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quantum Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter_01_Introduction_myst.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_02_Feature_encoding_myst.html">2. Feature encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_03_VQC_myst.html">3. Variational Quantum Classifier (VQC)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Quantum Support Vector Machines (QSVM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/edit/master/Book/docs/Part_02_QML/Chapter_04_QSVM_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/issues/new?title=Issue%20on%20page%20%2Fdocs/Part_02_QML/Chapter_04_QSVM_myst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/Part_02_QML/Chapter_04_QSVM_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. Quantum Support Vector Machines (QSVM)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-machines-svm">4.1. Support Vector Machines (SVM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificador-de-vectores-de-soporte-cuantico">4.2. Clasificador de vectores de soporte cuántico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-qsvm-en-qibo">4.2.1. Ejemplo de QSVM en Qibo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <blockquote>
+<div><p>May 03, 2024 | 6 min read</p>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" src="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" style="width: 2000px;" /></a>
+</figure>
+<p>Authors:</p>
+<ul class="simple">
+<li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\( \renewcommand{\bra}[1]{\langle #1|} \)</span>
+<span class="math notranslate nohighlight">\( \renewcommand{\ket}[1]{|#1\rangle} \)</span>
+<span class="math notranslate nohighlight">\( \renewcommand{\braket}[2]{\langle #1|#2\rangle} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\ketbra}[2]{| #1\rangle \langle #2|} \)</span>
+<span class="math notranslate nohighlight">\( \renewcommand{\i}{{\color{blue} i}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\Hil}{{\mathbb H}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\boldn}{{\bf n}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\tr}{{\rm tr}}\)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\bn}{{\bf n}} \)</span></p>
+<p>Consulta la notación que se ha utilizado durante todo el documento en el siguiente <a class="reference internal" href="#notacion"><span class="xref myst">enlace</span></a>.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="quantum-support-vector-machines-qsvm">
+<span id="sec-qml-qsvm"></span><h1>4. Quantum Support Vector Machines (QSVM)<a class="headerlink" href="#quantum-support-vector-machines-qsvm" title="Permalink to this heading">#</a></h1>
+<p>En esta sección, se tratarán las <strong>máquinas de vectores de soporte o de soporte vectorial</strong> (en inglés <em>Support Vector Machines</em>, SVM) tanto en computación clásica como en computación cuántica. En este último caso, la solución es conocida como <strong>máquinas de vectores de soporte cuánticos</strong> (en su sigla en inglés <em>QSVM</em>). A su vez, se presentarán algunas implementaciones de ambas computaciones.</p>
+<section id="support-vector-machines-svm">
+<span id="sec-svm"></span><h2>4.1. Support Vector Machines (SVM)<a class="headerlink" href="#support-vector-machines-svm" title="Permalink to this heading">#</a></h2>
+<p>Las máquinas de vectores de soporte o de soporte vectorial son un conjunto de modelos de aprendizaje supervisado propuesto por Vladimir Vapnik .atl en 1964 y posteriormente fueron mejorados en diferentes versiones  <span id="id1">[<a class="reference internal" href="#id19" title="scikit-learn. Support vector machines. URL: https://scikit-learn.org/stable/modules/svm.html#.">9</a>]</span>, <span id="id2">[<a class="reference internal" href="#id14" title="C. Cortes and V. Vapnik. Support vector networks. Machine Learning, 20:273-297, 1995. doi:https://doi.org/10.1007/BF00994018.">3</a>]</span>. Los SVMs se pueden aplicar en procesos de clasificación, regresión y detección de valores atípicos (en inglés, <em>outliers</em>).</p>
+<p>En <em><strong>clasificación</strong></em>, es conocido como <strong>clasificador de vectores de soporte</strong> (<em>SVC</em>, en sus siglas en inglés). El SVC construye el hiperplano óptimo que maximiza la distancia entre dos categorías del conjunto de datos para una mejor predicción. Es decir, busca el hiperplano con la mayor distancia de separación entre las dos categorías del conjunto de datos. Esta característica lo diferencia de los modelos de perceptrón, que buscan el hiperplano que distingue las dos categorías del conjunto de datos. Intuitivamente, una buena separación se consigue mediante el hiperplano que tiene la mayor distancia al punto de datos de entrenamiento más cercano de cualquier categoría (llamado margen funcional), ya que, en general, cuanto mayor es el margen, menor es el error de generalización del clasificador <span id="id3">[<a class="reference internal" href="#id18" title="Trevor Hastie, Robert Tibshirani, and Jerome Friedman. The elements of statistical learning: data mining, inference and prediction. Springer, 2 edition, 2009. URL: http://www-stat.stanford.edu/~tibs/ElemStatLearn/.">5</a>]</span>.</p>
+<p>En la <a class="reference internal" href="#fig-svm"><span class="std std-numref">Fig. 7</span></a> se visualizan tres posibles hiperplanos para separar las dos clases/categorías del conjunto de datos, representadas por puntos negros y blancos. Los ejes <span class="math notranslate nohighlight">\(x_{1}\)</span> y <span class="math notranslate nohighlight">\(x_{2}\)</span> corresponden a las características de cada instancia en el conjunto de datos. El hiperplano H1 no separa adecuadamente las clases del conjunto de datos; el hiperplano H2 las separa con un margen pequeño y, en cambio, el hiperplano H3 las distingue con la distancia óptima. En consecuencia, se genera la frontera de decisión adecuada u óptima para la predicción. En otras palabras, el SVM con el hiperplano H3 distinguirá con mayor probabilidad la clase a la que pertenece un nuevo punto.</p>
+<figure class="align-center" id="fig-svm">
+<a class="reference internal image-reference" href="../../_images/Svm_separating_hyperplanes.png"><img alt="../../_images/Svm_separating_hyperplanes.png" src="../../_images/Svm_separating_hyperplanes.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">SVM con distintos hiperplanos</span><a class="headerlink" href="#fig-svm" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>En general, un conjunto de datos no es linealmente separable y el SVC no encontraría un hiperplano óptimo. En estos casos, se aplica el método del kernel, que permite el mapeo de los datos a otro espacio de características con mayor dimensión, donde sería más sencillo encontrar el hiperplano óptimo. Para más detalle de los métodos kernel, visualice el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>.</p>
+</section>
+<section id="clasificador-de-vectores-de-soporte-cuantico">
+<span id="sec-qsvc"></span><h2>4.2. Clasificador de vectores de soporte cuántico<a class="headerlink" href="#clasificador-de-vectores-de-soporte-cuantico" title="Permalink to this heading">#</a></h2>
+<p>El <strong>clasificador de vectores de soporte cuántico</strong> (<em>QSVC</em>, en sus siglas en inglés) es la aplicación del SVC en computación cuántica, como se ilustra en la <a class="reference internal" href="#fig-qsvc"><span class="std std-numref">Fig. 8</span></a>. Aprovecha la capacidad del SVC para trabajar con métodos kernel, los cuales pueden calcularse de manera eficiente en computación cuántica. De esta manera, se beneficia de la alta dimensionalidad del espacio de Hilbert <span id="id4">[<a class="reference internal" href="#id15" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">6</a>]</span>, <span id="id5">[<a class="reference internal" href="#id13" title="Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. Phys. Rev. Lett., 122:040504, Feb 2019. URL: https://link.aps.org/doi/10.1103/PhysRevLett.122.040504, doi:10.1103/PhysRevLett.122.040504.">8</a>]</span>. Para más detalles de los métodos kernel, visualice el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>.</p>
+<figure class="align-center" id="fig-qsvc">
+<a class="reference internal image-reference" href="../../_images/qsvm_kernel.jpg"><img alt="../../_images/qsvm_kernel.jpg" src="../../_images/qsvm_kernel.jpg" style="width: 898px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Flujo de trabajo del QSVC</span><a class="headerlink" href="#fig-qsvc" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>El QSVC corresponde en varios pasos como se visualiza en la  <a class="reference internal" href="#fig-qsvc"><span class="std std-numref">Fig. 8</span></a>:</p>
+<ol class="arabic simple">
+<li><p>La generación de un kernel cuántico, <span class="math notranslate nohighlight">\(K\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Mapeo de cada dato clásico, <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span>, en un estado cuántico <span class="math notranslate nohighlight">\(\vert \Phi{(\mathbf{x_{i}})} \rangle\)</span>. Esto se puede lograr con el circuito cuántico <span class="math notranslate nohighlight">\(\mathcal{U}_{\Phi{(\mathbf{x_{i}})}}\)</span>,  <span class="math notranslate nohighlight">\(\mathcal{U}_{\Phi{(\mathbf{x_{i}})}} \vert 0^{\otimes N} \rangle = \vert \Phi{(\mathbf{x_{i}})} \rangle\)</span>, donde el valor inicial de cada qubit es <span class="math notranslate nohighlight">\(\ket{0}\)</span> y <span class="math notranslate nohighlight">\(N\)</span> es el número de características o <em>qubits</em>.</p></li>
+<li><p>Obtención de la matriz del kernel, cada elemento de la matriz del kernel se calcula,  <span class="math notranslate nohighlight">\(K_{i,j} = |\braket{\Phi(\mathbf{x_{i}})}{\Phi(\mathbf{x_{j}})}|^2 = |\bra{0^{\otimes N}} \mathcal{U}^\dagger_{ \Phi(\mathbf{x_{i}})} \mathcal{U}_{ \Phi{(\mathbf{x_{j}})}} \ket{0^{\otimes N}}|^2 \)</span> donde <span class="math notranslate nohighlight">\(i,j = 0...M\)</span> y <span class="math notranslate nohighlight">\(M\)</span> es el número de vectores de características en el conjunto de datos. <span class="math notranslate nohighlight">\(K_{i,j}\)</span> se interpreta como una <em>medida de similitud</em> o <em>de distancia</em> entre <em>estados cuánticos</em>.</p></li>
+</ol>
+</li>
+<li><p>Se aplica la matriz de kernel en el algoritmo de SVC clásico para entrenar y obtener la predicción.</p></li>
+</ol>
+<section id="ejemplo-de-qsvm-en-qibo">
+<span id="sec-ejemploqsvc"></span><h3>4.2.1. Ejemplo de QSVM en Qibo<a class="headerlink" href="#ejemplo-de-qsvm-en-qibo" title="Permalink to this heading">#</a></h3>
+<p>El ejemplo se basa en un tutorial de pennylane <span id="id6">[<a class="reference internal" href="Chapter_05_Kernel_myst.html#id19" title="Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html.">6</a>]</span>. En este, se usará el SVM de la librería <em>scikit-learn</em>, <em>sklearn</em>. La interfaz permite proporcionar kernel adicional en dos formas:</p>
+<ol class="arabic simple">
+<li><p>La función que calcula la matriz del kernel.</p>
+<ul class="simple">
+<li><p>(kernel= nombrefunción)</p></li>
+</ul>
+</li>
+<li><p>La matriz del kernel calculada.</p>
+<ul class="simple">
+<li><p>(kernel=“precomputed”)</p></li>
+</ul>
+</li>
+</ol>
+<p>En el ejemplo, se aplicará la primera forma, facilitando la función que calcula la matriz del kernel. A su vez, el famoso conjunto de datos, <em>Iris</em>, <span id="id7">[<a class="reference internal" href="#id16" title="R. A. Fisher. The use of multiple measurements in taxonomic problems. Annals of Eugenics, 7(7):179-188, 1936.">4</a>]</span>. Este conjunto de datos, que data de 1936, consta de 150 muestras de cuatro características cada una y da lugar a un problema de clasificación y se utilizará solo las primeras 100 muestras.</p>
+<p>Se cargan las librerías necesarias:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># librería con SVM</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+
+<span class="c1"># Carga el conjunto de datos y algunas funciones adicionales</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Librería cuántico (Qibo)</span>
+<span class="kn">import</span> <span class="nn">qibo</span>
+<span class="kn">from</span> <span class="nn">qibo</span> <span class="kn">import</span> <span class="n">gates</span>
+<span class="kn">from</span> <span class="nn">qibo.models</span> <span class="kn">import</span> <span class="n">Circuit</span>
+
+<span class="c1">#Uso de backend de numpy en Qibo</span>
+<span class="n">qibo</span><span class="o">.</span><span class="n">set_backend</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:50:05]: Using numpy backend on /CPU:0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se carga el conjunto de datos, <span class="math notranslate nohighlight">\(X\)</span>, se seleccionan las primeras 100 muestras y luego se adaptan los datos aplicando un escalado periódico mediante la codificación a datos cuánticos. Este proceso implica la transformación de los datos a la distribución normal estándar, también conocida como la <em>distribución Z</em>.</p>
+<p>A su vez, el conjunto de datos se divide en dos grupos:</p>
+<ul class="simple">
+<li><p>Entrenamiento</p></li>
+<li><p>Testeo</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Se selecciona solo la dos primeras clases del conjunto </span>
+<span class="c1"># de datos debido a que el clasificador es binario</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+
+<span class="c1"># Escalar los datos a distribución normal estándar debido a la </span>
+<span class="c1"># codificación datos es periódica</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Escalar las etiquetas a -1 y 1 debido que es importante para SVM</span>
+<span class="n">y_scaled</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Se divide en entrenamiento y testeo</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">y_scaled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La codificación de los datos clásicos a estados cuánticos se llevará a cabo mediante la codificación en ángulo, utilizando puertas de rotación. Para obtener más detalles sobre la codificación cuántica, consulte el notebook <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a>. En el ejemplo, se aplica la puerta de rotación en el eje Y para codificar los datos clásicos en estados cuánticos. Esta puerta no introduce componentes imaginarias.</p>
+<p>Dado que cada vector de características consta de cuatro características, se necesitarán cuatro qubits para codificar los estados cuánticos, por lo tanto, <span class="math notranslate nohighlight">\(N = 4\)</span>.</p>
+<p>Para estimar la distancia entre dos estados cuánticos, es decir, el producto escalar, se aplica el <strong>test invertido</strong> o <strong>quantum kernel estimation</strong> <span id="id8">[<a class="reference internal" href="#id15" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">6</a>]</span>. Para obtener más detalles sobre los kernels, consulte el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>. En el ejemplo, el circuito cuántico representa el cálculo de la distancia entre dos estados cuánticos como <span class="math notranslate nohighlight">\(K_{i,j} = |\braket{\Phi(\mathbf{x_{i}})}{\Phi(\mathbf{x_{j}})}|^2 = |\bra{0^{\otimes N}} \mathcal{U}^\dagger_{ \Phi(\mathbf{x_{i}})} \mathcal{U}_{ \Phi{(\mathbf{x_{j}})}} \ket{0^{\otimes N}}|^2 \)</span>. El estado cuántico resultante <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> se mide con respecto al estado computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span>, y el resultado es la probabilidad <span class="math notranslate nohighlight">\(|\braket {0^{\otimes N}} {\phi}|^2\)</span> de observar la base computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span> del estado cuántico actual <span class="math notranslate nohighlight">\(\ket{\phi}\)</span>. Este cálculo se basa en las <strong>reglas de Born</strong> <span id="id9">[<a class="reference internal" href="#id21" title="Reglas de born. URL: https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule.">1</a>]</span>.</p>
+<p>Para obtener las probabilidades en la base computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span> en una computadora cuántica, el circuito cuántico debe ser ejecutado varias veces o shots. Según el artículo <em>Supervised learning with quantum-enhanced feature spaces</em> <span id="id10">[<a class="reference internal" href="#id15" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">6</a>]</span>, el circuito debería ejecutarse 50000 veces. En el ejemplo, se usa 8000 por limitación del computador cuántico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># kernel cuántico</span>
+<span class="k">def</span> <span class="nf">distancia_circuit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    
+    <span class="c1"># cuatro cúbits: cuatro características</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+    <span class="n">n_shots</span> <span class="o">=</span> <span class="mi">8000</span>
+
+    <span class="c1"># Create an empty circuit</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+
+    <span class="c1"># Codificación cuántica en puertas RY </span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">pos</span><span class="p">]))</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span><span class="o">.</span><span class="n">dagger</span><span class="p">())</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+
+    <span class="c1"># ejecución del circuito n veces (n_shots)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">nshots</span><span class="o">=</span><span class="n">n_shots</span><span class="p">)</span>
+    <span class="c1"># Devuelve las probabilidades analíticas</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">probabilities</span><span class="p">()</span>
+       
+<span class="c1"># Se devuelve el probabilidad del base computacional &quot;0000&quot;</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="n">distancia_circuit</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se verifica que el kernel cuántico funciona correctamente con el vector de características <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> consigo mismo. El resultado debería ser 1, es decir, la probabilidad del estado inicial <span class="math notranslate nohighlight">\(\ket{\phi}{\text{inicial}} = \ket{0^N}\)</span> es igual a la probabilidad del estado final <span class="math notranslate nohighlight">\(\ket{\phi}{\text{final}} = \ket{0^N}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se define una función que calcula una matriz de kernel para los vectores de características en dos conjuntos de datos diferentes <span class="math notranslate nohighlight">\(A, B\)</span>. Si <span class="math notranslate nohighlight">\(A=B\)</span>, la matriz del kernel es conocida como la <strong>matriz de Gram</strong> <span id="id11">[<a class="reference internal" href="#id17" title="Nils Barth. The gramian and k-volume in n-space: some classical results in linear algebra. Journal of Young Investigators, 1999.">2</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kernel_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para el entrenamiento, se inicializa el clasificador SVC con la matriz del kernel cuántico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inicialización</span>
+<span class="n">qsvm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel_matrix</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entrenando...&quot;</span><span class="p">)</span>
+<span class="n">qsvm</span> <span class="o">=</span> <span class="n">qsvm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entrenado!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entrenando...
+Entrenado!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se calcula la precisión en la clasificación con el conjunto de datos de test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#test</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Precisión con test...&quot;</span><span class="p">)</span>
+
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">qsvm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">accuracy_score</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Precisión con test...
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se compara el resultado con un SVM clásico con kernel lineal</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelclasico</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<span class="n">modelclasico</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Precisión con test...&quot;</span><span class="p">)</span>
+
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">modelclasico</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">accuracy_score</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Precisión con test...
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='notacion'></a></p>
+<div class="note admonition">
+<p class="admonition-title">Nota (Anexo notación)</p>
+<p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
+<p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id12">
+<dl class="citation">
+<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id9">1</a></span></dt>
+<dd><p>Reglas de born. URL: <a class="reference external" href="https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule">https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule</a>.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id11">2</a></span></dt>
+<dd><p>Nils Barth. The gramian and k-volume in n-space: some classical results in linear algebra. <em>Journal of Young Investigators</em>, 1999.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
+<dd><p>C. Cortes and V. Vapnik. Support vector networks. <em>Machine Learning</em>, 20:273–297, 1995. <a class="reference external" href="https://doi.org/https://doi.org/10.1007/BF00994018">doi:https://doi.org/10.1007/BF00994018</a>.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id7">4</a></span></dt>
+<dd><p>R. A. Fisher. The use of multiple measurements in taxonomic problems. <em>Annals of Eugenics</em>, 7(7):179–188, 1936.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id3">5</a></span></dt>
+<dd><p>Trevor Hastie, Robert Tibshirani, and Jerome Friedman. <em>The elements of statistical learning: data mining, inference and prediction</em>. Springer, 2 edition, 2009. URL: <a class="reference external" href="http://www-stat.stanford.edu/~tibs/ElemStatLearn/">http://www-stat.stanford.edu/~tibs/ElemStatLearn/</a>.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">6</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id8">2</a>,<a href="#id10">3</a>)</span></dt>
+<dd><p>Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. <em>Nature</em>, 567(7747):209–212, March 2019. URL: <a class="reference external" href="http://dx.doi.org/10.1038/s41586-019-0980-2">http://dx.doi.org/10.1038/s41586-019-0980-2</a>, <a class="reference external" href="https://doi.org/10.1038/s41586-019-0980-2">doi:10.1038/s41586-019-0980-2</a>.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id6">7</a></span></dt>
+<dd><p>Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: <a class="reference external" href="https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html">https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html</a>.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">8</a></span></dt>
+<dd><p>Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. <em>Phys. Rev. Lett.</em>, 122:040504, Feb 2019. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.122.040504">https://link.aps.org/doi/10.1103/PhysRevLett.122.040504</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.122.040504">doi:10.1103/PhysRevLett.122.040504</a>.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id1">9</a></span></dt>
+<dd><p>scikit-learn. Support vector machines. URL: <a class="reference external" href="https://scikit-learn.org/stable/modules/svm.html#">https://scikit-learn.org/stable/modules/svm.html#</a>.</p>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<center>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img aling="left" alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+</center>
+<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.</p>
+<p>This work has been financially supported by the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda.</p>
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" class="align-left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" style="width: 1000px;" /></a>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/Part_02_QML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter_03_VQC_myst.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3. Variational Quantum Classifier (VQC)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter_05_Kernel_myst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. Quantum Kernels</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-machines-svm">4.1. Support Vector Machines (SVM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificador-de-vectores-de-soporte-cuantico">4.2. Clasificador de vectores de soporte cuántico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-qsvm-en-qibo">4.2.1. Ejemplo de QSVM en Qibo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QuantumSpain & TalentQ
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
