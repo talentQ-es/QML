@@ -553,7 +553,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:50:19]: Using tensorflow backend on /device:CPU:0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 13:10:46]: Using tensorflow backend on /device:CPU:0
 </pre></div>
 </div>
 </div>
@@ -611,7 +611,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d852bfeab91ed3221f5c7a6602af8d1d33507a89c4742aa038670bed0d09dc14.png" src="../../_images/d852bfeab91ed3221f5c7a6602af8d1d33507a89c4742aa038670bed0d09dc14.png" />
+<img alt="../../_images/5492562980b00f3192e0eefaaf0601ab281d8bb8c7c4d77e87f4d9d993108aa1.png" src="../../_images/5492562980b00f3192e0eefaaf0601ab281d8bb8c7c4d77e87f4d9d993108aa1.png" />
 </div>
 </div>
 <p>Tal y como ya se ha comentado en notebooks anteriores, para poder entrenar el modelo dividiremos el dataset inicial en el conjunto de entremaniento (<em>train</em>) y en el que nos servirá para conocer el comportamiento del circuito con datos desconocidos (<em>val</em>).</p>
@@ -863,10 +863,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.43241086306503357 Acc:  0.85
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3414450365244832 Acc:  0.89
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3534984650110077 Acc:  0.896
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3450364687233132 Acc:  0.89
 </pre></div>
 </div>
 </div>
@@ -896,7 +896,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" src="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" />
+<img alt="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" src="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" />
 </div>
 </div>
 <p>Tal y como se aprecia en la imagen anterior, el modelo no llega a aprender correctamente. El clasificador que obtenemos no consigue generar la frontera de decisión no lineal que se comentaba anteriormente. Todos los errores se comenten en la zona central (la que genera la dificultad), es por eso que el valor del error no es demasiado alto ni el del accuracy excesivamente bajo.</p>
@@ -992,10 +992,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.43241086306503357 Acc:  0.85
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3414450365244832 Acc:  0.89
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3534984650110077 Acc:  0.896
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3450364687233132 Acc:  0.89
 </pre></div>
 </div>
 </div>
@@ -1024,7 +1024,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" src="../../_images/2adcb2aeacaae346d5e547a4f69af05182edecaf1a171ce4120861d898b2855a.png" />
+<img alt="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" src="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" />
 </div>
 </div>
 <p>El resultado obtenido en este caso es similar al anterior.</p>
@@ -1108,10 +1108,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.45130980034682855 Acc:  0.82
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3498499359959764 Acc:  0.87
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3732143075303984 Acc:  0.874
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.36104289259663536 Acc:  0.868
 </pre></div>
 </div>
 </div>
@@ -1140,7 +1140,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/14613524e5f5c04df6db1296e568507ef2b7645f1bc24231b415b56a1d57c87c.png" src="../../_images/14613524e5f5c04df6db1296e568507ef2b7645f1bc24231b415b56a1d57c87c.png" />
+<img alt="../../_images/dfb7d7d578756b218c86b689a1f2420d5c62d523c20a39b196999883d892a101.png" src="../../_images/dfb7d7d578756b218c86b689a1f2420d5c62d523c20a39b196999883d892a101.png" />
 </div>
 </div>
 <p>En este caso la clasificación cambia, se pueden apreciar errores de clasificación en los extremos y se mantienen los errores de clasificación en el centro.</p>
@@ -1232,10 +1232,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6442657540037081 Acc:  0.77
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6312291772799759 Acc:  0.81
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6209059083737476 Acc:  0.796
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6205888948162622 Acc:  0.79
 </pre></div>
 </div>
 </div>
@@ -1264,7 +1264,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e626b22eccaf52a82f9f1259458ba234e8c73af39a43fcf301636b0e0c7e093a.png" src="../../_images/e626b22eccaf52a82f9f1259458ba234e8c73af39a43fcf301636b0e0c7e093a.png" />
+<img alt="../../_images/9147255333688ee67c24ba25ad05c06206023f2353777c56c4bb4b792b3de807.png" src="../../_images/9147255333688ee67c24ba25ad05c06206023f2353777c56c4bb4b792b3de807.png" />
 </div>
 </div>
 <p>Tal y como se aprecia en el gráfico anterior, este optimizador no es capaz de conseguir los parámetros adecuados para una correcta clasificación. Se puede observar que todas las instancias se etiquetan con la misma clase.</p>
@@ -1354,10 +1354,10 @@ $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.8635020982383261 Acc:  0.52
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  2.0574886124724627 Acc:  0.47
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.9411585777667268 Acc:  0.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.941127395397523 Acc:  0.5
 </pre></div>
 </div>
 </div>
@@ -1386,7 +1386,7 @@ $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a57eed172b6e9c57a9ca64cea6c9c14f062141bb02b4df01acde94b7301b314a.png" src="../../_images/a57eed172b6e9c57a9ca64cea6c9c14f062141bb02b4df01acde94b7301b314a.png" />
+<img alt="../../_images/04fc56d87761de86e75a66cc67e9539a4d83afd94b77b7718298e9a1b080543f.png" src="../../_images/04fc56d87761de86e75a66cc67e9539a4d83afd94b77b7718298e9a1b080543f.png" />
 </div>
 </div>
 <p>Ocurre lo mismo que en el caso anterior, el clasificador no hace distinción entre dos clases y no se genera ninguna frontera de decisión.</p>
@@ -1466,7 +1466,7 @@ $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c5b0fbd9ffd604be88791b9aa96d3c446fbe58fc555232bee2116783f6b4c158.png" src="../../_images/c5b0fbd9ffd604be88791b9aa96d3c446fbe58fc555232bee2116783f6b4c158.png" />
+<img alt="../../_images/ba8a6fbd12a22000c35f4114f836cc25132d9f03a0f0fc824f87956779cf4b56.png" src="../../_images/ba8a6fbd12a22000c35f4114f836cc25132d9f03a0f0fc824f87956779cf4b56.png" />
 </div>
 </div>
 <p>Con el clasificador ajustado mediante el optimizador Powell observamos una frontera de decisión que corresponde a una línea horizontal, por lo que tampoco se logra la clasificación esperada.</p>
@@ -1554,7 +1554,7 @@ f^\prime(x_0) = \frac{f(x_1)-f(x_0)}{x_1-x_0}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1867bb475029b91a564c53b4a5f3551489ca20281e76a85be18f82f2fb60c845.png" src="../../_images/1867bb475029b91a564c53b4a5f3551489ca20281e76a85be18f82f2fb60c845.png" />
+<img alt="../../_images/67956cf48ad3c07566b49f8b6f356f26848d73f89f58816b4fd233d5fd3126b3.png" src="../../_images/67956cf48ad3c07566b49f8b6f356f26848d73f89f58816b4fd233d5fd3126b3.png" />
 </div>
 </div>
 <p>En este caso se obtiene un resultado similar al obtenido con el optimizador de descenso por gradiente.</p>
