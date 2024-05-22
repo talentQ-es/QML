@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. Quantum Kernels &#8212; PT3-Support</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jamasole/Curso-TalentQ-Book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Part_02_QML/Chapter_05_Kernel_myst';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. Optimizadores" href="Chapter_06_Optimizadores_myst.html" />
+    <link rel="prev" title="4. Quantum Support Vector Machines (QSVM)" href="Chapter_04_QSVM_myst.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-light" alt="PT3-Support - Home"/>
+    <script>document.write(`<img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-dark" alt="PT3-Support - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quantum Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter_01_Introduction_myst.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_02_Feature_encoding_myst.html">2. Feature encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_03_VQC_myst.html">3. Variational Quantum Classifier (VQC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_04_QSVM_myst.html">4. Quantum Support Vector Machines (QSVM)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Quantum Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/edit/master/Book/docs/Part_02_QML/Chapter_05_Kernel_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/issues/new?title=Issue%20on%20page%20%2Fdocs/Part_02_QML/Chapter_05_Kernel_myst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/Part_02_QML/Chapter_05_Kernel_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. Quantum Kernels</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-los-metodos-kernel">5.1. Introducción a los métodos kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-al-kernel-cuantico">5.2. Introducción al kernel cuántico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distintas-implementaciones-de-kernel">5.3. Distintas implementaciones de kernel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#swap-test">5.3.1. SWAP test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-kernel-estimator">5.3.2. Quantum Kernel Estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-kernel-estimator-qke-proyector">5.3.2.1. Quantum Kernel Estimator (QKE) - proyector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-kernel-estimator-qke-probabilidades">5.3.2.2. Quantum Kernel Estimator (QKE) - probabilidades</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <blockquote>
+<div><p>May 03, 2024 | 8 min read</p>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" src="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" style="width: 2000px;" /></a>
+</figure>
+<p>Authors:</p>
+<ul class="simple">
+<li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\( \newcommand{\bra}[1]{\langle #1|} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\ket}[1]{|#1\rangle} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\braket}[2]{\langle #1|#2\rangle} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\ketbra}[2]{| #1\rangle \langle #2|} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\i}{{\color{blue} i}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\Hil}{{\mathbb H}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\boldn}{{\bf n}} \)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\tr}{{\rm tr}}\)</span>
+<span class="math notranslate nohighlight">\( \newcommand{\bn}{{\bf n}} \)</span></p>
+<p>Consulta la notación que se ha utilizado durante todo el documento en el siguiente <a class="reference internal" href="#notacion"><span class="xref myst">enlace</span></a>.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="quantum-kernels">
+<span id="sec-qml-quantum-kernels"></span><h1>5. Quantum Kernels<a class="headerlink" href="#quantum-kernels" title="Permalink to this heading">#</a></h1>
+<p>En esta sección, se tratarán los <strong>métodos kernel</strong>. En primer lugar se presentarán los kernel clásicos, para luego trasladar esta misma idea a la computación cuántica. A su vez, se presentarán algunas implementaciones de kernel cuántico y se mostrará la matriz asociada a cada caso.</p>
+<section id="introduccion-a-los-metodos-kernel">
+<span id="sec-introkernel"></span><h2>5.1. Introducción a los métodos kernel<a class="headerlink" href="#introduccion-a-los-metodos-kernel" title="Permalink to this heading">#</a></h2>
+<p>Los métodos kernel representan los datos en un número de dimensiones mayor por lo que ayudan a encontrar nuevos patrones en los datos. Estas técnicas son muy utilizadas en aprendizaje supervisado, ya que permiten transformar los problemas no lineales en lineales donde los datos son representandos en un espacio de mayor dimensión.</p>
+<p>La expresión general de los kernel es <span class="math notranslate nohighlight">\(k(\mathbf{x_{i}},\mathbf{x_{j}}) = \langle  f(\mathbf{x_{i}}), f(\mathbf{x_{j}}) \rangle\)</span> donde <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{x_{j}}\)</span> corresponden a los datos de entradas de dimensión <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(f\)</span> representa la función que transforma los datos de entradas de dimensión <span class="math notranslate nohighlight">\(n\)</span> en un espacio de dimensión <span class="math notranslate nohighlight">\(m\)</span> y <span class="math notranslate nohighlight">\(\langle \mathbf{a}, \mathbf{b} \rangle\)</span> denota el producto interno. Considerando un conjunto de datos, la función kernel se puede representar mediante una matriz, conocida como <strong>matriz kernel</strong>, <span class="math notranslate nohighlight">\(K_{ij} = K(\mathbf{x_{i}},\mathbf{x_{j}})\)</span> <span id="id1">[<a class="reference internal" href="#id21" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">5</a>]</span>.</p>
+<p>A continuación,en la <a class="reference internal" href="#fig-ejemplodskernel"><span class="std std-numref">Fig. 9</span></a>, se muestra un ejemplo visual para comprender la idea en la que se basan los kernel.</p>
+<figure class="align-center" id="fig-ejemplodskernel">
+<a class="reference internal image-reference" href="../../_images/EjemploDataset_kernel.PNG"><img alt="../../_images/EjemploDataset_kernel.PNG" src="../../_images/EjemploDataset_kernel.PNG" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Visualización del dataset de ejemplo en 2D [1].</span><a class="headerlink" href="#fig-ejemplodskernel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Este conjunto de datos (<em>dataset</em> en inglés) cuenta con dos clases (azul y morada) y se aprecia una clara estructura en los datos de n dimensiones. Concretamente se distinguen dos circulos cada uno de ellos corresponde a una clase y uno está dentro del otro. Por lo tanto, en dos dimensiones no se puede separar las clases linealmente, en otras palabras, la frontera de decisión no será lineal. Se trata de trasladar los datos a un espacio de dimensión mayor para así poder separar ambas clases. En este caso en particular se define la tercera dimensión como <span class="math notranslate nohighlight">\(z =  x^2+y^2\)</span>. En la <a class="reference internal" href="#fig-featuremapkernel"><span class="std std-numref">Fig. 10</span></a> se muestra lo comentado:</p>
+<figure class="align-center" id="fig-featuremapkernel">
+<a class="reference internal image-reference" href="../../_images/featureMap_KERNEL.PNG"><img alt="../../_images/featureMap_KERNEL.PNG" src="../../_images/featureMap_KERNEL.PNG" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Figure 2. Visualización del objetivo de los métodos kernel <span id="id2">[<a class="reference internal" href="#id21" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">5</a>]</span>.</span><a class="headerlink" href="#fig-featuremapkernel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Se observa que cuando los datos se representan en tres dimensiones existe un hiperplano que clasifica correctamente ambas clases. Proyectando el hiperplano de nuevo en las dimensiones originales la frontera de decisión es no lineal. Cabe destacar que esta manera de trabajar con la no linealidad en los modelos proporcionan la posibilidad de reconocer patrones en el espacio de datos original.</p>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>En algunas fuentes de información la expresión del kernel se expresa <span class="math notranslate nohighlight">\(K(\mathbf{x_{i}},\mathbf{x_{j}}) = \phi(\mathbf{x_{j}})^T \phi(\mathbf{x_{i}})\)</span>, en este caso la función que realiza el mapeo se denota mediante <span class="math notranslate nohighlight">\(\phi()\)</span>. Esta función también se conoce como <b>feature map</b> <span id="id3">[<a class="reference internal" href="#id22" title="Marc G Genton. Classes of kernels for machine learning: a statistics perspective. Journal of machine learning research, 2(Dec):299–312, 2001.">2</a>]</span>.</p>
+</div>
+<p>Los métodos kernel son muy utilizados junto al algoritmo <em>support vector machine</em> (SVM) en conjuntos de datos no lineales, debido a la transformación de los conjuntos de datos a lineales donde este algoritmo trata de encontrar el hiperplano <span class="math notranslate nohighlight">\((\mathbf{w},b)\)</span> que mejor separa las distintas clases. En este <a class="reference internal" href="Chapter_04_QSVM_myst.html#sec-qml-qsvm"><span class="std std-ref">4. Quantum Support Vector Machines (QSVM)</span></a> se puede encontrar más información a cerca de esta técnica de clasificación.</p>
+</section>
+<section id="introduccion-al-kernel-cuantico">
+<span id="sec-introquantumkernel"></span><h2>5.2. Introducción al kernel cuántico<a class="headerlink" href="#introduccion-al-kernel-cuantico" title="Permalink to this heading">#</a></h2>
+<p>Una vez se ha comentado la idea que persiguen los métodos kernel en computación clásica se aborda el funcionamiento de estas técnicas en computación cuántica. Para visualizar la idea general y el funcionamiento de ambos tipos de kernel se adjunta la <a class="reference internal" href="#fig-ck-qk"><span class="std std-numref">Fig. 11</span></a>:</p>
+<figure class="align-center" id="fig-ck-qk">
+<a class="reference internal image-reference" href="../../_images/ClassicalKernel_QuantumKernel.PNG"><img alt="../../_images/ClassicalKernel_QuantumKernel.PNG" src="../../_images/ClassicalKernel_QuantumKernel.PNG" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Comparación entre kernel clásico y cuántico <span id="id4">[<a class="reference internal" href="#id23" title="Institute for Quantum Computing. Quantum kernel methods. URL: https://github.com/PaddlePaddle/Quantum/blob/master/tutorials/machine_learning/QKernel_EN.ipynb.">1</a>]</span>.</span><a class="headerlink" href="#fig-ck-qk" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Como se aprecia en la <a class="reference internal" href="#fig-ck-qk"><span class="std std-numref">Fig. 11</span></a>  en ambos casos se trabaja con un <em>feature map</em> que se denota como <span class="math notranslate nohighlight">\(\phi(\mathbf{x})\)</span>, se encarga de transformar los datos del espacio de datos original a un nuevo espacio de características. No obstante, aunque existen similitudes en lo que se refiere al concepto, también se aprecian diferencias en la expresión de la función kernel o que la función kernel cuántica además de llevar a cabo el cambio de dimensión, transforma los datos en <strong>estados cuánticos</strong>.</p>
+<p>Tal y como se adelantaba en la comparación representada en la <a class="reference internal" href="#fig-ck-qk"><span class="std std-numref">Fig. 11</span></a>, al tratar datos clásicos medicante algoritmos de <em>Quantum Machine Learning</em> estos mismos deben encargarse de codificar los datos en estados cuánticos para posteriormente poder trabajar con ellos. Este proceso es equivalente a una función <em>feature map</em> que asigna los valores a estados cuánticos, concretamente <span class="math notranslate nohighlight">\(\phi(\mathbf{x})\)</span> mapea el vector de características <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> en el espacio de Hilbert <span class="math notranslate nohighlight">\(\ket{\phi(\mathbf{x})}\bra{\phi(\mathbf{x})}\)</span> <span id="id5">[<a class="reference internal" href="#id21" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">5</a>]</span>. Mediante la función kernel se lleva a cabo la codificación de los datos, conocida como <em><strong>data_encoding</strong></em>. El quantum kernel se puede interpretar como una medida de similitud, de forma que <span class="math notranslate nohighlight">\(k(\mathbf{x_{i}},\mathbf{x_{j}})\)</span> tomará un valor elevado cuando <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{x_{j}}\)</span> sean cercanos <span id="id6">[<a class="reference internal" href="#id24" title="Hsin-Yuan Huang, Mick Broughton, Masoud Mohseni, Ryan Babbush, Sergio Boixo, Hartmut Neven, and Jarrod R. McClean. Power of data in quantum machine learning. Nature Communications, 2020. URL: https://api.semanticscholar.org/CorpusID:226246283.">4</a>]</span>.</p>
+<p>La codificación de los datos es una fase fundamental en QML y exiten varias técnicas que abordan este reto, en este <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a> se puede encontrar más información a cerca de esta temática.</p>
+<p>Entender los modelos cuánticos como métodos kernel significa que la expresividad, optimización y el comportamiento al generalizar los modelos están determinados en gran medida por la estrategia de codificación, la cual viene fijada por el método kernel <span id="id7">[<a class="reference internal" href="#id25" title="Maria Schuld. Supervised quantum machine learning models are kernel methods. arXiv preprint arXiv:2101.11020, 2021.">7</a>]</span>. Además significa que aunque el propio kernel puede explorar espacios de datos de dimensionalidad alta en el sistema cuántico y los modelos cuánticos pueden entrenar y operar en subespacios de dimensiones más bajas.</p>
+<p>Al igual que en el caso clásico, el puente entre el QML y los métodos kernel esta formado por la observación de que los modelos cuánticos mapean los datos en una dimensión superior en la cual la medida define una frontera de decisión lineal.</p>
+</section>
+<section id="distintas-implementaciones-de-kernel">
+<span id="sec-implementacioneskernel"></span><h2>5.3. Distintas implementaciones de kernel<a class="headerlink" href="#distintas-implementaciones-de-kernel" title="Permalink to this heading">#</a></h2>
+<p>El entrenamiento basado en métodos kernel pasan por alto el procesado y la medición que implementan los circuitos variacionales, de manera que solo dependerá de la codificación de los datos <span id="id8">[<a class="reference internal" href="#id26" title="Thomas Hofmann, Bernhard Schölkopf, and Alexander J. Smola. Kernel methods in machine learning. The Annals of Statistics, 36(3):1171 – 1220, 2008. URL: https://doi.org/10.1214/009053607000000677, doi:10.1214/009053607000000677.">3</a>]</span>.</p>
+<p>A continuación se adjunta una implementeación de distintos tipos de métodos kernel. Por un lado, se muestran dos ejemplos de <em><strong>Quantum Kernel Estimation</strong></em> (QKE). Por otro lado, se adjunta el código para el denominado <em><strong>swap test</strong></em>. Para comprobar el correcto funcionamiento de estos ejemplos, se hará uso del dataset iris, ya que se trata de un problema de clasificación sencillo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Se cargan las librerias necesarias para porder ejecutar las próximas celdas</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="kn">from</span> <span class="nn">qibo</span> <span class="kn">import</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">gates</span><span class="p">,</span> <span class="n">hamiltonians</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">qibo.models</span> <span class="kn">import</span> <span class="n">Circuit</span>
+<span class="kn">from</span> <span class="nn">qibo.symbols</span> <span class="kn">import</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">I</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">qibo</span> <span class="kn">import</span> <span class="n">set_backend</span>
+<span class="c1">#Uso de backend de numpy en Qibo</span>
+<span class="n">set_backend</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:50:11]: Using numpy backend on /CPU:0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generamos el dataset mediante la función &quot;load_iris&quot;.</span>
+<span class="c1"># Almacenamos los datos de entrada (inputs) en X y la etiqueta (label) correspondiente en y.</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Seleccionamos unicamente los inputs y labels de las dos primeras clases,</span>
+<span class="c1"># esto corresponde a seleccionar las primeras 100 instancias</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+
+<span class="c1"># Estandarizar los valores de los datos de entrada es importante</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Cambiamos los valores de las etiquetas a -1, 1. Se trata de un proceso importante para el clasificador SVM</span>
+<span class="c1"># y la definición de la función de coste.</span>
+<span class="n">y_scaled</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">y_scaled</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se adjunta la función <em>kernel_matrix</em>, esta será la que se utilice para calcular la matriz kernel. Todas las implementaciones finalizan obteniendo la matriz kernel y mostrandola gráficamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kernel_matrix</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="swap-test">
+<span id="sec-swaptest"></span><h3>5.3.1. SWAP test<a class="headerlink" href="#swap-test" title="Permalink to this heading">#</a></h3>
+<p>Para implementar el kernel se preparan los estados <span class="math notranslate nohighlight">\(\ket{\phi(\mathbf{x_{i}})},\ket{\phi(\mathbf{x_{j}})}\)</span> en conjuntos de cúbits diferentes mediante rutinas de codificación, <span class="math notranslate nohighlight">\(U(\mathbf{x_{i}}), U(\mathbf{x_{j}})\)</span>. Generalmente este primer paso se suele llevar a cabo mediante rotaciones, en el ejemplo que se muestra a continuación se trabaja con rotaciones en el eje Y. Tras codificar los datos clásicos en estado cuánticos, se mide el solapamiento con una rutina que se denomina <em><strong>SWAP test</strong></em> <span id="id9">[<a class="reference internal" href="#id19" title="Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html.">6</a>]</span>.</p>
+<figure class="align-center" id="fig-swaptest-kernel">
+<a class="reference internal image-reference" href="../../_images/SwapTest_kernel.PNG"><img alt="../../_images/SwapTest_kernel.PNG" src="../../_images/SwapTest_kernel.PNG" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Circuito asociado a la rutina SWAP test.</span><a class="headerlink" href="#fig-swaptest-kernel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>En la <a class="reference internal" href="#fig-swaptest-kernel"><span class="std std-numref">Fig. 12</span></a> anterior se muestra el circuito necesario para implementar esta rutina y a continuación se implementa esta rutina.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos el número de qubits necesarios</span>
+<span class="n">nqubits</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="k">def</span> <span class="nf">circ_kernel_swap</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">):</span>
+    <span class="c1"># Inicializamos el circuito con &quot;nqubits&quot;</span>
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+    
+    <span class="c1"># Generamos el Feature map mediante puertas RY</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">x1</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">x1</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">x2</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">x2</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="c1"># Kernel swap    </span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">SWAP</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">controlled_by</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">SWAP</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">controlled_by</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="c1"># Añadimos la medida en el qubit 0</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="c1"># Definimos el observable necesario para calcular el valor esperado</span>
+<span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">():</span>
+    <span class="n">Obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">([</span> <span class="n">Z</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonians</span><span class="o">.</span><span class="n">SymbolicHamiltonian</span><span class="p">(</span><span class="n">Obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span>
+
+<span class="c1"># Calculamos el valor esperado que produce el circuito</span>
+<span class="k">def</span> <span class="nf">expVal_swap_test</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">circ_kernel_swap</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="p">()</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">expectation</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">expected_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la siguiente celda se comprueba el correcto funcionamiento de la función <em>kernel_swap</em>, la comprobación consiste en medir el solapamiento de un ejemplo con el mismo, por lo que el resultado debe ser 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Se comprueba que el funcionamiento es adecuado.</span>
+<span class="n">expVal_swap_test</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nqubits</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999999999999997
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se analiza la matriz kernel</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos la matriz kernel al completo</span>
+<span class="n">matriz_swap</span> <span class="o">=</span> <span class="n">kernel_matrix</span><span class="p">(</span><span class="n">expVal_swap_test</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mostrar la matriz kernel mediante un mapa de calor.</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">)})</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">matriz_swap</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cc657f2f10ea14033b602237ffaa31fdd950785756c4a8cbb43e543d8c98900c.png" src="../../_images/cc657f2f10ea14033b602237ffaa31fdd950785756c4a8cbb43e543d8c98900c.png" />
+</div>
+</div>
+<p>Se puede observar de la matriz kernel lo siguiente:</p>
+<ol class="arabic simple">
+<li><p>Cada fila / columna representa la amplitud de transición de una muestra, con todos las demás muestras del conjunto de datos.</p></li>
+<li><p>La amplitud de transición de una muestra consigo mismo es 1, por lo que la matriz tiene una diagonal unitaria.</p></li>
+<li><p>La matriz es simétrica, la amplitud de transición de <strong>x</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>y</strong> es igual <strong>y</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>x</strong></p></li>
+</ol>
+</section>
+<section id="quantum-kernel-estimator">
+<span id="sec-qke"></span><h3>5.3.2. Quantum Kernel Estimator<a class="headerlink" href="#quantum-kernel-estimator" title="Permalink to this heading">#</a></h3>
+<p>El <em>Quantum Kernel Estimator</em>, QKE, necesita la mitad de cúbits comparado con la versión de SWAP test y consiste en aplicar el operador unitario de codificación <span class="math notranslate nohighlight">\(\ket{U(\mathbf{x_{i}})}\)</span> y su inverso en los mismos cúbits <span class="math notranslate nohighlight">\(\bra{U^{\dagger}(\mathbf{x_{j}})}\)</span> como se visualiza en la <a class="reference internal" href="Chapter_04_QSVM_myst.html#fig-qsvc"><span class="std std-numref">Fig. 8</span></a>.</p>
+<figure class="align-center" id="kernel-circuit">
+<a class="reference internal image-reference" href="../../_images/kernel_circuit_ejemplo.png"><img alt="../../_images/kernel_circuit_ejemplo.png" src="../../_images/kernel_circuit_ejemplo.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Circuito asociado a los Quantum Kernel Estimator <span id="id10">[<a class="reference internal" href="#id27" title="Srinivasan Arunachalam Yunchao Liu and Kristan Temme. A rigorous and robust quantum speed-up in supervised machine learning. URL: https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf.">8</a>]</span>.</span><a class="headerlink" href="#kernel-circuit" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Por tanto, la fórmula del kernel, K, se define como,</p>
+<div class="math notranslate nohighlight">
+\[ K(\mathbf{x_{i}},\mathbf{x_{j}}) = |\braket{\phi(\mathbf{x_{j}})}{\phi(\mathbf{x_{i}})}|^2 = |\bra{0..0}U(\mathbf{x_{j}})^{\dagger}U(\mathbf{x_{i}})\ket{0..0}|^2\]</div>
+<p>El QKE se puede implementar en dos versiones de circuitos que se expone a continuación:</p>
+<ol class="arabic simple">
+<li><p>proyector</p></li>
+<li><p>probabilidades</p></li>
+</ol>
+<p>En las siguientes celdas se implementa el mismo kernel de dos formas distintas. En ambos casos la codificación se lleva a cabo mediante <em>angle embedding</em> y luego se aplica el adjunto tal y como se comentaba. La diferencia viene a la hora de calcular el solapamiento, en el primer caso se utiliza el proyector y en el segundo se calcula la probabilidad de <span class="math notranslate nohighlight">\(\ket{0}\)</span>.</p>
+<p>Se hace uso de la codificación <em><strong>angle embedding</strong></em> por lo que serán necesarios tantos cúbits como carácteristicas tiene el dataset, se puede obtener más información a cerca de esta codificación en el siguiente <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a>.</p>
+<p>En primer lugar, se obtiene el número de características de cada muestra en el dataset Iris, con el que se está trabajando en este ejemplo. Por ello, el número de cúbits será el número de característica por muestra del conjunto de datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Número de qubits:&quot;</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de qubits: 4
+</pre></div>
+</div>
+</div>
+</div>
+<section id="quantum-kernel-estimator-qke-proyector">
+<span id="sec-qke-proyector"></span><h4>5.3.2.1. Quantum Kernel Estimator (QKE) - proyector<a class="headerlink" href="#quantum-kernel-estimator-qke-proyector" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+
+<span class="k">def</span> <span class="nf">circ_kernel_QKE</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">):</span>
+    
+    <span class="c1"># cuatro cúbits: cuatro características</span>
+    <span class="n">n_shots</span> <span class="o">=</span> <span class="mi">8000</span>
+
+    <span class="c1"># Inicializar el circuito, generar un circuito vacio</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+
+    <span class="c1"># Codificación cuántica en puertas RY y medir todos los qubits</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">pos</span><span class="p">]))</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span><span class="o">.</span><span class="n">dagger</span><span class="p">())</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">circuit</span>
+
+
+<span class="c1"># Definir el observable</span>
+<span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">():</span>
+    <span class="n">Obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">([</span> <span class="n">Z</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonians</span><span class="o">.</span><span class="n">SymbolicHamiltonian</span><span class="p">(</span><span class="n">Obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span>
+
+<span class="c1"># Ejecutar el circuito y calcular el valor esperado</span>
+<span class="k">def</span> <span class="nf">expVal_swap_QKE</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">circ_kernel_QKE</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="p">()</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">expectation</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">expected_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se verifica que funciona correctamente el kernel cuántico con un dato consigo mismo. Tal y como se ha comentado anteriormente, el resultado debería ser 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Se comprueba que el funcionamiento es adecuado.</span>
+<span class="n">expVal_swap_QKE</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999999999999996
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se analiza la matriz kernel</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos la matriz kernel al completo</span>
+<span class="n">matriz_proyector</span> <span class="o">=</span> <span class="n">kernel_matrix</span><span class="p">(</span><span class="n">expVal_swap_QKE</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">)})</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">matriz_proyector</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8ca170a7f4f161b4fcbdfad337cf1cb326ed03eb9a3e52df6e3c92fb14896af1.png" src="../../_images/8ca170a7f4f161b4fcbdfad337cf1cb326ed03eb9a3e52df6e3c92fb14896af1.png" />
+</div>
+</div>
+</section>
+<section id="quantum-kernel-estimator-qke-probabilidades">
+<span id="sec-qke-proba"></span><h4>5.3.2.2. Quantum Kernel Estimator (QKE) - probabilidades<a class="headerlink" href="#quantum-kernel-estimator-qke-probabilidades" title="Permalink to this heading">#</a></h4>
+<p>En este caso sin embargo, en lugar de utilizar el proyector se hace uso de la probabilidad del <span class="math notranslate nohighlight">\(\ket{0}\)</span> para calcular el solapamiento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># kernel cuántico</span>
+<span class="k">def</span> <span class="nf">distancia_circuit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">n_qubits</span><span class="p">):</span>
+    
+    <span class="c1"># cuatro cúbits: cuatro características</span>
+    <span class="n">n_shots</span> <span class="o">=</span> <span class="mi">8000</span>
+
+    <span class="c1"># Create an empty circuit</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+
+    <span class="c1"># Codificación cuántica en puertas RY </span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">pos</span><span class="p">]))</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span><span class="o">.</span><span class="n">dagger</span><span class="p">())</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+
+    <span class="c1"># ejecución del circuito n veces (n_shots)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">nshots</span><span class="o">=</span><span class="n">n_shots</span><span class="p">)</span>
+
+    <span class="c1"># Devuelve las probabilidades analíticas</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">probabilities</span><span class="p">()</span>
+       
+<span class="c1"># Se devuelve el probabilidad del base computacional &quot;0000&quot;</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">:</span> <span class="n">distancia_circuit</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se verifica que funciona correctamente el kernel cuántico con un dato consigo mismo. El resultado debería ser 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Se comprueba que el funcionamiento es adecuado.</span>
+<span class="n">kernel</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nqubits</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999999999999996
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se analiza la matriz kernel</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos la matriz kernel al completo</span>
+<span class="n">matriz_prob</span> <span class="o">=</span> <span class="n">kernel_matrix</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_train</span><span class="p">,</span><span class="n">n_qubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">)})</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">matriz_prob</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/69a55c30c5dca5f39c93c58929a6e1583f93c6cadcdc9344bb8fe04ad5f11426.png" src="../../_images/69a55c30c5dca5f39c93c58929a6e1583f93c6cadcdc9344bb8fe04ad5f11426.png" />
+</div>
+</div>
+<p>Como se puede ver es indiferente calcular el solapamiento mediante proyectores o calculando la probabilidad de <span class="math notranslate nohighlight">\(\ket{0}\)</span>, se puede observar que la matriz kernel es la misma siempre y cuando se aplique el mismo método de codificación.</p>
+<p><a id='notacion'></a></p>
+<div class="note admonition">
+<p class="admonition-title">Nota (Anexo notación)</p>
+<p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
+<p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id11">
+<dl class="citation">
+<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
+<dd><p>Institute for Quantum Computing. Quantum kernel methods. URL: <a class="github reference external" href="https://github.com/PaddlePaddle/Quantum/blob/master/tutorials/machine_learning/QKernel_EN.ipynb">PaddlePaddle/Quantum</a>.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>Marc G Genton. Classes of kernels for machine learning: a statistics perspective. <em>Journal of machine learning research</em>, 2(Dec):299–312, 2001.</p>
+</dd>
+<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id8">3</a></span></dt>
+<dd><p>Thomas Hofmann, Bernhard Schölkopf, and Alexander J. Smola. Kernel methods in machine learning. <em>The Annals of Statistics</em>, 36(3):1171 – 1220, 2008. URL: <a class="reference external" href="https://doi.org/10.1214/009053607000000677">https://doi.org/10.1214/009053607000000677</a>, <a class="reference external" href="https://doi.org/10.1214/009053607000000677">doi:10.1214/009053607000000677</a>.</p>
+</dd>
+<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
+<dd><p>Hsin-Yuan Huang, Mick Broughton, Masoud Mohseni, Ryan Babbush, Sergio Boixo, Hartmut Neven, and Jarrod R. McClean. Power of data in quantum machine learning. <em>Nature Communications</em>, 2020. URL: <a class="reference external" href="https://api.semanticscholar.org/CorpusID:226246283">https://api.semanticscholar.org/CorpusID:226246283</a>.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">5</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id5">3</a>)</span></dt>
+<dd><p>Qiskit. Quantum machine learning. URL: <a class="github reference external" href="https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb">Qiskit/textbook</a>.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id9">6</a></span></dt>
+<dd><p>Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: <a class="reference external" href="https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html">https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html</a>.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
+<dd><p>Maria Schuld. Supervised quantum machine learning models are kernel methods. <em>arXiv preprint arXiv:2101.11020</em>, 2021.</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id10">8</a></span></dt>
+<dd><p>Srinivasan Arunachalam Yunchao Liu and Kristan Temme. A rigorous and robust quantum speed-up in supervised machine learning. URL: <a class="reference external" href="https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf">https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf</a>.</p>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<center>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img aling="left" alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+</center>
+<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.</p>
+<p>This work has been financially supported by the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda.</p>
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" class="align-left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" style="width: 1000px;" /></a>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/Part_02_QML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter_04_QSVM_myst.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4. Quantum Support Vector Machines (QSVM)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter_06_Optimizadores_myst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6. Optimizadores</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-los-metodos-kernel">5.1. Introducción a los métodos kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-al-kernel-cuantico">5.2. Introducción al kernel cuántico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distintas-implementaciones-de-kernel">5.3. Distintas implementaciones de kernel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#swap-test">5.3.1. SWAP test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-kernel-estimator">5.3.2. Quantum Kernel Estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-kernel-estimator-qke-proyector">5.3.2.1. Quantum Kernel Estimator (QKE) - proyector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-kernel-estimator-qke-probabilidades">5.3.2.2. Quantum Kernel Estimator (QKE) - probabilidades</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QuantumSpain & TalentQ
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

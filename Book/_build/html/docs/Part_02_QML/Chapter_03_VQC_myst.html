@@ -1,0 +1,1194 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Variational Quantum Classifier (VQC) &#8212; PT3-Support</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jamasole/Curso-TalentQ-Book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Part_02_QML/Chapter_03_VQC_myst';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Quantum Support Vector Machines (QSVM)" href="Chapter_04_QSVM_myst.html" />
+    <link rel="prev" title="2. Feature encoding" href="Chapter_02_Feature_encoding_myst.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-light" alt="PT3-Support - Home"/>
+    <script>document.write(`<img src="../../_static/TalentQ_LogoNegNegro.png" class="logo__image only-dark" alt="PT3-Support - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quantum Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter_01_Introduction_myst.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_02_Feature_encoding_myst.html">2. Feature encoding</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Variational Quantum Classifier (VQC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_04_QSVM_myst.html">4. Quantum Support Vector Machines (QSVM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/edit/master/Book/docs/Part_02_QML/Chapter_03_VQC_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/davidcb98/JupyterBook_plantilla/issues/new?title=Issue%20on%20page%20%2Fdocs/Part_02_QML/Chapter_03_VQC_myst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/Part_02_QML/Chapter_03_VQC_myst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. Variational Quantum Classifier (VQC)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-quantum-circuit">3.1. Variational Quantum Circuit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-reuploading-classifier">3.2. Data reuploading classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-de-aplicacion">3.3. Ejemplos de aplicación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vqc">3.3.1 VQC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-re-uploading">3.3.2 Data re-uploading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <blockquote>
+<div><p>May 03, 2024 | 6 min read</p>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" src="https://quantumspain-project.es/wp-content/uploads/2022/11/Logo_QS_EspanaDigital.png" style="width: 2000px;" /></a>
+</figure>
+<p>Authors:</p>
+<ul class="simple">
+<li><p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p></li>
+</ul>
+<p>Consulta la notación que se ha utilizado durante todo el documento en el siguiente <a class="reference internal" href="#notacion"><span class="xref myst">enlace</span></a>.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="variational-quantum-classifier-vqc">
+<h1>3. Variational Quantum Classifier (VQC)<a class="headerlink" href="#variational-quantum-classifier-vqc" title="Permalink to this heading">#</a></h1>
+<p>Existen múltiples métodos para clasificar un conjunto de datos utilizando un ordenador cuántico. Uno de ellos es el algoritmo conocido como <strong>Variational Quantum Classifier</strong> o <strong>VQC</strong>, que pertenece a la categoría de algoritmos cuánticos variacionales (VQA).</p>
+<p>El VQC es un algoritmo de aprendizaje supervisado que hace uso de un circuito cuántico variacional. Este circuito, también llamado circuito cuántico parametrizado, tiene una estructura similar a la de una red neuronal clásica. Siguiendo con esta analogía, cada puerta cuántica parametrizada equivale a un nodo en una red clásica, y los parámetros que gobiernan estas puertas a los pesos en una red.</p>
+<p>Al igual que el aprendizaje automático clásico, el algoritmo VQC tiene una fase de entrenamiento, en la que se proporcionan datos etiquetados, y una fase de validación, en la que se clasifican nuevos datos con el modelo ya entrenado para así evaluar la calidad del modelo. Se trata de un algoritmo de clasificación híbrido, ya que combina una componente cuántica y una componente clásica, tal y como se aprecia en la <a class="reference internal" href="#fig-etapasqml"><span class="std std-numref">Fig. 6</span></a>, que realiza un bucle de optimización de los parámetros clásicos del circuito cuántico.</p>
+<figure class="align-center" id="fig-etapasqml">
+<a class="reference internal image-reference" href="../../_images/VQCfases.png"><img alt="../../_images/VQCfases.png" src="../../_images/VQCfases.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Etapas del algoritmo QML <span id="id1">[<a class="reference internal" href="#id97" title="Antonio Macaluso, Luca Clissa, Stefano Lodi, and Claudio Sartori. A variational algorithm for quantum neural networks. In Valeria V. Krzhizhanovskaya, Gábor Závodszky, Michael H. Lees, Jack J. Dongarra, Peter M. A. Sloot, Sérgio Brissos, and João Teixeira, editors, Computational Science – ICCS 2020, 591–604. Cham, 2020. Springer International Publishing.">2</a>]</span></span><a class="headerlink" href="#fig-etapasqml" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><a id='VariationalQuantumCirc'></a></p>
+<section id="variational-quantum-circuit">
+<h2>3.1. Variational Quantum Circuit<a class="headerlink" href="#variational-quantum-circuit" title="Permalink to this heading">#</a></h2>
+<p>Los circuitos cuánticos variacionales o parametrizados son circuitos que dependen de parámetros configurables y que se optimizan mediante un coprocesador clásico para realizar una tarea determinada.</p>
+<p>En general, todo circuito variacional se divide en tres pasos:</p>
+<ol class="arabic simple">
+<li><p><strong>Preparación de datos (<em>State Preparation</em>)</strong>: El primer paso en cualquier proceso de aprendizaje automático cuántico es trasladar los datos de tu problema clásico a estados cuánticos dentro de tu espacio de Hilbert. Al hacer este proceso, es importante tener en cuenta que para clasificar correctamente los datos, debemos introducir no linealidad en el proceso, ya que el circuito cuántico es lineal en el espacio de Hilbert. Esta no linealidad se puede introducir de diferentes formas, una de ellas es mediante un preprocesamiento clásico de los datos o mediante las puertas cuánticas que transformarán estos datos clásicos en características cuánticas de nuestro estado. Este proceso se conoce como codificación de caracteristicas o <em>feature encoding</em>; es el encargado de traducir nuestro problema clásico a un problema que nuestro circuito cuántico pueda tratar. A este paso también se le conoce como <em>quantum embedding</em> o <em>data encoding</em>. Para obtener más información sobre estas técnicas, puede consultar el siguiente <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a>.</p></li>
+<li><p><strong>Circuito parametrizado</strong>: El circuito diseñado para realizar una tarea concreta y está caracterizado por un operador unitario parametrizado <span class="math notranslate nohighlight">\(U(\mathbf{x}, \theta)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> es la entrada del circuito (los datos codificados anteriormente) y <span class="math notranslate nohighlight">\(\theta\)</span> son los parámetros variacionales. Este operador unitario está compuesto por diferentes capas de puertas cuánticas, la arquitectura para definir una capa puede cambiar según el problema y debe adaptarse para cada caso. También existen variantes más sofisticadas del VQC que combinan la arquitectura de capas con el mapeado de características, las cuales se discutirán más adelante.</p></li>
+<li><p><strong>Medida/Optimización</strong>: En esta etapa, se ejecuta el circuito y se mide repetidamente para obtener el valor esperado de un observable. Con este valor esperado, se intenta inferir la etiqueta que correspondía al dato codificado. A partir de esta medida, se calcula una función de coste y sus gradientes para poder optimizar los parámetros que caracterizan el circuito y repetir el proceso. Con suficientes iteraciones y si el <em>landscape</em> de la función de coste es navegable, los pesos de las puertas estarán optimizados para clasificar el conjunto de datos con el que se haya entrenado <span id="id2">[<a class="reference internal" href="#id79" title="M. Cerezo, Andrew Arrasmith, Ryan Babbush, Simon C. Benjamin, Suguru Endo, Keisuke Fujii, Jarrod R. McClean, Kosuke Mitarai, Xiao Yuan, Lukasz Cincio, and Patrick J. Coles. Variational quantum algorithms. Nature Reviews Physics, 3(9):625–644, August 2021. URL: http://dx.doi.org/10.1038/s42254-021-00348-9, doi:10.1038/s42254-021-00348-9.">1</a>]</span>.</p></li>
+</ol>
+<p><a id='Ejemplo'></a></p>
+</section>
+<section id="data-reuploading-classifier">
+<h2>3.2. Data reuploading classifier<a class="headerlink" href="#data-reuploading-classifier" title="Permalink to this heading">#</a></h2>
+<p>La técnica de <em>data reuploading</em> en clasificación con circuitos cuánticos fue introducida en <span id="id3">[<a class="reference internal" href="#id78" title="Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. Quantum, 4:226, February 2020. URL: http://dx.doi.org/10.22331/q-2020-02-06-226, doi:10.22331/q-2020-02-06-226.">3</a>]</span> y tiene la ventaja de introducir no linealidad en el sistema de manera nativa. El algoritmo consiste en aplicar técnicas de <em>feature encoding</em> de manera iterativa al principio de cada capa. De esta manera, con un <em>feature encoding</em> sencillo y repitiendolo en cada <em>layer</em> se pueden resolver problemas de clasificación no lineales con muy pocas capas.</p>
+<p><a id='Ejemplo'></a></p>
+</section>
+<section id="ejemplos-de-aplicacion">
+<h2>3.3. Ejemplos de aplicación<a class="headerlink" href="#ejemplos-de-aplicacion" title="Permalink to this heading">#</a></h2>
+<p><a id='Ejemplo'></a></p>
+<section id="vqc">
+<h3>3.3.1 VQC<a class="headerlink" href="#vqc" title="Permalink to this heading">#</a></h3>
+<p>A continuación, se presenta un ejemplo básico que demuestra el uso de un clasificador cuántico variacional. Como conjunto de datos de ejemplo, utilizaremos “two moons” incluido en la librería scikit-learn. Este conjunto de datos no se puede clasificar de manera lineal y nos ayudará más adelante a observar cómo introducir diferentes fuentes de no linealidad en el circuito variacional.</p>
+<p>Primero cargamos la librería y las herramientas necesarias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qibo</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">qibo</span> <span class="kn">import</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">gates</span><span class="p">,</span> <span class="n">hamiltonians</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">qibo.symbols</span> <span class="kn">import</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">I</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+<span class="kn">from</span> <span class="nn">qibo.models</span> <span class="kn">import</span> <span class="n">Circuit</span>
+
+<span class="c1">#Se desactiva los mensajes de tensorflow</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="c1">#Fijar el backend en el que se ejecutará el programa</span>
+<span class="n">qibo</span><span class="o">.</span><span class="n">set_backend</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 12:49:22]: Using tensorflow backend on /device:CPU:0
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación, observamos el set de datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Algunos hiperparámetros del sistema</span>
+<span class="n">nclasses</span><span class="o">=</span><span class="mi">2</span> <span class="c1"># Número de classes</span>
+<span class="n">measured_qubits</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">nclasses</span><span class="p">)))</span> <span class="c1">#Número de qubits a medir(depende del numero de classes)</span>
+<span class="n">nqubits</span><span class="o">=</span><span class="mi">2</span> <span class="c1"># Número de qubits</span>
+<span class="n">nlayers</span><span class="o">=</span><span class="mi">4</span> <span class="c1"># Número de capas</span>
+<span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span> <span class="c1"># Número de runs del circuito</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generamos el conjuto de datos con dos classes y lo mostramos en un gráfico</span>
+<span class="n">num_inputs</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">make_moons</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span><span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0626d0095f46cc6272a09fb4dc956bb536b891c2ff475a214aa5a73abd74f534.png" src="../../_images/0626d0095f46cc6272a09fb4dc956bb536b891c2ff475a214aa5a73abd74f534.png" />
+</div>
+</div>
+<p>Vamos a empezar con un poco de preprocesamiento clásico. Observamos que los datos varían de -1 a 2. Teniendo en cuenta que más adelante los codificaremos en los ángulos de una rotación, vamos a reescalarlos para que estén en el rango de -1 a 1 y los vamos a centrar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">procesdata</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">#Pasamos los datos a una array</span>
+    <span class="n">Min</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Max</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">data</span><span class="o">-</span><span class="n">Max</span><span class="o">-</span><span class="n">Min</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">Max</span><span class="o">-</span><span class="n">Min</span><span class="p">)</span> <span class="c1">#Centramos y acotamos entre -1 y 1</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora vemos como este preprocesamiento a modificado nuestros datos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_pad</span><span class="o">=</span><span class="n">procesdata</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="c1">#Cambaimos las etiquetas de cada datos de 0,1 a -1,1</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> 
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;go&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/11604203ee32c80352765ced3c3573ed42530bc0b05263ae26fef2981b45f317.png" src="../../_images/11604203ee32c80352765ced3c3573ed42530bc0b05263ae26fef2981b45f317.png" />
+</div>
+</div>
+<p>Separamos el set de entrenamiento del de validación</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.80</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]]</span>
+<span class="n">Y_val</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]]</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_pad</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]]</span>
+<span class="n">X_val</span> <span class="o">=</span> <span class="n">X_pad</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Definimos el ansatz de las capas del VQC que utilizaremos para construir el circuito. Como <em>feature encoding</em> utilizaremos el dense angle en dos qubits por lo que duplicaremos el <em>feature encoding</em>. De esta manera conseguimos de eficiente una buena no lienalidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_circuit</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">nqubits</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span><span class="n">nlayers</span><span class="o">=</span><span class="n">nlayers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        x: input del circuito</span>
+<span class="sd">        w: parámetros del circuito</span>
+<span class="sd">        nqubits: número de qubits</span>
+<span class="sd">        nlayers: número de capas</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        instancia de circuito cuántico para ejecutar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlayers</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="mi">3</span>
+        <span class="c1">#j=7+i*4</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]))</span>
+     
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">CZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">]))</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">4</span><span class="p">]))</span>
+    
+    <span class="c1"># Última rotación</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">5</span><span class="p">]))</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">6</span><span class="p">]))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora definimos las funciones que vamos a necesitar durante el entrenamiento. La función  “Predictions” computa los valores esperados de cada observable para cada dato que se ha dado de input al circuito.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Definimos el observable que vamos a medir en este caso pauliz en el primer qubit</span>
+<span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nqubits</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">Obj</span><span class="o">=</span><span class="n">Z</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span> <span class="n">Z</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">I</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonians</span><span class="o">.</span><span class="n">SymbolicHamiltonian</span><span class="p">(</span><span class="n">Obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Predictions</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        data: input del circuito</span>
+<span class="sd">        theta: parámetros del circuito</span>
+<span class="sd">        nqubits: número de qubits</span>
+<span class="sd">        nshots: número de shots </span>
+<span class="sd">        R= parámetro que controla si hacemos data reuploading</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.array() con los valores esperados correspondientes al input</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">R</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">=</span> <span class="n">create_circuitd</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span>  <span class="n">create_circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">expectation</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">state</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">expected_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como función de coste utilizamos el <em>square loss</em> defindo tal que:
+$<span class="math notranslate nohighlight">\(
+\mathit{\text{Square loss}} = \frac {\sum_{i=1}^N (y_i - \tilde{y_i})^2}{N}
+\)</span>$
+Utilizaremos también el accuracy o porcentaje de acierto para medir el rendimiento del modelo. Hay que tener en cuenta que los valores que tendremos como salida de “Predictions” serán los valores esperados de un observable. Por consiguiente si queremos asignar una clase a cada valor podemos hacerlos dependiendo del signo, ya que el valor esperado está entre -1 y 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqloss_acc</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="n">sqloss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>    
+        <span class="n">sqloss</span> <span class="o">=</span> <span class="n">sqloss</span> <span class="o">+</span> <span class="p">(</span><span class="n">label</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">prediction</span><span class="p">):</span>
+            <span class="n">acc</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">sqloss</span> <span class="o">=</span> <span class="n">sqloss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loss: &#39;</span><span class="p">,</span> <span class="n">sqloss</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="s1">&#39;Acc: &#39;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sqloss</span><span class="p">,</span> <span class="n">acc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Cost_function</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">Predictions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span><span class="n">nqubits</span><span class="p">,</span><span class="n">nshots</span><span class="p">,</span><span class="n">R</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">sqloss_acc</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Iniciamos los parámetros del sistema aleatoriamente</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Inicializamos aleatoriamente los parametros</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">nqubits</span> <span class="o">*</span> <span class="n">nlayers</span> <span class="o">+</span> <span class="n">nqubits</span> <span class="o">+</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1">#imprimimos los parametros</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parametros iniciales&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="c1">#pasamos los parametros a un tensor y comprovamos la fucnión de coste</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="c1">#print(&#39;params&#39;,params)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cost_all&#39;</span><span class="p">,</span><span class="n">cost_all</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>número de parámetros a ajustar: 22
+Parametros iniciales [1.72414847 2.24683366 1.89363699 1.711801   1.33095081 2.0291362
+ 1.37472077 2.80158751 3.02743585 1.20461706 2.48727756 1.66157239
+ 1.78456462 2.9078476  0.22316636 0.27372477 0.06351797 2.61575239
+ 2.44465153 2.73322377 3.07442019 2.51063067]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.2886613279735066 Acc:  0.492
+cost_all tf.Tensor(1.2886613279735066, shape=(), dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Entrenamos el modelo e imprimimos el porcentaje de acierto.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Contamos el timepo que tarda</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1">#Hiperparametros del optmizador</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.015</span>
+<span class="c1">#momentum = 100</span>
+<span class="c1">#batch_size = 5</span>
+
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Número máximo de iteraciones que hará el algoritmo.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
+    
+    <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">tf_grads</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+    
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;Adam&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta_1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta_2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-08</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+    
+        
+<span class="c1"># Calcular coste con todos los datos y mirar precisión para criterio de parada.</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo que se ha tardado en ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ahora podemos hacer un gráfico para ver como clasifica el circuito.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.15410294</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.87684302</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.6736488</span> <span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">0.84173673</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+        <span class="mf">1.15082887</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">1.81912963</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">1.40472511</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.59156761</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+        <span class="mf">3.05744019</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">0.99459716</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.72729385</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">1.90203343</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+        <span class="mf">2.02458091</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">3.14830863</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0168414</span> <span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">0.48372381</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">0.17648978</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.82575143</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.26463316</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.73322377</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+        <span class="mf">2.89440183</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.51063067</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]),</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+<span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;Variable:0&#39; shape=(22,) dtype=complex128, numpy=
+array([ 1.15410294+0.j,  2.87684302+0.j,  2.6736488 +0.j,  0.84173673+0.j,
+        1.15082887+0.j,  1.81912963+0.j,  1.40472511+0.j,  2.59156761+0.j,
+        3.05744019+0.j,  0.99459716+0.j,  2.72729385+0.j,  1.90203343+0.j,
+        2.02458091+0.j,  3.14830863+0.j, -0.0168414 +0.j,  0.48372381+0.j,
+       -0.17648978+0.j,  2.82575143+0.j,  2.26463316+0.j,  2.73322377+0.j,
+        2.89440183+0.j,  2.51063067+0.j])&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">RdBu</span>
+
+
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="n">X_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">flatten</span><span class="p">())]</span>
+
+<span class="c1">#X_grid=procesdata(X_grid)</span>
+
+<span class="n">predictions_grid</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Predictions</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span> <span class="n">nshots</span><span class="o">=</span><span class="n">nshots</span> <span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">X_grid</span><span class="p">]</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">predictions_grid</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+
+<span class="n">cnt</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z1</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z1</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">,),</span> <span class="n">linestyles</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,),</span> <span class="n">linewidths</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">Predictions</span><span class="p">(</span>
+            <span class="n">ket</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">,</span>
+            <span class="n">nqubits</span><span class="p">,</span>
+            <span class="n">nshots</span><span class="o">=</span><span class="n">nshots</span><span class="p">,</span>
+            
+        <span class="p">))</span> <span class="k">for</span> <span class="n">ket</span> <span class="ow">in</span> <span class="n">X_pad</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_pad</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5585749e254c606225c0a0588607e08d9cbca3d82f243adf9d85f540dd62c009.png" src="../../_images/5585749e254c606225c0a0588607e08d9cbca3d82f243adf9d85f540dd62c009.png" />
+</div>
+</div>
+<p><a id='Ejemplo'></a></p>
+</section>
+<section id="data-re-uploading">
+<h3>3.3.2 Data re-uploading<a class="headerlink" href="#data-re-uploading" title="Permalink to this heading">#</a></h3>
+<p>En esta sección enseñaremos como funciona el algoritmo de data re-uploading para clasificar utilizando solo un qubit. Utilizaremos los mismos datos y el mismo preprocesamiento. Debemos modificar el circuito para implementar el algoritmo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_circuitd</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">nqubits</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span><span class="n">nlayers</span><span class="o">=</span><span class="n">nlayers</span><span class="p">):</span>
+    
+    <span class="n">c</span><span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">nqubits</span><span class="o">=</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlayers</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="n">c</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gates</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nclasses</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">measured_qubits</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">nclasses</span><span class="p">)))</span>
+<span class="n">nqubits</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">nlayers</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">nshots</span><span class="o">=</span><span class="mi">10000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">num_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.80</span> <span class="o">*</span> <span class="n">num_data</span><span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_data</span><span class="p">))</span>
+<span class="n">X_pad2</span><span class="o">=</span><span class="n">X_pad</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]]</span>
+<span class="n">Y_val</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]]</span>
+<span class="n">X_train2</span> <span class="o">=</span> <span class="n">X_pad2</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]]</span>
+<span class="n">X_val</span> <span class="o">=</span> <span class="n">X_pad2</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Inicializamos la variable</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">test_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;número de parámetros a ajustar:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_params_INI&#39;</span><span class="p">,</span><span class="n">test_params</span><span class="p">)</span>
+
+<span class="c1">#Pasamos la variable a un tensor</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">test_params</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>  
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_pad2</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;params&#39;</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cost_all&#39;</span><span class="p">,</span><span class="n">cost_all</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>número de parámetros a ajustar: 8
+test_params_INI [ 5.54193389  1.25713095  3.07479606  7.03997361  5.86710646 -3.07020901
+  2.98479079 -0.47550269]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.9791728303814127 Acc:  0.314
+params &lt;tf.Variable &#39;Variable:0&#39; shape=(8,) dtype=complex128, numpy=
+array([ 5.54193389+0.j,  1.25713095+0.j,  3.07479606+0.j,  7.03997361+0.j,
+        5.86710646+0.j, -3.07020901+0.j,  2.98479079+0.j, -0.47550269+0.j])&gt;
+cost_all tf.Tensor(1.9791728303814127, shape=(), dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="c1">#Hiperparametros del optimizador</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.09</span>
+<span class="n">momentum</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>  <span class="c1"># Emepzamos a iterar el algoritmo</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Iteración&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
+    
+    <span class="c1"># Calcular el gradiente:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">value_cost</span><span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train2</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">nqubits</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+    <span class="n">tf_grads</span> <span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">real</span><span class="p">(</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">value_cost</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+
+    <span class="c1"># Actualizar los parámetros:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="p">,</span> <span class="s2">&quot;Adam&quot;</span><span class="p">)(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta_1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta_2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-08</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tf_grads</span><span class="p">,</span> <span class="p">[</span><span class="n">params</span><span class="p">]))</span>
+
+<span class="c1">#Calculamos el coste final</span>
+<span class="n">cost_val</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">,</span><span class="n">nqubits</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cost_all</span> <span class="o">=</span> <span class="n">Cost_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_pad2</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span><span class="n">nqubits</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+<span class="n">tiempo_ej</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El tiempo que se ha tardado en ejecutar el algoritmo ha sido: &#39;</span><span class="p">,</span><span class="n">tiempo_ej</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;minutos&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Hacemos un gráfico para demostrar como el circuito clasifica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paramsd</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">6.98192218</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5428519</span> <span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">3.79479336</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">8.11996204</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+        <span class="mf">5.50711014</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.34991814</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>  <span class="mf">2.44480601</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.47550269</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">]),</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+<span class="n">paramsd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;Variable:0&#39; shape=(8,) dtype=complex128, numpy=
+array([ 6.98192218+0.j, -0.5428519 +0.j,  3.79479336+0.j,  8.11996204+0.j,
+        5.50711014+0.j, -2.34991814+0.j,  2.44480601+0.j, -0.47550269+0.j])&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">RdBu</span>
+<span class="n">paramsd</span><span class="o">=</span><span class="n">params</span>
+
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">X_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">flatten</span><span class="p">())]</span>
+
+<span class="n">X_grid</span><span class="o">=</span><span class="n">procesdata</span><span class="p">(</span><span class="n">X_grid</span><span class="p">)</span>
+
+<span class="n">predictions_grid</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Predictions</span><span class="p">(</span>
+            <span class="n">f</span><span class="p">,</span>
+            <span class="n">paramsd</span><span class="p">,</span>
+            <span class="n">nqubits</span><span class="p">,</span>
+            <span class="n">nshots</span><span class="o">=</span><span class="n">nshots</span><span class="p">,</span>
+            <span class="n">R</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">X_grid</span><span class="p">]</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">predictions_grid</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+
+<span class="n">cnt</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z2</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;both&quot;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z2</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">,),</span> <span class="n">linestyles</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,),</span> <span class="n">linewidths</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="n">Predictions</span><span class="p">(</span>
+            <span class="n">ket</span><span class="p">,</span>
+            <span class="n">paramsd</span><span class="p">,</span>
+            <span class="n">nqubits</span><span class="p">,</span>
+            <span class="n">nshots</span><span class="o">=</span><span class="n">nshots</span><span class="p">,</span>
+            <span class="n">R</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">ket</span> <span class="ow">in</span> <span class="n">X_pad2</span>
+    <span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e932cb00c71e7e6445d4c99ad974a6348d21d2cdaa4f1612a50d9be4084047bd.png" src="../../_images/e932cb00c71e7e6445d4c99ad974a6348d21d2cdaa4f1612a50d9be4084047bd.png" />
+</div>
+</div>
+<p><a id='notacion'></a></p>
+<div class="note admonition">
+<p class="admonition-title">ANEXO NOTACIÓN</p>
+<p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
+<p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id4">
+<dl class="citation">
+<dt class="label" id="id79"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>M. Cerezo, Andrew Arrasmith, Ryan Babbush, Simon C. Benjamin, Suguru Endo, Keisuke Fujii, Jarrod R. McClean, Kosuke Mitarai, Xiao Yuan, Lukasz Cincio, and Patrick J. Coles. Variational quantum algorithms. <em>Nature Reviews Physics</em>, 3(9):625–644, August 2021. URL: <a class="reference external" href="http://dx.doi.org/10.1038/s42254-021-00348-9">http://dx.doi.org/10.1038/s42254-021-00348-9</a>, <a class="reference external" href="https://doi.org/10.1038/s42254-021-00348-9">doi:10.1038/s42254-021-00348-9</a>.</p>
+</dd>
+<dt class="label" id="id97"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Antonio Macaluso, Luca Clissa, Stefano Lodi, and Claudio Sartori. A variational algorithm for quantum neural networks. In Valeria V. Krzhizhanovskaya, Gábor Závodszky, Michael H. Lees, Jack J. Dongarra, Peter M. A. Sloot, Sérgio Brissos, and João Teixeira, editors, <em>Computational Science – ICCS 2020</em>, 591–604. Cham, 2020. Springer International Publishing.</p>
+</dd>
+<dt class="label" id="id78"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. <em>Quantum</em>, 4:226, February 2020. URL: <a class="reference external" href="http://dx.doi.org/10.22331/q-2020-02-06-226">http://dx.doi.org/10.22331/q-2020-02-06-226</a>, <a class="reference external" href="https://doi.org/10.22331/q-2020-02-06-226">doi:10.22331/q-2020-02-06-226</a>.</p>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<center>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<img aling="left" alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+</center>
+<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.</p>
+<p>This work has been financially supported by the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda.</p>
+<a class="reference internal image-reference" href="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png"><img alt="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" class="align-left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" style="width: 1000px;" /></a>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/Part_02_QML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter_02_Feature_encoding_myst.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. Feature encoding</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter_04_QSVM_myst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. Quantum Support Vector Machines (QSVM)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-quantum-circuit">3.1. Variational Quantum Circuit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-reuploading-classifier">3.2. Data reuploading classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-de-aplicacion">3.3. Ejemplos de aplicación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vqc">3.3.1 VQC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-re-uploading">3.3.2 Data re-uploading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QuantumSpain & TalentQ
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+format: jb-book
+root: docs/index
+parts:
+- caption:  Quantum Machine Learning
+  chapters:
+  - file:  docs/Part_02_QML/Chapter_01_Introduction_myst.ipynb
+  - file:  docs/Part_02_QML/Chapter_02_Feature_encoding_myst.ipynb
+  - file:  docs/Part_02_QML/Chapter_03_VQC_myst.ipynb
+  - file:  docs/Part_02_QML/Chapter_04_QSVM_myst.ipynb
+  - file:  docs/Part_02_QML/Chapter_05_Kernel_myst.ipynb
+  - file:  docs/Part_02_QML/Chapter_06_Optimizadores_myst.ipynb
