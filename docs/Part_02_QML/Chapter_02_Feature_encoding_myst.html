@@ -223,6 +223,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Referencias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter_Bibliografia_myst.html">Bibliografía</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -439,7 +443,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-encoding">2.3. Angle encoding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dense-angle-encoding">2.2.4. Dense angle encoding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-escoger-feature-encoding">2.3. Cómo escoger Feature Encoding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
             </nav>
         </div>
@@ -473,7 +476,7 @@ document.write(`
 </div>
 <p>Se empieza con un conjunto de datos <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> y se quiere codificar en un estado <span class="math notranslate nohighlight">\(\ket{\psi_x}\)</span> con el que trabajar, para ello se construye un circuito parametrizado que generará una unitaria <span class="math notranslate nohighlight">\(\mathcal{U}(\mathbf{x})\)</span> tal que <span class="math notranslate nohighlight">\(\ket{\psi_x}=\mathcal{U}(\mathbf{x})\ket{0}\)</span>. Dependiendo del tipo de feature encoding que se utilice, la unitaria <span class="math notranslate nohighlight">\(\mathcal{U}(x)\)</span> tendrá diferentes características.</p>
 <p>Se define un conjunto de datos (dataset) de entrada <span class="math notranslate nohighlight">\(D\)</span> de dimensión <span class="math notranslate nohighlight">\(M\)</span> x <span class="math notranslate nohighlight">\(N\)</span>, es decir, se cuenta con un dataset con M instancias y N variables. Este dataset se puede expresar como <span class="math notranslate nohighlight">\(D = {\mathbf{x}_{(1)}, ..., \mathbf{x}_{(m)}, ..., \mathbf{x}_{(M)}}\)</span> donde cada <span class="math notranslate nohighlight">\(\mathbf{x}_{(m)}\)</span> es un vector de dimensión N.</p>
-<p>Hay multiples técnicas de <strong>feature encoding</strong>, a continuación se explicarán las más básicas y se dará un ejemplo de cómo implementar cada una. Para más detalles consultar<span id="id1">[<a class="reference internal" href="#id76" title="Seth Lloyd, Maria Schuld, Aroosa Ijaz, Josh Izaac, and Nathan Killoran. Quantum embeddings for machine learning. 2020. arXiv:2001.03622.">1</a>]</span>,<span id="id2">[<a class="reference internal" href="#id77" title="Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. Physical Review Letters, February 2019. URL: http://dx.doi.org/10.1103/PhysRevLett.122.040504, doi:10.1103/physrevlett.122.040504.">4</a>]</span>.</p>
+<p>Hay multiples técnicas de <strong>feature encoding</strong>, a continuación se explicarán las más básicas y se dará un ejemplo de cómo implementar cada una. Para más detalles consultar<span id="id1">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id72" title="Seth Lloyd, Maria Schuld, Aroosa Ijaz, Josh Izaac, and Nathan Killoran. Quantum embeddings for machine learning. 2020. arXiv:2001.03622.">24</a>]</span>,<span id="id2">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id73" title="Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. Physical Review Letters, February 2019. URL: http://dx.doi.org/10.1103/PhysRevLett.122.040504, doi:10.1103/physrevlett.122.040504.">36</a>]</span>.</p>
 <p><a id='BasisEncoding'></a></p>
 <section id="basis-encoding">
 <h2>2.1. Basis encoding<a class="headerlink" href="#basis-encoding" title="Permalink to this heading">#</a></h2>
@@ -543,7 +546,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x               :  [0.  0.5 0.  0.5 0.  0.5 0.  0.5]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 13:09:48]: Using tensorflow backend on /device:CPU:0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-06-11 12:05:59]: Using tensorflow backend on /device:CPU:0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amplitude vector:  [0. +0.j 0.5+0.j 0. +0.j 0.5+0.j 0. +0.j 0.5+0.j 0. +0.j 0.5+0.j]
@@ -611,7 +614,7 @@ q1: ─
 </div>
 </div>
 </div>
-<p>Para codificar un vector arbitrario en las amplitudes de un estado cuántico con el mínimo número de puertas cuánticas hay que utilizar los resultados de <span id="id3">[<a class="reference internal" href="#id78" title="Mikko Mottonen, Juha J. Vartiainen, Ville Bergholm, and Martti M. Salomaa. Transformation of quantum states using uniformly controlled rotations. 2004. arXiv:quant-ph/0407010.">2</a>]</span>. Una implementación de este método en qibo todavía no está desarrollada. Por esa razon de momento se pasa el vector cuántico explicitamente.</p>
+<p>Para codificar un vector arbitrario en las amplitudes de un estado cuántico con el mínimo número de puertas cuánticas hay que utilizar los resultados de <span id="id3">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id74" title="Mikko Mottonen, Juha J. Vartiainen, Ville Bergholm, and Martti M. Salomaa. Transformation of quantum states using uniformly controlled rotations. 2004. arXiv:quant-ph/0407010.">27</a>]</span>. Una implementación de este método en qibo todavía no está desarrollada. Por esa razon de momento se pasa el vector cuántico explicitamente.</p>
 </section>
 <section id="angle-encoding">
 <h2>2.3. Angle encoding<a class="headerlink" href="#angle-encoding" title="Permalink to this heading">#</a></h2>
@@ -749,32 +752,12 @@ q1: ─RX─RZ─
 <li><p>Es el método que presenta mayor dificultad a la hora de entrenar la red neuronal y tiene tendencia a presentar barren plateaus (gradientes que tienden a cero).</p></li>
 </ul>
 <p>El resto de métodos basados en codificar en las amplitudes del vector cuántico no presentan los inconvenientes enumerados anteriormente y son los métodos preferidos para desarrollar algoritmos en la era del NISQ (<em>Noisy Intermediate-Scale Quantum</em>). Aún así, presentan el inconveniente de que hay que escoger sabiamente cómo introducir la no linealidad necesaria para cada problema. La forma más genérica es utilizar <em>Amplitude encoding</em> y aplicar una función <span class="math notranslate nohighlight">\(f(x)\)</span> a tus datos para obtener correlaciones entre ellos y así poder resolver problemas no lineales. Este método, que es a primera vista sencillo, presenta el problema de que la amplitud del circuito puede ser muy grande dependiendo de <span class="math notranslate nohighlight">\(f(x)\)</span> y además, escoger <span class="math notranslate nohighlight">\(f(x)\)</span> puede ser un proceso muy arbitrario. Por otra parte, otros métodos de codificación más sencillos pueden proporcionar directamente los elementos de no linealidad necesarios para resolver el problema.</p>
-<p>Para finalizar, existen otras técnicas más sofisticadas para introducir datos clásicos en un circuito variacional, una de ellas es conocida como <em>data re-uploading</em> <span id="id4">[<a class="reference internal" href="Chapter_03_VQC_myst.html#id78" title="Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. Quantum, 4:226, February 2020. URL: http://dx.doi.org/10.22331/q-2020-02-06-226, doi:10.22331/q-2020-02-06-226.">3</a>]</span> el cual se cubrira en el siguiente notebook.</p>
+<p>Para finalizar, existen otras técnicas más sofisticadas para introducir datos clásicos en un circuito variacional, una de ellas es conocida como <em>data re-uploading</em> <span id="id4">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id75" title="Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. Quantum, 4:226, February 2020. URL: http://dx.doi.org/10.22331/q-2020-02-06-226, doi:10.22331/q-2020-02-06-226.">30</a>]</span> el cual se cubrira en el siguiente notebook.</p>
 <p><a id='2notacion'></a></p>
 <div class="note admonition">
 <p class="admonition-title">ANEXO NOTACIÓN</p>
 <p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
 <p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
-</div>
-</section>
-<hr class="docutils" />
-<section id="bibliografia">
-<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
-<div class="docutils container" id="id5">
-<dl class="citation">
-<dt class="label" id="id76"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Seth Lloyd, Maria Schuld, Aroosa Ijaz, Josh Izaac, and Nathan Killoran. Quantum embeddings for machine learning. 2020. <a class="reference external" href="https://arxiv.org/abs/2001.03622">arXiv:2001.03622</a>.</p>
-</dd>
-<dt class="label" id="id78"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
-<dd><p>Mikko Mottonen, Juha J. Vartiainen, Ville Bergholm, and Martti M. Salomaa. Transformation of quantum states using uniformly controlled rotations. 2004. <a class="reference external" href="https://arxiv.org/abs/quant-ph/0407010">arXiv:quant-ph/0407010</a>.</p>
-</dd>
-<dt class="label" id="id79"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
-<dd><p>Adrián Pérez-Salinas, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. Data re-uploading for a universal quantum classifier. <em>Quantum</em>, 4:226, February 2020. URL: <a class="reference external" href="http://dx.doi.org/10.22331/q-2020-02-06-226">http://dx.doi.org/10.22331/q-2020-02-06-226</a>, <a class="reference external" href="https://doi.org/10.22331/q-2020-02-06-226">doi:10.22331/q-2020-02-06-226</a>.</p>
-</dd>
-<dt class="label" id="id77"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
-<dd><p>Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. <em>Physical Review Letters</em>, February 2019. URL: <a class="reference external" href="http://dx.doi.org/10.1103/PhysRevLett.122.040504">http://dx.doi.org/10.1103/PhysRevLett.122.040504</a>, <a class="reference external" href="https://doi.org/10.1103/physrevlett.122.040504">doi:10.1103/physrevlett.122.040504</a>.</p>
-</dd>
-</dl>
 </div>
 <hr class="docutils" />
 <p>Autores:</p>
@@ -868,7 +851,6 @@ q1: ─RX─RZ─
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-encoding">2.3. Angle encoding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dense-angle-encoding">2.2.4. Dense angle encoding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-escoger-feature-encoding">2.3. Cómo escoger Feature Encoding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
   </nav></div>
 
