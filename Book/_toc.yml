@@ -9,3 +9,6 @@ parts:
   - file:  docs/Part_02_QML/Chapter_04_QSVM_myst.ipynb
   - file:  docs/Part_02_QML/Chapter_05_Kernel_myst.ipynb
   - file:  docs/Part_02_QML/Chapter_06_Optimizadores_myst.ipynb
+- caption: Referencias
+  chapters:
+  - file: docs/Chapter_Bibliografia_myst.ipynb

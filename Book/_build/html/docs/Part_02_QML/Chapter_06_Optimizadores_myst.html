@@ -106,6 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bibliografía" href="../Chapter_Bibliografia_myst.html" />
     <link rel="prev" title="5. Quantum Kernels" href="Chapter_05_Kernel_myst.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -221,6 +222,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Chapter_04_QSVM_myst.html">4. Quantum Support Vector Machines (QSVM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Optimizadores</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Referencias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter_Bibliografia_myst.html">Bibliografía</a></li>
 </ul>
 
     </div>
@@ -461,7 +466,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-powell">6.6.  Método de optimización Powell</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-bfgs">6.7. Método de optimización BFGS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
             </nav>
         </div>
@@ -478,12 +482,12 @@ document.write(`
 </div></blockquote>
 <section class="tex2jax_ignore mathjax_ignore" id="optimizadores">
 <h1>6. Optimizadores<a class="headerlink" href="#optimizadores" title="Permalink to this heading">#</a></h1>
-<p>Tal y como se menciona en el notebook de <a class="reference internal" href="Chapter_01_Introduction_myst.html#sec-qml-introduccion"><span class="std std-ref">1. Introducción</span></a>, el aprendizaje automático tinene como objetivo aprender de las observaciones existentes y hacer uso de ese aprendizaje para predecir nuevas observaciones o determinar el resultado de nuevas entradas. Para ello, es necesario un proceso iterativo en el que se busca minimizar el error cometido, este proceso se conoce como el entrenamiento del modelo <span id="id1">[<a class="reference internal" href="#id42" title="Juankboards en Planeta Chatbot. Conceptos fundamentales en machine learning: función de pérdida y optimización. URL: https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/.">3</a>]</span>.</p>
+<p>Tal y como se menciona en el notebook de <a class="reference internal" href="Chapter_01_Introduction_myst.html#sec-qml-introduccion"><span class="std std-ref">1. Introducción</span></a>, el aprendizaje automático tinene como objetivo aprender de las observaciones existentes y hacer uso de ese aprendizaje para predecir nuevas observaciones o determinar el resultado de nuevas entradas. Para ello, es necesario un proceso iterativo en el que se busca minimizar el error cometido, este proceso se conoce como el entrenamiento del modelo <span id="id1">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id19" title="Juankboards en Planeta Chatbot. Conceptos fundamentales en machine learning: función de pérdida y optimización. URL: https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/.">10</a>]</span>.</p>
 <p>En objetivo del entrenamiento es lograr el menor error posible, para ello se evalua la función de coste conociendo así la calidad de las predicciones del modelo, en otras palabras conoceremos como de buena es una solución. El proceso irá avanzando, mejorando la precisión en la predicción, hasta cumplir con el criterio de parada fijado. La tarea de minimizar las funciones de coste no es sencilla y existen diversas técnicas para abordarla, algunas de ellas se muestran a continuación.</p>
 <section id="descenso-por-gradiente">
 <span id="sec-descensogradiente"></span><h2>6.1. Descenso por gradiente<a class="headerlink" href="#descenso-por-gradiente" title="Permalink to this heading">#</a></h2>
-<p>El descenso por gradiente (<em>gradient descent</em>) es un algoritmo de optimización utilizado para realizar el entrenamiento de modelos de <em>Machine Learning</em> y <em>Deep learning</em> que se basa en el concepto del gradiente para llevar a cabo la minimización del error cometido <span id="id2">[<a class="reference internal" href="#id43" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">4</a>]</span>. Cabe destacar que para poder encontrar el mínimo de la función este método asume que se puede obtener el gradiente de la función a estudiar y que esta es contínua y diferenciable (no necesariamente en toda la función).</p>
-<p>Para poder implementar este algoritmo de optimización se debe definir la dirección y la <strong>tasa de aprendizaje</strong> (también conocido como el tamaño del paso). El primero de ellos nos indica en qué dirección seguir explorando el conjunto de soluciones mientras que el segundo especifica cuanto avanzar en la dirección seleccionada <span id="id3">[<a class="reference internal" href="#id44" title="V. Robles B. Descenso por gradiente: una breve introducción - parte 1. URL: https://github.com/vlarobbyk/descenso-por-gradiente/blob/master/GradientDescent-1.ipynb.">1</a>]</span>.</p>
+<p>El descenso por gradiente (<em>gradient descent</em>) es un algoritmo de optimización utilizado para realizar el entrenamiento de modelos de <em>Machine Learning</em> y <em>Deep learning</em> que se basa en el concepto del gradiente para llevar a cabo la minimización del error cometido <span id="id2">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id20" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">20</a>]</span>. Cabe destacar que para poder encontrar el mínimo de la función este método asume que se puede obtener el gradiente de la función a estudiar y que esta es contínua y diferenciable (no necesariamente en toda la función).</p>
+<p>Para poder implementar este algoritmo de optimización se debe definir la dirección y la <strong>tasa de aprendizaje</strong> (también conocido como el tamaño del paso). El primero de ellos nos indica en qué dirección seguir explorando el conjunto de soluciones mientras que el segundo especifica cuanto avanzar en la dirección seleccionada <span id="id3">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id21" title="V. Robles B. Descenso por gradiente: una breve introducción - parte 1. URL: https://github.com/vlarobbyk/descenso-por-gradiente/blob/master/GradientDescent-1.ipynb.">4</a>]</span>.</p>
 <p>El algoritmo parte desde un punto arbitrario <span class="math notranslate nohighlight">\(x^{(0)}\)</span> en el que se debe conocer el valor inicial de la función objetivo a minimizar. En cada paso <span class="math notranslate nohighlight">\(k \geq 0\)</span> se avanza de forma iterativa en la dirección opuesta al gradiente, ya que se trabaja con problemas a minimizar. Cabe destacar que esto no supone un límite a la hora de definir la cantidad de problemas que se pueden resolver con esta técnica, ya que todos los problemas a maximizar se pueden transformar en problemas a minimizar mediante un cambio de signo. La busqueda de la solución utilizando el descenso por gradiente se puede resumir mediante la siguiente expresión matemática.</p>
 <div class="math notranslate nohighlight">
 \[ x^{(k+1)} = x^{(k)} - t_k \nabla f(x^{(k)})\]</div>
@@ -513,8 +517,8 @@ document.write(`
 </figure>
 <p>Se detectan otras dos dificultades al utilizar el descenso por gradiente para ajustar los parámetros de las redes neuronales.</p>
 <ul class="simple">
-<li><p><strong>Desvanecimiento del gradiente</strong> (gradientes fuga), esto ocurre cuando el gradiente es demasiado pequeño en la retropropagación en las redes neuronales. El gradiente se reduce lo que provoca que las capas intermedias de la red aprendan muy lentamente, cuando esto sucede los parámetros se actualizan hasta que toman el valor nulo. Cuando esto ocurre el algoritmo que se esta entrenando deja de aprender. <span id="id4">[<a class="reference internal" href="#id43" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">4</a>]</span></p></li>
-<li><p>El problema de <strong>gradientes explosivos</strong> es justamente el efecto opuesto al anterior, es decir, cuando el gradiente es demasiado grande. En estos casos se crea un modelo inestable, los pesos de la red neuronal crecen demasiado hasta que pasan a tomar el valor NaN. <span id="id5">[<a class="reference internal" href="#id43" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">4</a>]</span></p></li>
+<li><p><strong>Desvanecimiento del gradiente</strong> (gradientes fuga), esto ocurre cuando el gradiente es demasiado pequeño en la retropropagación en las redes neuronales. El gradiente se reduce lo que provoca que las capas intermedias de la red aprendan muy lentamente, cuando esto sucede los parámetros se actualizan hasta que toman el valor nulo. Cuando esto ocurre el algoritmo que se esta entrenando deja de aprender. <span id="id4">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id20" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">20</a>]</span></p></li>
+<li><p>El problema de <strong>gradientes explosivos</strong> es justamente el efecto opuesto al anterior, es decir, cuando el gradiente es demasiado grande. En estos casos se crea un modelo inestable, los pesos de la red neuronal crecen demasiado hasta que pasan a tomar el valor NaN. <span id="id5">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id20" title="IBM. ¿qué es el descenso de gradiente? URL: https://www.ibm.com/mx-es/topics/gradient-descent.">20</a>]</span></p></li>
 </ul>
 </section>
 <section id="implementacion">
@@ -546,7 +550,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 13:10:46]: Using tensorflow backend on /device:CPU:0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-06-11 12:06:56]: Using tensorflow backend on /device:CPU:0
 </pre></div>
 </div>
 </div>
@@ -604,7 +608,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5492562980b00f3192e0eefaaf0601ab281d8bb8c7c4d77e87f4d9d993108aa1.png" src="../../_images/5492562980b00f3192e0eefaaf0601ab281d8bb8c7c4d77e87f4d9d993108aa1.png" />
+<img alt="../../_images/e5af9eeae6891dd5e2702b936b1f3a506a753aa2ec7f07b5582aefa9ccc2caaa.png" src="../../_images/e5af9eeae6891dd5e2702b936b1f3a506a753aa2ec7f07b5582aefa9ccc2caaa.png" />
 </div>
 </div>
 <p>Tal y como ya se ha comentado en notebooks anteriores, para poder entrenar el modelo dividiremos el dataset inicial en el conjunto de entremaniento (<em>train</em>) y en el que nos servirá para conocer el comportamiento del circuito con datos desconocidos (<em>val</em>).</p>
@@ -856,10 +860,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3414450365244832 Acc:  0.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.4175923049620295 Acc:  0.9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3450364687233132 Acc:  0.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3545756770024227 Acc:  0.894
 </pre></div>
 </div>
 </div>
@@ -889,7 +893,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" src="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" />
+<img alt="../../_images/81d1e715aa3ff1db4ca8a994f7b7651a77e38daa24a69a85f28ce14e17707219.png" src="../../_images/81d1e715aa3ff1db4ca8a994f7b7651a77e38daa24a69a85f28ce14e17707219.png" />
 </div>
 </div>
 <p>Tal y como se aprecia en la imagen anterior, el modelo no llega a aprender correctamente. El clasificador que obtenemos no consigue generar la frontera de decisión no lineal que se comentaba anteriormente. Todos los errores se comenten en la zona central (la que genera la dificultad), es por eso que el valor del error no es demasiado alto ni el del accuracy excesivamente bajo.</p>
@@ -905,11 +909,11 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 <p>El algoritmo no sufre variaciones drásticas, unicamente se debe tener en cuenta la variación a la hora de calcular el gradiente. En el descenso por gradiente con momentum el valor del siguiente punto se calcula mediante la siguiente expresión:</p>
 <div class="math notranslate nohighlight">
 \[ x^{(k+1)} = x^{(k)} - a^{(k+1)}\]</div>
-<p>donde el término <span class="math notranslate nohighlight">\(a^{(k+1)}\)</span> se actualiza mediante la siguiente expresión <span class="math notranslate nohighlight">\( a^{(k+1)} = \beta a^{(k)} + t_k \nabla f(x^{(k)})\)</span> donde <span class="math notranslate nohighlight">\(t_k\)</span> corresponde al tamaño de paso y <span class="math notranslate nohighlight">\(\beta\)</span> corresponde al momentum, este parámetro debe cumplir que <span class="math notranslate nohighlight">\( \beta \in [0,1]\)</span> <span id="id6">[<a class="reference internal" href="#id46" title="Pennylane. Momentum optimizer. URL: https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html.">7</a>]</span>.</p>
+<p>donde el término <span class="math notranslate nohighlight">\(a^{(k+1)}\)</span> se actualiza mediante la siguiente expresión <span class="math notranslate nohighlight">\( a^{(k+1)} = \beta a^{(k)} + t_k \nabla f(x^{(k)})\)</span> donde <span class="math notranslate nohighlight">\(t_k\)</span> corresponde al tamaño de paso y <span class="math notranslate nohighlight">\(\beta\)</span> corresponde al momentum, este parámetro debe cumplir que <span class="math notranslate nohighlight">\( \beta \in [0,1]\)</span> <span id="id6">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id23" title="Pennylane. Momentum optimizer. URL: https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html.">28</a>]</span>.</p>
 </section>
 <section id="como-seleccionar-beta">
 <span id="sec-momentumbeta"></span><h3>6.2.2. Como seleccionar <span class="math notranslate nohighlight">\(\beta\)</span><a class="headerlink" href="#como-seleccionar-beta" title="Permalink to this heading">#</a></h3>
-<p>Al introducir el momentum se debe ajustar un nuevo parámetro, este corresponde al peso que le otorgamos a los gradientes anteriores y se denomina <span class="math notranslate nohighlight">\(\beta\)</span>. Si el valor de <span class="math notranslate nohighlight">\(\beta\)</span> es pequeño el gradiante se reduce rápidamente pudiendo crear problemas de gradiente desvaneciente. Si se le asigna un valor demasiado grande, sin embargo, este no se reducirán tan rápido por lo que influirán más gradientes en la actualización, este segundo caso es el ideal. Cabe destacar que el valor más común para este parámetos es <span class="math notranslate nohighlight">\(0.9\)</span>. <span id="id7">[<a class="reference internal" href="#id47" title="Coursera. Gradient descent with momentum. URL: https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f.">2</a>]</span></p>
+<p>Al introducir el momentum se debe ajustar un nuevo parámetro, este corresponde al peso que le otorgamos a los gradientes anteriores y se denomina <span class="math notranslate nohighlight">\(\beta\)</span>. Si el valor de <span class="math notranslate nohighlight">\(\beta\)</span> es pequeño el gradiante se reduce rápidamente pudiendo crear problemas de gradiente desvaneciente. Si se le asigna un valor demasiado grande, sin embargo, este no se reducirán tan rápido por lo que influirán más gradientes en la actualización, este segundo caso es el ideal. Cabe destacar que el valor más común para este parámetos es <span class="math notranslate nohighlight">\(0.9\)</span>. <span id="id7">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id24" title="Coursera. Gradient descent with momentum. URL: https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f.">9</a>]</span></p>
 </section>
 <section id="sec-momentumimplementacion">
 <span id="id8"></span><h3>6.2.3. Implementación<a class="headerlink" href="#sec-momentumimplementacion" title="Permalink to this heading">#</a></h3>
@@ -985,10 +989,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3414450365244832 Acc:  0.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.4175923049620295 Acc:  0.9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3450364687233132 Acc:  0.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3545756770024227 Acc:  0.894
 </pre></div>
 </div>
 </div>
@@ -1017,7 +1021,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" src="../../_images/b04a500b94c6a9f281f86ea209f38efe9b9dc30ae9d7927057f34454bf3b9fd1.png" />
+<img alt="../../_images/81d1e715aa3ff1db4ca8a994f7b7651a77e38daa24a69a85f28ce14e17707219.png" src="../../_images/81d1e715aa3ff1db4ca8a994f7b7651a77e38daa24a69a85f28ce14e17707219.png" />
 </div>
 </div>
 <p>El resultado obtenido en este caso es similar al anterior.</p>
@@ -1025,10 +1029,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </section>
 <section id="nesterov-momentum-optimizer-descenso-por-gradiente-con-nertorv-momentum">
 <span id="sec-nesterov"></span><h2>6.3. Nesterov Momentum Optimizer (descenso por gradiente con Nertorv Momentum)<a class="headerlink" href="#nesterov-momentum-optimizer-descenso-por-gradiente-con-nertorv-momentum" title="Permalink to this heading">#</a></h2>
-<p>Al igual que los dos métodos anteriores, este algoritmo de optimización también se basa en el gradiente. No obstante, cuenta con una mayor tasa de convergencia en ciertas situaciones. <span id="id9">[<a class="reference internal" href="#id48" title="Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In International conference on machine learning, 1139–1147. PMLR, 2013.">9</a>]</span></p>
+<p>Al igual que los dos métodos anteriores, este algoritmo de optimización también se basa en el gradiente. No obstante, cuenta con una mayor tasa de convergencia en ciertas situaciones. <span id="id9">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id25" title="Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In International conference on machine learning, 1139–1147. PMLR, 2013.">39</a>]</span></p>
 <section id="sec-nesterovalgortimo">
 <span id="id10"></span><h3>6.3.1. Algoritmo<a class="headerlink" href="#sec-nesterovalgortimo" title="Permalink to this heading">#</a></h3>
-<p>El optimizador Nesterov Momentum es similar al descenso por gradiente con momentum, pero este desplaza el punto actual mediante el término de momentum al calcular el gradiente. De manera que la única modificación respecto a la técnica anterior es la expresión para actualizar <span class="math notranslate nohighlight">\(a^{(k+1)}\)</span> que se sustituye por <span class="math notranslate nohighlight">\(a^{(k+1)} = \beta a^{(k)} + t_k \nabla f(x^{(k)} - \beta a^{(k)})\)</span>.<span id="id11">[<a class="reference internal" href="#id49" title="Pennylane. Nesterov momentum optimizer. URL: https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html.">8</a>]</span></p>
+<p>El optimizador Nesterov Momentum es similar al descenso por gradiente con momentum, pero este desplaza el punto actual mediante el término de momentum al calcular el gradiente. De manera que la única modificación respecto a la técnica anterior es la expresión para actualizar <span class="math notranslate nohighlight">\(a^{(k+1)}\)</span> que se sustituye por <span class="math notranslate nohighlight">\(a^{(k+1)} = \beta a^{(k)} + t_k \nabla f(x^{(k)} - \beta a^{(k)})\)</span>.<span id="id11">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id26" title="Pennylane. Nesterov momentum optimizer. URL: https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html.">29</a>]</span></p>
 </section>
 <section id="sec-nesterovimplementacion">
 <span id="id12"></span><h3>6.3.2. Implementación<a class="headerlink" href="#sec-nesterovimplementacion" title="Permalink to this heading">#</a></h3>
@@ -1101,10 +1105,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.3498499359959764 Acc:  0.87
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.44559725536638345 Acc:  0.86
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.36104289259663536 Acc:  0.868
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.37696163417390055 Acc:  0.872
 </pre></div>
 </div>
 </div>
@@ -1133,7 +1137,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dfb7d7d578756b218c86b689a1f2420d5c62d523c20a39b196999883d892a101.png" src="../../_images/dfb7d7d578756b218c86b689a1f2420d5c62d523c20a39b196999883d892a101.png" />
+<img alt="../../_images/174a7d0cb4975a6104b76521d17126731c00a9b35b9b3aa16f09f36dfafe7723.png" src="../../_images/174a7d0cb4975a6104b76521d17126731c00a9b35b9b3aa16f09f36dfafe7723.png" />
 </div>
 </div>
 <p>En este caso la clasificación cambia, se pueden apreciar errores de clasificación en los extremos y se mantienen los errores de clasificación en el centro.</p>
@@ -1141,17 +1145,17 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </section>
 <section id="adam">
 <span id="sec-adam"></span><h2>6.4 Adam<a class="headerlink" href="#adam" title="Permalink to this heading">#</a></h2>
-<p>Se trata de un método de optimización estocástica eficiente que unicamente requiere gradientes de primer orden con poco requerimiento de memoria. Este método calcula tasas de aprendizaje adaptativas individuales para diferentes parámetros a partir de las estimaciones del primer y segundo momento de los gradientes. Es por eso que el nombre de esta técnica, Adam, proviene de <em>adaptative moment estimation</em>. <span id="id13">[<a class="reference internal" href="#id50" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">6</a>]</span></p>
+<p>Se trata de un método de optimización estocástica eficiente que unicamente requiere gradientes de primer orden con poco requerimiento de memoria. Este método calcula tasas de aprendizaje adaptativas individuales para diferentes parámetros a partir de las estimaciones del primer y segundo momento de los gradientes. Es por eso que el nombre de esta técnica, Adam, proviene de <em>adaptative moment estimation</em>. <span id="id13">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id27" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">23</a>]</span></p>
 <section id="sec-adamalgoritmo">
 <span id="id14"></span><h3>6.4.1. Algoritmo<a class="headerlink" href="#sec-adamalgoritmo" title="Permalink to this heading">#</a></h3>
 <p>A continuación se muestra el pseudo-código de este algoritmo.</p>
 <figure class="align-center" id="fig-algadam">
 <a class="reference internal image-reference" href="../../_images/AlgAdam.PNG"><img alt="../../_images/AlgAdam.PNG" src="../../_images/AlgAdam.PNG" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Pseudo-código algoritmo Adam <span>[<a class="reference internal" href="#id50" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">6</a>]</span>.</span><a class="headerlink" href="#fig-algadam" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Pseudo-código algoritmo Adam <span>[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id27" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">23</a>]</span>.</span><a class="headerlink" href="#fig-algadam" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Tal y como se muestra en la figura 5, el algoritmo actualiza las medias móviles exponenciales del gradiente (<span class="math notranslate nohighlight">\(m_t\)</span>) y del gradiente al cuadrado (<span class="math notranslate nohighlight">\(v_t\)</span>) donde los hiperparámetros <span class="math notranslate nohighlight">\(\beta_1, \beta_2 \in [0,1)\)</span> corresponden al parámetro de suavizado de las medias móviles. Como se aprecia en el pseudo-código anterior, los parámetros de suavizado se inicializan al 0, dejando que en las primeras iteraciones el valor sea cercano al valor nulo, especialmente cuando los valores de <span class="math notranslate nohighlight">\(\beta\)</span> son cercanos a 1 <span id="id15">[<a class="reference internal" href="#id50" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">6</a>]</span>.</p>
+<p>Tal y como se muestra en la figura 5, el algoritmo actualiza las medias móviles exponenciales del gradiente (<span class="math notranslate nohighlight">\(m_t\)</span>) y del gradiente al cuadrado (<span class="math notranslate nohighlight">\(v_t\)</span>) donde los hiperparámetros <span class="math notranslate nohighlight">\(\beta_1, \beta_2 \in [0,1)\)</span> corresponden al parámetro de suavizado de las medias móviles. Como se aprecia en el pseudo-código anterior, los parámetros de suavizado se inicializan al 0, dejando que en las primeras iteraciones el valor sea cercano al valor nulo, especialmente cuando los valores de <span class="math notranslate nohighlight">\(\beta\)</span> son cercanos a 1 <span id="id15">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id27" title="Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">23</a>]</span>.</p>
 </section>
 <section id="sec-adamimplementacion">
 <span id="id16"></span><h3>6.4.2. Implementación<a class="headerlink" href="#sec-adamimplementacion" title="Permalink to this heading">#</a></h3>
@@ -1225,10 +1229,10 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6312291772799759 Acc:  0.81
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6259834338146246 Acc:  0.79
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.6205888948162622 Acc:  0.79
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  0.606673952790901 Acc:  0.792
 </pre></div>
 </div>
 </div>
@@ -1257,7 +1261,7 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9147255333688ee67c24ba25ad05c06206023f2353777c56c4bb4b792b3de807.png" src="../../_images/9147255333688ee67c24ba25ad05c06206023f2353777c56c4bb4b792b3de807.png" />
+<img alt="../../_images/a2b8182f899209b5c6fb047cc63e4d8e5d174b001faca22d8fdac7abed872fe8.png" src="../../_images/a2b8182f899209b5c6fb047cc63e4d8e5d174b001faca22d8fdac7abed872fe8.png" />
 </div>
 </div>
 <p>Tal y como se aprecia en el gráfico anterior, este optimizador no es capaz de conseguir los parámetros adecuados para una correcta clasificación. Se puede observar que todas las instancias se etiquetan con la misma clase.</p>
@@ -1265,14 +1269,14 @@ MSE = \frac{1}{N} \sum_{i=1}^N (y_i-\hat y_i)^2
 </section>
 <section id="adadelta">
 <span id="sec-adadelta"></span><h2>6.5 Adadelta<a class="headerlink" href="#adadelta" title="Permalink to this heading">#</a></h2>
-<p>Adadelta es una técnica de optimización estocástica basada en el descenso por gradiente que permite aplicar el método de la tasa de aprendizaje por dimensión. Se trata de una expansión del método Adagrad que busca reducir la agresividad y el descenso monótono de la tasa de aprendizaje. Para ello en vez de hacer uso de todos los gradientes pasados, únicamente utilizan los contenidos en una ventana de tamaño fijo <span class="math notranslate nohighlight">\(w\)</span> <span id="id17">[<a class="reference internal" href="#id51" title="Keras. Adadelta. URL: https://keras.io/api/optimizers/adadelta/.">5</a>]</span>.</p>
+<p>Adadelta es una técnica de optimización estocástica basada en el descenso por gradiente que permite aplicar el método de la tasa de aprendizaje por dimensión. Se trata de una expansión del método Adagrad que busca reducir la agresividad y el descenso monótono de la tasa de aprendizaje. Para ello en vez de hacer uso de todos los gradientes pasados, únicamente utilizan los contenidos en una ventana de tamaño fijo <span class="math notranslate nohighlight">\(w\)</span> <span id="id17">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id28" title="Keras. Adadelta. URL: https://keras.io/api/optimizers/adadelta/.">22</a>]</span>.</p>
 <section id="sec-adadeltaalgoritmo">
 <span id="id18"></span><h3>6.5.1. Algoritmo<a class="headerlink" href="#sec-adadeltaalgoritmo" title="Permalink to this heading">#</a></h3>
-<p>La suma de los gradientes se define de manera recursiva, de manera que <span class="math notranslate nohighlight">\(E[g^2]_t\)</span> en el tiempo t depende de la media anterior y el gradiente actual, tal y como se indíca en la siguiente formula <span id="id19">[<a class="reference internal" href="#id52" title="Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.">11</a>]</span>:
+<p>La suma de los gradientes se define de manera recursiva, de manera que <span class="math notranslate nohighlight">\(E[g^2]_t\)</span> en el tiempo t depende de la media anterior y el gradiente actual, tal y como se indíca en la siguiente formula <span id="id19">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id29" title="Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.">42</a>]</span>:
 $<span class="math notranslate nohighlight">\(E[g^2]_t = \gamma E[g^2]_{t-1} + (1-\gamma)g_t^2\)</span>$</p>
-<p>Normalmente el parámetro <span class="math notranslate nohighlight">\(\gamma\)</span> se fija a 0.9. Utilizando este método de optimización los parámetros se acutalizan mediante las siguientes expresiones <span id="id20">[<a class="reference internal" href="#id52" title="Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.">11</a>]</span>:
+<p>Normalmente el parámetro <span class="math notranslate nohighlight">\(\gamma\)</span> se fija a 0.9. Utilizando este método de optimización los parámetros se acutalizan mediante las siguientes expresiones <span id="id20">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id29" title="Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.">42</a>]</span>:
 $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqrt{E[g^2]_t+\epsilon}}g_t\)</span>$</p>
-<p>La principal ventaja del algoritmo Adadelta es que no es necesario definir el valor de la tasa de aprendizaje por defecto <span id="id21">[<a class="reference internal" href="#id51" title="Keras. Adadelta. URL: https://keras.io/api/optimizers/adadelta/.">5</a>]</span>.</p>
+<p>La principal ventaja del algoritmo Adadelta es que no es necesario definir el valor de la tasa de aprendizaje por defecto <span id="id21">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id28" title="Keras. Adadelta. URL: https://keras.io/api/optimizers/adadelta/.">22</a>]</span>.</p>
 </section>
 <section id="sec-adadeltaimplementacion">
 <span id="id22"></span><h3>6.5.2. Implementación<a class="headerlink" href="#sec-adadeltaimplementacion" title="Permalink to this heading">#</a></h3>
@@ -1347,10 +1351,10 @@ $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  2.0574886124724627 Acc:  0.47
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.9023031273128745 Acc:  0.51
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.941127395397523 Acc:  0.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss:  1.9411366508303498 Acc:  0.5
 </pre></div>
 </div>
 </div>
@@ -1379,7 +1383,7 @@ $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/04fc56d87761de86e75a66cc67e9539a4d83afd94b77b7718298e9a1b080543f.png" src="../../_images/04fc56d87761de86e75a66cc67e9539a4d83afd94b77b7718298e9a1b080543f.png" />
+<img alt="../../_images/e0fa8cb58c663764f1712fe2c7fa116fbd701d269494e87ec4d8002aabc085da.png" src="../../_images/e0fa8cb58c663764f1712fe2c7fa116fbd701d269494e87ec4d8002aabc085da.png" />
 </div>
 </div>
 <p>Ocurre lo mismo que en el caso anterior, el clasificador no hace distinción entre dos clases y no se genera ninguna frontera de decisión.</p>
@@ -1459,14 +1463,14 @@ $<span class="math notranslate nohighlight">\(\Delta\theta_t = -\frac{\eta}{\sqr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ba8a6fbd12a22000c35f4114f836cc25132d9f03a0f0fc824f87956779cf4b56.png" src="../../_images/ba8a6fbd12a22000c35f4114f836cc25132d9f03a0f0fc824f87956779cf4b56.png" />
+<img alt="../../_images/0c5516adb39f20fe1dc9330377bf7566373845523fd4639dc37b290fc7b6915b.png" src="../../_images/0c5516adb39f20fe1dc9330377bf7566373845523fd4639dc37b290fc7b6915b.png" />
 </div>
 </div>
 <p>Con el clasificador ajustado mediante el optimizador Powell observamos una frontera de decisión que corresponde a una línea horizontal, por lo que tampoco se logra la clasificación esperada.</p>
 </section>
 <section id="metodo-de-optimizacion-bfgs">
 <span id="sec-bfgs"></span><h2>6.7. Método de optimización BFGS<a class="headerlink" href="#metodo-de-optimizacion-bfgs" title="Permalink to this heading">#</a></h2>
-<p>El algoritmo Broyden-Fletcher-Goldfarb-Shanno también conocido como BFGS, es un método iterativo utilizado para resolver problemas no lineales sin restricciones. Al igual que el método Davidon-Fletcher-Powell, determina la dirección de descenso precondicionando el gradiente con la información de la curvatura de la función. BFGS realiza este proceso gradualmente mejorando la matriz hessiana de la función de coste. Dicha matriz se obtiene mediante evaluaciones del gradiente (o evaluaciones del gradiente aproximado) y se generaliza mediante el <em>método de la secante</em> <span id="id23">[<a class="reference internal" href="#id53" title="Wikipedia. Broyden–fletcher–goldfarb–shanno algorithm. URL: https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm.">10</a>]</span>.</p>
+<p>El algoritmo Broyden-Fletcher-Goldfarb-Shanno también conocido como BFGS, es un método iterativo utilizado para resolver problemas no lineales sin restricciones. Al igual que el método Davidon-Fletcher-Powell, determina la dirección de descenso precondicionando el gradiente con la información de la curvatura de la función. BFGS realiza este proceso gradualmente mejorando la matriz hessiana de la función de coste. Dicha matriz se obtiene mediante evaluaciones del gradiente (o evaluaciones del gradiente aproximado) y se generaliza mediante el <em>método de la secante</em> <span id="id23">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id30" title="Wikipedia. Broyden–fletcher–goldfarb–shanno algorithm. URL: https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm.">40</a>]</span>.</p>
 <div class="note admonition">
 <p class="admonition-title">Nota (Método de la secante)</p>
 <p>Se trata de un método utilizado para aproximar la derivada de una función, en algunos casos el cálculo de la derivada es muy costoso por lo que este tipo de métodos resultan de gran utilidad. La expresión utilizada para obtener el valor de la pendiente es la siguiente [14]:</p>
@@ -1547,51 +1551,10 @@ f^\prime(x_0) = \frac{f(x_1)-f(x_0)}{x_1-x_0}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/67956cf48ad3c07566b49f8b6f356f26848d73f89f58816b4fd233d5fd3126b3.png" src="../../_images/67956cf48ad3c07566b49f8b6f356f26848d73f89f58816b4fd233d5fd3126b3.png" />
+<img alt="../../_images/cba1e5f1e059893fd171ecd49af4ac06852d972c4b7db27fce35b637658d740b.png" src="../../_images/cba1e5f1e059893fd171ecd49af4ac06852d972c4b7db27fce35b637658d740b.png" />
 </div>
 </div>
 <p>En este caso se obtiene un resultado similar al obtenido con el optimizador de descenso por gradiente.</p>
-</section>
-<hr class="docutils" />
-<section id="bibliografia">
-<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
-<div class="docutils container" id="id24">
-<dl class="citation">
-<dt class="label" id="id44"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
-<dd><p>V. Robles B. Descenso por gradiente: una breve introducción - parte 1. URL: <a class="github reference external" href="https://github.com/vlarobbyk/descenso-por-gradiente/blob/master/GradientDescent-1.ipynb">vlarobbyk/descenso-por-gradiente</a>.</p>
-</dd>
-<dt class="label" id="id47"><span class="brackets"><a class="fn-backref" href="#id7">2</a></span></dt>
-<dd><p>Coursera. Gradient descent with momentum. URL: <a class="reference external" href="https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f">https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f</a>.</p>
-</dd>
-<dt class="label" id="id42"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
-<dd><p>Juankboards en Planeta Chatbot. Conceptos fundamentales en machine learning: función de pérdida y optimización. URL: <a class="reference external" href="https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/">https://planetachatbot.com/conceptos-fundamentales-en-machine-learning-funcon-de-perdida-y-optimizacion/</a>.</p>
-</dd>
-<dt class="label" id="id43"><span class="brackets">4</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>)</span></dt>
-<dd><p>IBM. ¿qué es el descenso de gradiente? URL: <a class="reference external" href="https://www.ibm.com/mx-es/topics/gradient-descent">https://www.ibm.com/mx-es/topics/gradient-descent</a>.</p>
-</dd>
-<dt class="label" id="id51"><span class="brackets">5</span><span class="fn-backref">(<a href="#id17">1</a>,<a href="#id21">2</a>)</span></dt>
-<dd><p>Keras. Adadelta. URL: <a class="reference external" href="https://keras.io/api/optimizers/adadelta/">https://keras.io/api/optimizers/adadelta/</a>.</p>
-</dd>
-<dt class="label" id="id50"><span class="brackets">6</span><span class="fn-backref">(<a href="#id13">1</a>,<a href="#id15">2</a>)</span></dt>
-<dd><p>Diederik P Kingma and Jimmy Ba. Adam: a method for stochastic optimization. <em>arXiv preprint arXiv:1412.6980</em>, 2014.</p>
-</dd>
-<dt class="label" id="id46"><span class="brackets"><a class="fn-backref" href="#id6">7</a></span></dt>
-<dd><p>Pennylane. Momentum optimizer. URL: <a class="reference external" href="https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html">https://docs.pennylane.ai/en/stable/code/api/pennylane.MomentumOptimizer.html</a>.</p>
-</dd>
-<dt class="label" id="id49"><span class="brackets"><a class="fn-backref" href="#id11">8</a></span></dt>
-<dd><p>Pennylane. Nesterov momentum optimizer. URL: <a class="reference external" href="https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html">https://docs.pennylane.ai/en/stable/code/api/pennylane.NesterovMomentumOptimizer.html</a>.</p>
-</dd>
-<dt class="label" id="id48"><span class="brackets"><a class="fn-backref" href="#id9">9</a></span></dt>
-<dd><p>Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In <em>International conference on machine learning</em>, 1139–1147. PMLR, 2013.</p>
-</dd>
-<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id23">10</a></span></dt>
-<dd><p>Wikipedia. Broyden–fletcher–goldfarb–shanno algorithm. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm</a>.</p>
-</dd>
-<dt class="label" id="id52"><span class="brackets">11</span><span class="fn-backref">(<a href="#id19">1</a>,<a href="#id20">2</a>)</span></dt>
-<dd><p>Matthew D Zeiler. Adadelta: an adaptive learning rate method. <em>arXiv preprint arXiv:1212.5701</em>, 2012.</p>
-</dd>
-</dl>
-</div>
 <hr class="docutils" />
 <p>Autores:</p>
 <p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p>
@@ -1654,6 +1617,15 @@ f^\prime(x_0) = \frac{f(x_1)-f(x_0)}{x_1-x_0}
         <p class="prev-next-title">5. Quantum Kernels</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../Chapter_Bibliografia_myst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliografía</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1698,7 +1670,6 @@ f^\prime(x_0) = \frac{f(x_1)-f(x_0)}{x_1-x_0}
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-powell">6.6.  Método de optimización Powell</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-optimizacion-bfgs">6.7. Método de optimización BFGS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
   </nav></div>
 

@@ -223,6 +223,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Quantum Kernels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Referencias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter_Bibliografia_myst.html">Bibliografía</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -445,7 +449,6 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
             </nav>
         </div>
@@ -476,7 +479,7 @@ document.write(`
 <section id="introduccion-a-los-metodos-kernel">
 <span id="sec-introkernel"></span><h2>5.1. Introducción a los métodos kernel<a class="headerlink" href="#introduccion-a-los-metodos-kernel" title="Permalink to this heading">#</a></h2>
 <p>Los métodos kernel representan los datos en un número de dimensiones mayor por lo que ayudan a encontrar nuevos patrones en los datos. Estas técnicas son muy utilizadas en aprendizaje supervisado, ya que permiten transformar los problemas no lineales en lineales donde los datos son representandos en un espacio de mayor dimensión.</p>
-<p>La expresión general de los kernel es <span class="math notranslate nohighlight">\(k(\mathbf{x_{i}},\mathbf{x_{j}}) = \langle  f(\mathbf{x_{i}}), f(\mathbf{x_{j}}) \rangle\)</span> donde <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{x_{j}}\)</span> corresponden a los datos de entradas de dimensión <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(f\)</span> representa la función que transforma los datos de entradas de dimensión <span class="math notranslate nohighlight">\(n\)</span> en un espacio de dimensión <span class="math notranslate nohighlight">\(m\)</span> y <span class="math notranslate nohighlight">\(\langle \mathbf{a}, \mathbf{b} \rangle\)</span> denota el producto interno. Considerando un conjunto de datos, la función kernel se puede representar mediante una matriz, conocida como <strong>matriz kernel</strong>, <span class="math notranslate nohighlight">\(K_{ij} = K(\mathbf{x_{i}},\mathbf{x_{j}})\)</span> <span id="id1">[<a class="reference internal" href="#id21" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">5</a>]</span>.</p>
+<p>La expresión general de los kernel es <span class="math notranslate nohighlight">\(k(\mathbf{x_{i}},\mathbf{x_{j}}) = \langle  f(\mathbf{x_{i}}), f(\mathbf{x_{j}}) \rangle\)</span> donde <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{x_{j}}\)</span> corresponden a los datos de entradas de dimensión <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(f\)</span> representa la función que transforma los datos de entradas de dimensión <span class="math notranslate nohighlight">\(n\)</span> en un espacio de dimensión <span class="math notranslate nohighlight">\(m\)</span> y <span class="math notranslate nohighlight">\(\langle \mathbf{a}, \mathbf{b} \rangle\)</span> denota el producto interno. Considerando un conjunto de datos, la función kernel se puede representar mediante una matriz, conocida como <strong>matriz kernel</strong>, <span class="math notranslate nohighlight">\(K_{ij} = K(\mathbf{x_{i}},\mathbf{x_{j}})\)</span> <span id="id1">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id11" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">32</a>]</span>.</p>
 <p>A continuación,en la <a class="reference internal" href="#fig-ejemplodskernel"><span class="std std-numref">Fig. 9</span></a>, se muestra un ejemplo visual para comprender la idea en la que se basan los kernel.</p>
 <figure class="align-center" id="fig-ejemplodskernel">
 <a class="reference internal image-reference" href="../../_images/EjemploDataset_kernel.PNG"><img alt="../../_images/EjemploDataset_kernel.PNG" src="../../_images/EjemploDataset_kernel.PNG" style="width: 300px;" /></a>
@@ -488,13 +491,13 @@ document.write(`
 <figure class="align-center" id="fig-featuremapkernel">
 <a class="reference internal image-reference" href="../../_images/featureMap_KERNEL.PNG"><img alt="../../_images/featureMap_KERNEL.PNG" src="../../_images/featureMap_KERNEL.PNG" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Figure 2. Visualización del objetivo de los métodos kernel <span id="id2">[<a class="reference internal" href="#id21" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">5</a>]</span>.</span><a class="headerlink" href="#fig-featuremapkernel" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Figure 2. Visualización del objetivo de los métodos kernel <span id="id2">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id11" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">32</a>]</span>.</span><a class="headerlink" href="#fig-featuremapkernel" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Se observa que cuando los datos se representan en tres dimensiones existe un hiperplano que clasifica correctamente ambas clases. Proyectando el hiperplano de nuevo en las dimensiones originales la frontera de decisión es no lineal. Cabe destacar que esta manera de trabajar con la no linealidad en los modelos proporcionan la posibilidad de reconocer patrones en el espacio de datos original.</p>
 <div class="note admonition">
 <p class="admonition-title">Nota</p>
-<p>En algunas fuentes de información la expresión del kernel se expresa <span class="math notranslate nohighlight">\(K(\mathbf{x_{i}},\mathbf{x_{j}}) = \phi(\mathbf{x_{j}})^T \phi(\mathbf{x_{i}})\)</span>, en este caso la función que realiza el mapeo se denota mediante <span class="math notranslate nohighlight">\(\phi()\)</span>. Esta función también se conoce como <b>feature map</b> <span id="id3">[<a class="reference internal" href="#id22" title="Marc G Genton. Classes of kernels for machine learning: a statistics perspective. Journal of machine learning research, 2(Dec):299–312, 2001.">2</a>]</span>.</p>
+<p>En algunas fuentes de información la expresión del kernel se expresa <span class="math notranslate nohighlight">\(K(\mathbf{x_{i}},\mathbf{x_{j}}) = \phi(\mathbf{x_{j}})^T \phi(\mathbf{x_{i}})\)</span>, en este caso la función que realiza el mapeo se denota mediante <span class="math notranslate nohighlight">\(\phi()\)</span>. Esta función también se conoce como <b>feature map</b> <span id="id3">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id12" title="Marc G Genton. Classes of kernels for machine learning: a statistics perspective. Journal of machine learning research, 2(Dec):299–312, 2001.">14</a>]</span>.</p>
 </div>
 <p>Los métodos kernel son muy utilizados junto al algoritmo <em>support vector machine</em> (SVM) en conjuntos de datos no lineales, debido a la transformación de los conjuntos de datos a lineales donde este algoritmo trata de encontrar el hiperplano <span class="math notranslate nohighlight">\((\mathbf{w},b)\)</span> que mejor separa las distintas clases. En este <a class="reference internal" href="Chapter_04_QSVM_myst.html#sec-qml-qsvm"><span class="std std-ref">4. Quantum Support Vector Machines (QSVM)</span></a> se puede encontrar más información a cerca de esta técnica de clasificación.</p>
 </section>
@@ -504,18 +507,18 @@ document.write(`
 <figure class="align-center" id="fig-ck-qk">
 <a class="reference internal image-reference" href="../../_images/ClassicalKernel_QuantumKernel.PNG"><img alt="../../_images/ClassicalKernel_QuantumKernel.PNG" src="../../_images/ClassicalKernel_QuantumKernel.PNG" style="width: 800px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Comparación entre kernel clásico y cuántico <span id="id4">[<a class="reference internal" href="#id23" title="Institute for Quantum Computing. Quantum kernel methods. URL: https://github.com/PaddlePaddle/Quantum/blob/master/tutorials/machine_learning/QKernel_EN.ipynb.">1</a>]</span>.</span><a class="headerlink" href="#fig-ck-qk" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Comparación entre kernel clásico y cuántico <span id="id4">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id13" title="Institute for Quantum Computing. Quantum kernel methods. URL: https://github.com/PaddlePaddle/Quantum/blob/master/tutorials/machine_learning/QKernel_EN.ipynb.">12</a>]</span>.</span><a class="headerlink" href="#fig-ck-qk" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Como se aprecia en la <a class="reference internal" href="#fig-ck-qk"><span class="std std-numref">Fig. 11</span></a>  en ambos casos se trabaja con un <em>feature map</em> que se denota como <span class="math notranslate nohighlight">\(\phi(\mathbf{x})\)</span>, se encarga de transformar los datos del espacio de datos original a un nuevo espacio de características. No obstante, aunque existen similitudes en lo que se refiere al concepto, también se aprecian diferencias en la expresión de la función kernel o que la función kernel cuántica además de llevar a cabo el cambio de dimensión, transforma los datos en <strong>estados cuánticos</strong>.</p>
-<p>Tal y como se adelantaba en la comparación representada en la <a class="reference internal" href="#fig-ck-qk"><span class="std std-numref">Fig. 11</span></a>, al tratar datos clásicos medicante algoritmos de <em>Quantum Machine Learning</em> estos mismos deben encargarse de codificar los datos en estados cuánticos para posteriormente poder trabajar con ellos. Este proceso es equivalente a una función <em>feature map</em> que asigna los valores a estados cuánticos, concretamente <span class="math notranslate nohighlight">\(\phi(\mathbf{x})\)</span> mapea el vector de características <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> en el espacio de Hilbert <span class="math notranslate nohighlight">\(\ket{\phi(\mathbf{x})}\bra{\phi(\mathbf{x})}\)</span> <span id="id5">[<a class="reference internal" href="#id21" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">5</a>]</span>. Mediante la función kernel se lleva a cabo la codificación de los datos, conocida como <em><strong>data_encoding</strong></em>. El quantum kernel se puede interpretar como una medida de similitud, de forma que <span class="math notranslate nohighlight">\(k(\mathbf{x_{i}},\mathbf{x_{j}})\)</span> tomará un valor elevado cuando <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{x_{j}}\)</span> sean cercanos <span id="id6">[<a class="reference internal" href="#id24" title="Hsin-Yuan Huang, Mick Broughton, Masoud Mohseni, Ryan Babbush, Sergio Boixo, Hartmut Neven, and Jarrod R. McClean. Power of data in quantum machine learning. Nature Communications, 2020. URL: https://api.semanticscholar.org/CorpusID:226246283.">4</a>]</span>.</p>
+<p>Tal y como se adelantaba en la comparación representada en la <a class="reference internal" href="#fig-ck-qk"><span class="std std-numref">Fig. 11</span></a>, al tratar datos clásicos medicante algoritmos de <em>Quantum Machine Learning</em> estos mismos deben encargarse de codificar los datos en estados cuánticos para posteriormente poder trabajar con ellos. Este proceso es equivalente a una función <em>feature map</em> que asigna los valores a estados cuánticos, concretamente <span class="math notranslate nohighlight">\(\phi(\mathbf{x})\)</span> mapea el vector de características <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> en el espacio de Hilbert <span class="math notranslate nohighlight">\(\ket{\phi(\mathbf{x})}\bra{\phi(\mathbf{x})}\)</span> <span id="id5">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id11" title="Qiskit. Quantum machine learning. URL: https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb.">32</a>]</span>. Mediante la función kernel se lleva a cabo la codificación de los datos, conocida como <em><strong>data_encoding</strong></em>. El quantum kernel se puede interpretar como una medida de similitud, de forma que <span class="math notranslate nohighlight">\(k(\mathbf{x_{i}},\mathbf{x_{j}})\)</span> tomará un valor elevado cuando <span class="math notranslate nohighlight">\(\mathbf{x_{i}}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{x_{j}}\)</span> sean cercanos <span id="id6">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id14" title="Hsin-Yuan Huang, Mick Broughton, Masoud Mohseni, Ryan Babbush, Sergio Boixo, Hartmut Neven, and Jarrod R. McClean. Power of data in quantum machine learning. Nature Communications, 2020. URL: https://api.semanticscholar.org/CorpusID:226246283.">18</a>]</span>.</p>
 <p>La codificación de los datos es una fase fundamental en QML y exiten varias técnicas que abordan este reto, en este <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a> se puede encontrar más información a cerca de esta temática.</p>
-<p>Entender los modelos cuánticos como métodos kernel significa que la expresividad, optimización y el comportamiento al generalizar los modelos están determinados en gran medida por la estrategia de codificación, la cual viene fijada por el método kernel <span id="id7">[<a class="reference internal" href="#id25" title="Maria Schuld. Supervised quantum machine learning models are kernel methods. arXiv preprint arXiv:2101.11020, 2021.">7</a>]</span>. Además significa que aunque el propio kernel puede explorar espacios de datos de dimensionalidad alta en el sistema cuántico y los modelos cuánticos pueden entrenar y operar en subespacios de dimensiones más bajas.</p>
+<p>Entender los modelos cuánticos como métodos kernel significa que la expresividad, optimización y el comportamiento al generalizar los modelos están determinados en gran medida por la estrategia de codificación, la cual viene fijada por el método kernel <span id="id7">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id15" title="Maria Schuld. Supervised quantum machine learning models are kernel methods. arXiv preprint arXiv:2101.11020, 2021.">35</a>]</span>. Además significa que aunque el propio kernel puede explorar espacios de datos de dimensionalidad alta en el sistema cuántico y los modelos cuánticos pueden entrenar y operar en subespacios de dimensiones más bajas.</p>
 <p>Al igual que en el caso clásico, el puente entre el QML y los métodos kernel esta formado por la observación de que los modelos cuánticos mapean los datos en una dimensión superior en la cual la medida define una frontera de decisión lineal.</p>
 </section>
 <section id="distintas-implementaciones-de-kernel">
 <span id="sec-implementacioneskernel"></span><h2>5.3. Distintas implementaciones de kernel<a class="headerlink" href="#distintas-implementaciones-de-kernel" title="Permalink to this heading">#</a></h2>
-<p>El entrenamiento basado en métodos kernel pasan por alto el procesado y la medición que implementan los circuitos variacionales, de manera que solo dependerá de la codificación de los datos <span id="id8">[<a class="reference internal" href="#id26" title="Thomas Hofmann, Bernhard Schölkopf, and Alexander J. Smola. Kernel methods in machine learning. The Annals of Statistics, 36(3):1171 – 1220, 2008. URL: https://doi.org/10.1214/009053607000000677, doi:10.1214/009053607000000677.">3</a>]</span>.</p>
+<p>El entrenamiento basado en métodos kernel pasan por alto el procesado y la medición que implementan los circuitos variacionales, de manera que solo dependerá de la codificación de los datos <span id="id8">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id16" title="Thomas Hofmann, Bernhard Schölkopf, and Alexander J. Smola. Kernel methods in machine learning. The Annals of Statistics, 36(3):1171 – 1220, 2008. URL: https://doi.org/10.1214/009053607000000677, doi:10.1214/009053607000000677.">17</a>]</span>.</p>
 <p>A continuación se adjunta una implementeación de distintos tipos de métodos kernel. Por un lado, se muestran dos ejemplos de <em><strong>Quantum Kernel Estimation</strong></em> (QKE). Por otro lado, se adjunta el código para el denominado <em><strong>swap test</strong></em>. Para comprobar el correcto funcionamiento de estos ejemplos, se hará uso del dataset iris, ya que se trata de un problema de clasificación sencillo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -539,7 +542,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 13:10:38]: Using numpy backend on /CPU:0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-06-11 12:06:48]: Using numpy backend on /CPU:0
 </pre></div>
 </div>
 </div>
@@ -580,7 +583,7 @@ document.write(`
 </div>
 <section id="swap-test">
 <span id="sec-swaptest"></span><h3>5.3.1. SWAP test<a class="headerlink" href="#swap-test" title="Permalink to this heading">#</a></h3>
-<p>Para implementar el kernel se preparan los estados <span class="math notranslate nohighlight">\(\ket{\phi(\mathbf{x_{i}})},\ket{\phi(\mathbf{x_{j}})}\)</span> en conjuntos de cúbits diferentes mediante rutinas de codificación, <span class="math notranslate nohighlight">\(U(\mathbf{x_{i}}), U(\mathbf{x_{j}})\)</span>. Generalmente este primer paso se suele llevar a cabo mediante rotaciones, en el ejemplo que se muestra a continuación se trabaja con rotaciones en el eje Y. Tras codificar los datos clásicos en estado cuánticos, se mide el solapamiento con una rutina que se denomina <em><strong>SWAP test</strong></em> <span id="id9">[<a class="reference internal" href="#id19" title="Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html.">6</a>]</span>.</p>
+<p>Para implementar el kernel se preparan los estados <span class="math notranslate nohighlight">\(\ket{\phi(\mathbf{x_{i}})},\ket{\phi(\mathbf{x_{j}})}\)</span> en conjuntos de cúbits diferentes mediante rutinas de codificación, <span class="math notranslate nohighlight">\(U(\mathbf{x_{i}}), U(\mathbf{x_{j}})\)</span>. Generalmente este primer paso se suele llevar a cabo mediante rotaciones, en el ejemplo que se muestra a continuación se trabaja con rotaciones en el eje Y. Tras codificar los datos clásicos en estado cuánticos, se mide el solapamiento con una rutina que se denomina <em><strong>SWAP test</strong></em> <span id="id9">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id9" title="Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html.">34</a>]</span>.</p>
 <figure class="align-center" id="fig-swaptest-kernel">
 <a class="reference internal image-reference" href="../../_images/SwapTest_kernel.PNG"><img alt="../../_images/SwapTest_kernel.PNG" src="../../_images/SwapTest_kernel.PNG" style="width: 300px;" /></a>
 <figcaption>
@@ -681,7 +684,7 @@ document.write(`
 <figure class="align-center" id="kernel-circuit">
 <a class="reference internal image-reference" href="../../_images/kernel_circuit_ejemplo.png"><img alt="../../_images/kernel_circuit_ejemplo.png" src="../../_images/kernel_circuit_ejemplo.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Circuito asociado a los Quantum Kernel Estimator <span id="id10">[<a class="reference internal" href="#id27" title="Srinivasan Arunachalam Yunchao Liu and Kristan Temme. A rigorous and robust quantum speed-up in supervised machine learning. URL: https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf.">8</a>]</span>.</span><a class="headerlink" href="#kernel-circuit" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Circuito asociado a los Quantum Kernel Estimator <span id="id10">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id17" title="Srinivasan Arunachalam Yunchao Liu and Kristan Temme. A rigorous and robust quantum speed-up in supervised machine learning. URL: https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf.">41</a>]</span>.</span><a class="headerlink" href="#kernel-circuit" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Por tanto, la fórmula del kernel, K, se define como,</p>
@@ -856,40 +859,6 @@ document.write(`
 <p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
 <p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
 </div>
-</section>
-</section>
-</section>
-<hr class="docutils" />
-<section id="bibliografia">
-<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
-<div class="docutils container" id="id11">
-<dl class="citation">
-<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
-<dd><p>Institute for Quantum Computing. Quantum kernel methods. URL: <a class="github reference external" href="https://github.com/PaddlePaddle/Quantum/blob/master/tutorials/machine_learning/QKernel_EN.ipynb">PaddlePaddle/Quantum</a>.</p>
-</dd>
-<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
-<dd><p>Marc G Genton. Classes of kernels for machine learning: a statistics perspective. <em>Journal of machine learning research</em>, 2(Dec):299–312, 2001.</p>
-</dd>
-<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id8">3</a></span></dt>
-<dd><p>Thomas Hofmann, Bernhard Schölkopf, and Alexander J. Smola. Kernel methods in machine learning. <em>The Annals of Statistics</em>, 36(3):1171 – 1220, 2008. URL: <a class="reference external" href="https://doi.org/10.1214/009053607000000677">https://doi.org/10.1214/009053607000000677</a>, <a class="reference external" href="https://doi.org/10.1214/009053607000000677">doi:10.1214/009053607000000677</a>.</p>
-</dd>
-<dt class="label" id="id24"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
-<dd><p>Hsin-Yuan Huang, Mick Broughton, Masoud Mohseni, Ryan Babbush, Sergio Boixo, Hartmut Neven, and Jarrod R. McClean. Power of data in quantum machine learning. <em>Nature Communications</em>, 2020. URL: <a class="reference external" href="https://api.semanticscholar.org/CorpusID:226246283">https://api.semanticscholar.org/CorpusID:226246283</a>.</p>
-</dd>
-<dt class="label" id="id21"><span class="brackets">5</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id5">3</a>)</span></dt>
-<dd><p>Qiskit. Quantum machine learning. URL: <a class="github reference external" href="https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-machine-learning/kernel.ipynb">Qiskit/textbook</a>.</p>
-</dd>
-<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id9">6</a></span></dt>
-<dd><p>Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: <a class="reference external" href="https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html">https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html</a>.</p>
-</dd>
-<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
-<dd><p>Maria Schuld. Supervised quantum machine learning models are kernel methods. <em>arXiv preprint arXiv:2101.11020</em>, 2021.</p>
-</dd>
-<dt class="label" id="id27"><span class="brackets"><a class="fn-backref" href="#id10">8</a></span></dt>
-<dd><p>Srinivasan Arunachalam Yunchao Liu and Kristan Temme. A rigorous and robust quantum speed-up in supervised machine learning. URL: <a class="reference external" href="https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf">https://people.eecs.berkeley.edu/~yunchaoliu/slides/quantumkernel_IBM.pdf</a>.</p>
-</dd>
-</dl>
-</div>
 <hr class="docutils" />
 <p>Autores:</p>
 <p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p>
@@ -911,6 +880,8 @@ document.write(`
 <center>
 <img align="left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" width="1000px" />
 </center></section>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -988,7 +959,6 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
   </nav></div>
 

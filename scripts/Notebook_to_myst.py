@@ -148,10 +148,17 @@ if len(i_start_figure_list) > 0:
     if len(i_date) > 0 :
         i_date = i_date[0]
         try: 
+            ''''
+            Notebook_Date = f_data[i_date].split(':')[-1].split('\\n')[0].replace(" ","")
+            Date_raw = datetime.strptime(Notebook_Date, "%Y/%m/%d")
+            Date_formated = Date_raw.strftime("%b %d, %Y")
+
+            f_data[i_date] = '    "\\n",\n'
+            '''
             Notebook_Date = f_data[i_date].split(':')[-1].replace("\\n","").replace("\n","").replace(" ","").replace("\"","").replace(",","")
             Date_raw = datetime.strptime(Notebook_Date, "%Y/%m/%d")
             Date_formated = Date_raw.strftime("%b %d, %Y")
-            
+
             if '\\n\",\n' in f_data[i_date]:
                 f_data[i_date] = '    "\\n",\n'
             else:
@@ -351,13 +358,15 @@ if len(i_pattern_ref_bib) > 0:
         f_data[i] ='    "",\n'
     f_data[i_end_content] ='    ""\n'
 
+    """
     f_data[i_start_content] = '    "---\\n",\n' + \
                 '    "## Bibliografía \\n",\n' + \
                 '    "```{bibliography} \\n",\n' + \
                 '    ":style: plain\\n",\n' + \
                 '    ":filter: docname in docnames\\n",\n' + \
                 '    "```",\n'
-
+    """
+    f_data[i_start_content] = '    "",\n'
 ################################################################################
 ###### Guardamos los cambios en un nuevo fichero
 

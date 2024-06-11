@@ -223,6 +223,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Chapter_05_Kernel_myst.html">5. Quantum Kernels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter_06_Optimizadores_myst.html">6. Optimizadores</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Referencias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter_Bibliografia_myst.html">Bibliografía</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -439,7 +443,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-qsvm-en-qibo">4.2.1. Ejemplo de QSVM en Qibo</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
             </nav>
         </div>
@@ -469,8 +472,8 @@ document.write(`
 <p>En esta sección, se tratarán las <strong>máquinas de vectores de soporte o de soporte vectorial</strong> (en inglés <em>Support Vector Machines</em>, SVM) tanto en computación clásica como en computación cuántica. En este último caso, la solución es conocida como <strong>máquinas de vectores de soporte cuánticos</strong> (en su sigla en inglés <em>QSVM</em>). A su vez, se presentarán algunas implementaciones de ambas computaciones.</p>
 <section id="support-vector-machines-svm">
 <span id="sec-svm"></span><h2>4.1. Support Vector Machines (SVM)<a class="headerlink" href="#support-vector-machines-svm" title="Permalink to this heading">#</a></h2>
-<p>Las máquinas de vectores de soporte o de soporte vectorial son un conjunto de modelos de aprendizaje supervisado propuesto por Vladimir Vapnik .atl en 1964 y posteriormente fueron mejorados en diferentes versiones  <span id="id1">[<a class="reference internal" href="#id19" title="scikit-learn. Support vector machines. URL: https://scikit-learn.org/stable/modules/svm.html#.">9</a>]</span>, <span id="id2">[<a class="reference internal" href="#id14" title="C. Cortes and V. Vapnik. Support vector networks. Machine Learning, 20:273-297, 1995. doi:https://doi.org/10.1007/BF00994018.">3</a>]</span>. Los SVMs se pueden aplicar en procesos de clasificación, regresión y detección de valores atípicos (en inglés, <em>outliers</em>).</p>
-<p>En <em><strong>clasificación</strong></em>, es conocido como <strong>clasificador de vectores de soporte</strong> (<em>SVC</em>, en sus siglas en inglés). El SVC construye el hiperplano óptimo que maximiza la distancia entre dos categorías del conjunto de datos para una mejor predicción. Es decir, busca el hiperplano con la mayor distancia de separación entre las dos categorías del conjunto de datos. Esta característica lo diferencia de los modelos de perceptrón, que buscan el hiperplano que distingue las dos categorías del conjunto de datos. Intuitivamente, una buena separación se consigue mediante el hiperplano que tiene la mayor distancia al punto de datos de entrenamiento más cercano de cualquier categoría (llamado margen funcional), ya que, en general, cuanto mayor es el margen, menor es el error de generalización del clasificador <span id="id3">[<a class="reference internal" href="#id18" title="Trevor Hastie, Robert Tibshirani, and Jerome Friedman. The elements of statistical learning: data mining, inference and prediction. Springer, 2 edition, 2009. URL: http://www-stat.stanford.edu/~tibs/ElemStatLearn/.">5</a>]</span>.</p>
+<p>Las máquinas de vectores de soporte o de soporte vectorial son un conjunto de modelos de aprendizaje supervisado propuesto por Vladimir Vapnik .atl en 1964 y posteriormente fueron mejorados en diferentes versiones  <span id="id1">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id8" title="scikit-learn. Support vector machines. URL: https://scikit-learn.org/stable/modules/svm.html#.">38</a>]</span>, <span id="id2">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id3" title="C. Cortes and V. Vapnik. Support vector networks. Machine Learning, 20:273-297, 1995. doi:https://doi.org/10.1007/BF00994018.">8</a>]</span>. Los SVMs se pueden aplicar en procesos de clasificación, regresión y detección de valores atípicos (en inglés, <em>outliers</em>).</p>
+<p>En <em><strong>clasificación</strong></em>, es conocido como <strong>clasificador de vectores de soporte</strong> (<em>SVC</em>, en sus siglas en inglés). El SVC construye el hiperplano óptimo que maximiza la distancia entre dos categorías del conjunto de datos para una mejor predicción. Es decir, busca el hiperplano con la mayor distancia de separación entre las dos categorías del conjunto de datos. Esta característica lo diferencia de los modelos de perceptrón, que buscan el hiperplano que distingue las dos categorías del conjunto de datos. Intuitivamente, una buena separación se consigue mediante el hiperplano que tiene la mayor distancia al punto de datos de entrenamiento más cercano de cualquier categoría (llamado margen funcional), ya que, en general, cuanto mayor es el margen, menor es el error de generalización del clasificador <span id="id3">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id7" title="Trevor Hastie, Robert Tibshirani, and Jerome Friedman. The elements of statistical learning: data mining, inference and prediction. Springer, 2 edition, 2009. URL: http://www-stat.stanford.edu/~tibs/ElemStatLearn/.">15</a>]</span>.</p>
 <p>En la <a class="reference internal" href="#fig-svm"><span class="std std-numref">Fig. 7</span></a> se visualizan tres posibles hiperplanos para separar las dos clases/categorías del conjunto de datos, representadas por puntos negros y blancos. Los ejes <span class="math notranslate nohighlight">\(x_{1}\)</span> y <span class="math notranslate nohighlight">\(x_{2}\)</span> corresponden a las características de cada instancia en el conjunto de datos. El hiperplano H1 no separa adecuadamente las clases del conjunto de datos; el hiperplano H2 las separa con un margen pequeño y, en cambio, el hiperplano H3 las distingue con la distancia óptima. En consecuencia, se genera la frontera de decisión adecuada u óptima para la predicción. En otras palabras, el SVM con el hiperplano H3 distinguirá con mayor probabilidad la clase a la que pertenece un nuevo punto.</p>
 <figure class="align-center" id="fig-svm">
 <a class="reference internal image-reference" href="../../_images/Svm_separating_hyperplanes.png"><img alt="../../_images/Svm_separating_hyperplanes.png" src="../../_images/Svm_separating_hyperplanes.png" style="width: 400px;" /></a>
@@ -482,7 +485,7 @@ document.write(`
 </section>
 <section id="clasificador-de-vectores-de-soporte-cuantico">
 <span id="sec-qsvc"></span><h2>4.2. Clasificador de vectores de soporte cuántico<a class="headerlink" href="#clasificador-de-vectores-de-soporte-cuantico" title="Permalink to this heading">#</a></h2>
-<p>El <strong>clasificador de vectores de soporte cuántico</strong> (<em>QSVC</em>, en sus siglas en inglés) es la aplicación del SVC en computación cuántica, como se ilustra en la <a class="reference internal" href="#fig-qsvc"><span class="std std-numref">Fig. 8</span></a>. Aprovecha la capacidad del SVC para trabajar con métodos kernel, los cuales pueden calcularse de manera eficiente en computación cuántica. De esta manera, se beneficia de la alta dimensionalidad del espacio de Hilbert <span id="id4">[<a class="reference internal" href="#id15" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">6</a>]</span>, <span id="id5">[<a class="reference internal" href="#id13" title="Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. Phys. Rev. Lett., 122:040504, Feb 2019. URL: https://link.aps.org/doi/10.1103/PhysRevLett.122.040504, doi:10.1103/PhysRevLett.122.040504.">8</a>]</span>. Para más detalles de los métodos kernel, visualice el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>.</p>
+<p>El <strong>clasificador de vectores de soporte cuántico</strong> (<em>QSVC</em>, en sus siglas en inglés) es la aplicación del SVC en computación cuántica, como se ilustra en la <a class="reference internal" href="#fig-qsvc"><span class="std std-numref">Fig. 8</span></a>. Aprovecha la capacidad del SVC para trabajar con métodos kernel, los cuales pueden calcularse de manera eficiente en computación cuántica. De esta manera, se beneficia de la alta dimensionalidad del espacio de Hilbert <span id="id4">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id4" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">16</a>]</span>, <span id="id5">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id2" title="Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. Phys. Rev. Lett., 122:040504, Feb 2019. URL: https://link.aps.org/doi/10.1103/PhysRevLett.122.040504, doi:10.1103/PhysRevLett.122.040504.">37</a>]</span>. Para más detalles de los métodos kernel, visualice el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>.</p>
 <figure class="align-center" id="fig-qsvc">
 <a class="reference internal image-reference" href="../../_images/qsvm_kernel.jpg"><img alt="../../_images/qsvm_kernel.jpg" src="../../_images/qsvm_kernel.jpg" style="width: 898px;" /></a>
 <figcaption>
@@ -501,7 +504,7 @@ document.write(`
 </ol>
 <section id="ejemplo-de-qsvm-en-qibo">
 <span id="sec-ejemploqsvc"></span><h3>4.2.1. Ejemplo de QSVM en Qibo<a class="headerlink" href="#ejemplo-de-qsvm-en-qibo" title="Permalink to this heading">#</a></h3>
-<p>El ejemplo se basa en un tutorial de pennylane <span id="id6">[<a class="reference internal" href="Chapter_05_Kernel_myst.html#id19" title="Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html.">6</a>]</span>. En este, se usará el SVM de la librería <em>scikit-learn</em>, <em>sklearn</em>. La interfaz permite proporcionar kernel adicional en dos formas:</p>
+<p>El ejemplo se basa en un tutorial de pennylane <span id="id6">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id9" title="Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html.">34</a>]</span>. En este, se usará el SVM de la librería <em>scikit-learn</em>, <em>sklearn</em>. La interfaz permite proporcionar kernel adicional en dos formas:</p>
 <ol class="arabic simple">
 <li><p>La función que calcula la matriz del kernel.</p>
 <ul class="simple">
@@ -514,7 +517,7 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p>En el ejemplo, se aplicará la primera forma, facilitando la función que calcula la matriz del kernel. A su vez, el famoso conjunto de datos, <em>Iris</em>, <span id="id7">[<a class="reference internal" href="#id16" title="R. A. Fisher. The use of multiple measurements in taxonomic problems. Annals of Eugenics, 7(7):179-188, 1936.">4</a>]</span>. Este conjunto de datos, que data de 1936, consta de 150 muestras de cuatro características cada una y da lugar a un problema de clasificación y se utilizará solo las primeras 100 muestras.</p>
+<p>En el ejemplo, se aplicará la primera forma, facilitando la función que calcula la matriz del kernel. A su vez, el famoso conjunto de datos, <em>Iris</em>, <span id="id7">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id5" title="R. A. Fisher. The use of multiple measurements in taxonomic problems. Annals of Eugenics, 7(7):179-188, 1936.">11</a>]</span>. Este conjunto de datos, que data de 1936, consta de 150 muestras de cuatro características cada una y da lugar a un problema de clasificación y se utilizará solo las primeras 100 muestras.</p>
 <p>Se cargan las librerías necesarias:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -541,7 +544,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-05-22 13:10:35]: Using numpy backend on /CPU:0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Qibo 0.1.12.dev0|INFO|2024-06-11 12:06:45]: Using numpy backend on /CPU:0
 </pre></div>
 </div>
 </div>
@@ -577,8 +580,8 @@ document.write(`
 </div>
 <p>La codificación de los datos clásicos a estados cuánticos se llevará a cabo mediante la codificación en ángulo, utilizando puertas de rotación. Para obtener más detalles sobre la codificación cuántica, consulte el notebook <a class="reference internal" href="Chapter_02_Feature_encoding_myst.html#sec-qml-featureencoding"><span class="std std-ref">2. Feature encoding</span></a>. En el ejemplo, se aplica la puerta de rotación en el eje Y para codificar los datos clásicos en estados cuánticos. Esta puerta no introduce componentes imaginarias.</p>
 <p>Dado que cada vector de características consta de cuatro características, se necesitarán cuatro qubits para codificar los estados cuánticos, por lo tanto, <span class="math notranslate nohighlight">\(N = 4\)</span>.</p>
-<p>Para estimar la distancia entre dos estados cuánticos, es decir, el producto escalar, se aplica el <strong>test invertido</strong> o <strong>quantum kernel estimation</strong> <span id="id8">[<a class="reference internal" href="#id15" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">6</a>]</span>. Para obtener más detalles sobre los kernels, consulte el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>. En el ejemplo, el circuito cuántico representa el cálculo de la distancia entre dos estados cuánticos como <span class="math notranslate nohighlight">\(K_{i,j} = |\braket{\Phi(\mathbf{x_{i}})}{\Phi(\mathbf{x_{j}})}|^2 = |\bra{0^{\otimes N}} \mathcal{U}^\dagger_{ \Phi(\mathbf{x_{i}})} \mathcal{U}_{ \Phi{(\mathbf{x_{j}})}} \ket{0^{\otimes N}}|^2 \)</span>. El estado cuántico resultante <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> se mide con respecto al estado computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span>, y el resultado es la probabilidad <span class="math notranslate nohighlight">\(|\braket {0^{\otimes N}} {\phi}|^2\)</span> de observar la base computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span> del estado cuántico actual <span class="math notranslate nohighlight">\(\ket{\phi}\)</span>. Este cálculo se basa en las <strong>reglas de Born</strong> <span id="id9">[<a class="reference internal" href="#id21" title="Reglas de born. URL: https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule.">1</a>]</span>.</p>
-<p>Para obtener las probabilidades en la base computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span> en una computadora cuántica, el circuito cuántico debe ser ejecutado varias veces o shots. Según el artículo <em>Supervised learning with quantum-enhanced feature spaces</em> <span id="id10">[<a class="reference internal" href="#id15" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">6</a>]</span>, el circuito debería ejecutarse 50000 veces. En el ejemplo, se usa 8000 por limitación del computador cuántico.</p>
+<p>Para estimar la distancia entre dos estados cuánticos, es decir, el producto escalar, se aplica el <strong>test invertido</strong> o <strong>quantum kernel estimation</strong> <span id="id8">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id4" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">16</a>]</span>. Para obtener más detalles sobre los kernels, consulte el notebook <a class="reference internal" href="Chapter_05_Kernel_myst.html#sec-qml-quantum-kernels"><span class="std std-ref">5. Quantum Kernels</span></a>. En el ejemplo, el circuito cuántico representa el cálculo de la distancia entre dos estados cuánticos como <span class="math notranslate nohighlight">\(K_{i,j} = |\braket{\Phi(\mathbf{x_{i}})}{\Phi(\mathbf{x_{j}})}|^2 = |\bra{0^{\otimes N}} \mathcal{U}^\dagger_{ \Phi(\mathbf{x_{i}})} \mathcal{U}_{ \Phi{(\mathbf{x_{j}})}} \ket{0^{\otimes N}}|^2 \)</span>. El estado cuántico resultante <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> se mide con respecto al estado computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span>, y el resultado es la probabilidad <span class="math notranslate nohighlight">\(|\braket {0^{\otimes N}} {\phi}|^2\)</span> de observar la base computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span> del estado cuántico actual <span class="math notranslate nohighlight">\(\ket{\phi}\)</span>. Este cálculo se basa en las <strong>reglas de Born</strong> <span id="id9">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id10" title="Reglas de born. URL: https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule.">1</a>]</span>.</p>
+<p>Para obtener las probabilidades en la base computacional <span class="math notranslate nohighlight">\(\ket{0^{\otimes N}}\)</span> en una computadora cuántica, el circuito cuántico debe ser ejecutado varias veces o shots. Según el artículo <em>Supervised learning with quantum-enhanced feature spaces</em> <span id="id10">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id4" title="Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. Nature, 567(7747):209–212, March 2019. URL: http://dx.doi.org/10.1038/s41586-019-0980-2, doi:10.1038/s41586-019-0980-2.">16</a>]</span>, el circuito debería ejecutarse 50000 veces. En el ejemplo, se usa 8000 por limitación del computador cuántico.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># kernel cuántico</span>
@@ -622,7 +625,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Se define una función que calcula una matriz de kernel para los vectores de características en dos conjuntos de datos diferentes <span class="math notranslate nohighlight">\(A, B\)</span>. Si <span class="math notranslate nohighlight">\(A=B\)</span>, la matriz del kernel es conocida como la <strong>matriz de Gram</strong> <span id="id11">[<a class="reference internal" href="#id17" title="Nils Barth. The gramian and k-volume in n-space: some classical results in linear algebra. Journal of Young Investigators, 1999.">2</a>]</span>.</p>
+<p>Se define una función que calcula una matriz de kernel para los vectores de características en dos conjuntos de datos diferentes <span class="math notranslate nohighlight">\(A, B\)</span>. Si <span class="math notranslate nohighlight">\(A=B\)</span>, la matriz del kernel es conocida como la <strong>matriz de Gram</strong> <span id="id11">[<a class="reference internal" href="../Chapter_Bibliografia_myst.html#id6" title="Nils Barth. The gramian and k-volume in n-space: some classical results in linear algebra. Journal of Young Investigators, 1999.">5</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kernel_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
@@ -699,42 +702,6 @@ Entrenado!
 <p>Para que la comprensión de los notebooks sea mejor se ha unificado la notación utilizada en los mismos. Para diferenciar un vector de un valor único se hará uso de la negrita. De manera que <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> corresponde a un vector y <span class="math notranslate nohighlight">\(z\)</span> será una variable de una única componente.</p>
 <p>Si se quiere hacer referencia a dos vectores distintos pero que pertenecen al mismo <em>dataset</em> se utilizará un subíndice, es decir, <span class="math notranslate nohighlight">\(\mathbf{x_i}\)</span> hará referencia al i-ésimo vector del dataset. Si se quiere referenciar una característica concreta del vector se añadirá un nuevo subíndice, de manera que <span class="math notranslate nohighlight">\(\mathbf{x_{i_j}}\)</span> hará referencia a la j-ésima variable del i-ésimo vector.</p>
 </div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="bibliografia">
-<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Permalink to this heading">#</a></h2>
-<div class="docutils container" id="id12">
-<dl class="citation">
-<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id9">1</a></span></dt>
-<dd><p>Reglas de born. URL: <a class="reference external" href="https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule">https://publish.obsidian.md/myquantumwell/Quantum+Mechanics/Quantum+Measurement/Born+rule</a>.</p>
-</dd>
-<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id11">2</a></span></dt>
-<dd><p>Nils Barth. The gramian and k-volume in n-space: some classical results in linear algebra. <em>Journal of Young Investigators</em>, 1999.</p>
-</dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
-<dd><p>C. Cortes and V. Vapnik. Support vector networks. <em>Machine Learning</em>, 20:273–297, 1995. <a class="reference external" href="https://doi.org/https://doi.org/10.1007/BF00994018">doi:https://doi.org/10.1007/BF00994018</a>.</p>
-</dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id7">4</a></span></dt>
-<dd><p>R. A. Fisher. The use of multiple measurements in taxonomic problems. <em>Annals of Eugenics</em>, 7(7):179–188, 1936.</p>
-</dd>
-<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id3">5</a></span></dt>
-<dd><p>Trevor Hastie, Robert Tibshirani, and Jerome Friedman. <em>The elements of statistical learning: data mining, inference and prediction</em>. Springer, 2 edition, 2009. URL: <a class="reference external" href="http://www-stat.stanford.edu/~tibs/ElemStatLearn/">http://www-stat.stanford.edu/~tibs/ElemStatLearn/</a>.</p>
-</dd>
-<dt class="label" id="id15"><span class="brackets">6</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id8">2</a>,<a href="#id10">3</a>)</span></dt>
-<dd><p>Vojtěch Havlíček, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Supervised learning with quantum-enhanced feature spaces. <em>Nature</em>, 567(7747):209–212, March 2019. URL: <a class="reference external" href="http://dx.doi.org/10.1038/s41586-019-0980-2">http://dx.doi.org/10.1038/s41586-019-0980-2</a>, <a class="reference external" href="https://doi.org/10.1038/s41586-019-0980-2">doi:10.1038/s41586-019-0980-2</a>.</p>
-</dd>
-<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id6">7</a></span></dt>
-<dd><p>Maria Schuld. Kernel-based training of quantum models with scikit-learn. URL: <a class="reference external" href="https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html">https://pennylane.ai/qml/demos/tutorial_kernel_based_training.html</a>.</p>
-</dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">8</a></span></dt>
-<dd><p>Maria Schuld and Nathan Killoran. Quantum machine learning in feature hilbert spaces. <em>Phys. Rev. Lett.</em>, 122:040504, Feb 2019. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.122.040504">https://link.aps.org/doi/10.1103/PhysRevLett.122.040504</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.122.040504">doi:10.1103/PhysRevLett.122.040504</a>.</p>
-</dd>
-<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id1">9</a></span></dt>
-<dd><p>scikit-learn. Support vector machines. URL: <a class="reference external" href="https://scikit-learn.org/stable/modules/svm.html#">https://scikit-learn.org/stable/modules/svm.html#</a>.</p>
-</dd>
-</dl>
-</div>
 <hr class="docutils" />
 <p>Autores:</p>
 <p>Carmen Calvo (<a class="reference external" href="https://www.scayle.es/">SCAYLE</a>), Antoni Alou (<a class="reference external" href="https://www.pic.es/">PIC</a>), Carlos Hernani (<a class="reference external" href="https://www.uv.es/">UV</a>), Nahia Iriarte (<a class="reference external" href="https://www.nasertic.es/es">NASERTIC</a>) y Carlos Luque (<a class="reference external" href="https://www.iac.es/">IAC</a>)</p>
@@ -756,6 +723,7 @@ Entrenado!
 <center>
 <img align="left" src="https://quantumspain-project.es/wp-content/uploads/2024/02/Banner-QS_GOB_v2.png" width="1000px" />
 </center></section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -827,7 +795,6 @@ Entrenado!
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-qsvm-en-qibo">4.2.1. Ejemplo de QSVM en Qibo</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
 </ul>
   </nav></div>
 
